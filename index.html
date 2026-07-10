@@ -3,636 +3,895 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Luck Based List</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;900&display=swap" rel="stylesheet">
+<title>Unnerfed Sakupen Circles Spam List</title>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-    /* ================================== */
-    /* THEME VARIABLES (DARK & LIGHT)     */
-    /* ================================== */
-    :root {
-        --bg-color: #020204;
-        --card-bg: rgba(12, 12, 18, 0.65);
-        --modal-bg: rgba(12, 12, 18, 0.85);
-        --accent-1: #9b7bff;
-        --accent-2: #00d4ff;
-        --accent-pink: #ff4dff;
-        --discord: #5865F2;
-        --discord-text: #8c94f8;
-        
-        --glass-border: rgba(255, 255, 255, 0.08);
-        --glass-border-hover: rgba(255, 255, 255, 0.2);
-        --text-main: #ffffff;
-        --text-muted: #b3b3b3;
-        --nav-bg: rgba(8, 8, 12, 0.6);
-        --input-bg: rgba(0, 0, 0, 0.4);
-        --input-focus-bg: rgba(0, 0, 0, 0.6);
-        --stat-bg: rgba(255, 255, 255, 0.02);
-        
-        --ambient-opacity: 0.07;
-        --ambient-opacity-high: 0.15;
-        --card-gradient: linear-gradient(to right, rgba(2,2,4,1) 0%, rgba(2,2,4,0.7) 40%, rgba(2,2,4,0.2) 100%);
-        --toast-bg: rgba(20, 20, 30, 0.9);
-        --scrollbar-thumb: #1a1a26;
-        --empty-border: rgba(255, 255, 255, 0.1);
-        --rank-badge-bg: linear-gradient(135deg, #12121c, #1a1a2e);
-        --shadow-dark: rgba(0, 0, 0, 0.7);
-        --shadow-hover: rgba(0, 0, 0, 0.8);
-        --text-shadow: rgba(0, 0, 0, 0.5);
-        --skeleton-base: #0f0f15;
-        --skeleton-shine: #1a1a24;
-        
-        --id-bg: rgba(255, 255, 255, 0.05);
-        --id-hover: rgba(255, 255, 255, 0.15);
-        --wr-hover-bg: white;
-        --wr-hover-color: black;
-        --play-overlay: rgba(0, 0, 0, 0.4);
-        --play-overlay-hover: rgba(0, 0, 0, 0.1);
-    }
+/* ========================= */
+/* 🔥 THEME VARIABLES */
+/* ========================= */
+:root {
+    --bg-main: #000000;
+    --nav-bg: rgba(10, 10, 10, 0.7);
+    --text-main: #ffffff;
+    --text-dim: #aaaaaa;
+    --text-sub: #888888;
+    --border-color: rgba(255, 255, 255, 0.15);
+    --border-hover: rgba(255, 255, 255, 0.4);
+    --card-bg: #0a0a0a;
+    --card-grad-1: #050505;
+    --card-grad-2: #111111;
+    --input-bg: rgba(255, 255, 255, 0.05);
+    --input-focus: rgba(255, 255, 255, 0.1);
+    --shadow-color: rgba(0, 0, 0, 0.5);
+    --theme-btn-bg: rgba(255, 255, 255, 0.1);
+    --tab-active-bg: #ffffff;
+    --tab-active-text: #000000;
+    --tab-border: rgba(255, 255, 255, 0.2);
+    --banner-bg: rgba(88, 101, 242, 0.15);
+    --banner-border: rgba(88, 101, 242, 0.5);
+}
 
-    [data-theme="light"] {
-        --bg-color: #f0f2f5;
-        --card-bg: rgba(255, 255, 255, 0.75);
-        --modal-bg: rgba(255, 255, 255, 0.9);
-        --accent-1: #7848ff;
-        --accent-2: #008be5;
-        --accent-pink: #d900d9;
-        --discord: #5865F2;
-        --discord-text: #5865F2;
-        
-        --glass-border: rgba(0, 0, 0, 0.08);
-        --glass-border-hover: rgba(0, 0, 0, 0.2);
-        --text-main: #1a1a2e;
-        --text-muted: #5a5a75;
-        --nav-bg: rgba(255, 255, 255, 0.75);
-        --input-bg: rgba(0, 0, 0, 0.05);
-        --input-focus-bg: rgba(255, 255, 255, 0.9);
-        --stat-bg: rgba(255, 255, 255, 0.5);
-        
-        --ambient-opacity: 0.12;
-        --ambient-opacity-high: 0.25;
-        --card-gradient: linear-gradient(to right, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.85) 45%, rgba(255,255,255,0.15) 100%);
-        --toast-bg: rgba(255, 255, 255, 0.95);
-        --scrollbar-thumb: #c8d0e0;
-        --empty-border: rgba(0, 0, 0, 0.15);
-        --rank-badge-bg: linear-gradient(135deg, #ffffff, #eef0f5);
-        --shadow-dark: rgba(0, 0, 0, 0.08);
-        --shadow-hover: rgba(0, 0, 0, 0.12);
-        --text-shadow: rgba(255, 255, 255, 0.8);
-        --skeleton-base: #e2e5eb;
-        --skeleton-shine: #ffffff;
-        
-        --id-bg: rgba(0, 0, 0, 0.04);
-        --id-hover: rgba(0, 0, 0, 0.08);
-        --wr-hover-bg: #1a1a2e;
-        --wr-hover-color: white;
-        --play-overlay: rgba(255, 255, 255, 0.2);
-        --play-overlay-hover: rgba(255, 255, 255, 0);
-    }
+[data-theme="light"] {
+    --bg-main: #f4f4f5;
+    --nav-bg: rgba(255, 255, 255, 0.85);
+    --text-main: #18181b;
+    --text-dim: #52525b;
+    --text-sub: #71717a;
+    --border-color: rgba(0, 0, 0, 0.1);
+    --border-hover: rgba(0, 0, 0, 0.3);
+    --card-bg: #ffffff;
+    --card-grad-1: #ffffff;
+    --card-grad-2: #f4f4f5;
+    --input-bg: rgba(0, 0, 0, 0.05);
+    --input-focus: rgba(0, 0, 0, 0.1);
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --theme-btn-bg: rgba(0, 0, 0, 0.05);
+    --tab-active-bg: #000000;
+    --tab-active-text: #ffffff;
+    --tab-border: rgba(0, 0, 0, 0.2);
+    --banner-bg: rgba(88, 101, 242, 0.1);
+    --banner-border: rgba(88, 101, 242, 0.4);
+}
 
-    /* PREMIUM SCROLLBAR */
-    ::-webkit-scrollbar { width: 8px; height: 8px; }
-    ::-webkit-scrollbar-track { background: var(--bg-color); }
-    ::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 10px; }
-    ::-webkit-scrollbar-thumb:hover { background: var(--accent-1); }
+body {
+    margin: 0;
+    background: var(--bg-main);
+    font-family: 'Rubik', sans-serif;
+    color: var(--text-main);
+    overflow-x: hidden;
+    transition: background 0.3s ease, color 0.3s ease;
+}
 
-    /* GLOBAL STYLES */
-    body {
-        margin: 0; background: var(--bg-color); font-family: 'Rubik', sans-serif;
-        color: var(--text-main); overflow-x: hidden; padding-top: 150px;
-        min-height: 100vh; transition: background-color 0.5s ease, color 0.5s ease;
-    }
-    body.modal-open { overflow: hidden; } /* Prevents scrolling when modal is open */
+/* ========================= */
+/* NAVBAR */
+/* ========================= */
+.navbar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px max(5vw, 20px);
+    background: var(--nav-bg);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    gap: 15px;
+    transition: background 0.3s ease, border-color 0.3s ease;
+}
 
-    /* SCROLL PROGRESS BAR */
-    #scrollProgress { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(to right, var(--accent-pink), var(--accent-1), var(--accent-2)); width: 0%; z-index: 10000; transition: width 0.1s ease-out; }
+.nav-title {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--text-main);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
 
-    /* DEEP SPACE AMBIENT BACKGROUND */
-    .ambient-bg { position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: -2; background: radial-gradient(circle at 15% 25%, rgba(255, 77, 255, var(--ambient-opacity)) 0%, transparent 45%), radial-gradient(circle at 85% 75%, rgba(0, 212, 255, var(--ambient-opacity)) 0%, transparent 45%), radial-gradient(circle at 50% 50%, rgba(155, 123, 255, var(--ambient-opacity)) 0%, transparent 60%); filter: blur(30px); animation: drift 20s ease-in-out infinite alternate; transition: background 0.5s ease; }
-    .cursor-glow { position: fixed; top: -150px; left: -150px; width: 300px; height: 300px; background: radial-gradient(circle, rgba(155, 123, 255, var(--ambient-opacity-high)) 0%, transparent 70%); border-radius: 50%; pointer-events: none; z-index: -1; transition: transform 0.15s ease-out; will-change: transform; }
-    @keyframes drift { 0% { transform: scale(1); } 100% { transform: scale(1.15); } }
+.nav-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
 
-    /* ===================== */
-    /* PREMIUM ROUNDED NAV   */
-    /* ===================== */
-    .navbar { position: fixed; top: 24px; left: 50%; transform: translateX(-50%); z-index: 999; width: 92%; max-width: 1250px; height: 76px; box-sizing: border-box; display: flex; justify-content: space-between; align-items: center; padding: 0 30px; border-radius: 100px; background: var(--nav-bg); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px); border: 1px solid var(--glass-border); box-shadow: 0 25px 50px var(--shadow-dark), inset 0 1px 0 var(--glass-border); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-    .navbar:hover { box-shadow: 0 30px 60px var(--shadow-hover), 0 0 40px rgba(155, 123, 255, 0.15); transform: translateX(-50%) translateY(-2px); }
-    .logo { font-size: 24px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; background: linear-gradient(to right, var(--text-main), var(--accent-pink), var(--accent-2), var(--text-main)); background-size: 300%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: moveGradient 6s linear infinite; transition: all 0.3s ease; }
-    .right-nav { display: flex; align-items: center; gap: 14px; }
-    #searchBar { width: 190px; height: 44px; padding: 0 20px; border-radius: 100px; border: 1px solid var(--glass-border); background: var(--input-bg); color: var(--text-main); font-family: inherit; font-weight: 500; outline: none; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-    #searchBar:focus { width: 250px; background: var(--input-focus-bg); border-color: var(--accent-1); box-shadow: 0 0 25px rgba(155, 123, 255, 0.25); }
-    .sort-dropdown { height: 44px; padding: 0 16px; border-radius: 100px; border: 1px solid var(--glass-border); background: var(--input-bg); color: var(--text-muted); font-family: inherit; font-weight: 600; font-size: 13px; outline: none; cursor: pointer; transition: all 0.3s; }
-    .sort-dropdown:hover { background: var(--id-hover); color: var(--text-main); }
-    .sort-dropdown option { background: var(--bg-color); color: var(--text-main); }
-    .theme-toggle { width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--glass-border); background: var(--input-bg); color: var(--text-main); display: flex; align-items: center; justify-content: center; cursor: pointer; outline: none; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-    .theme-toggle:hover { background: var(--id-hover); transform: translateY(-2px); box-shadow: 0 10px 20px var(--shadow-dark); }
-    .theme-toggle svg { width: 20px; height: 20px; stroke: currentColor; transition: transform 0.5s ease; }
-    .theme-toggle:active svg { transform: rotate(45deg) scale(0.8); }
-    #moonIcon { display: none; } #sunIcon { display: block; }
-    [data-theme="light"] #moonIcon { display: block; } [data-theme="light"] #sunIcon { display: none; }
-    .btn { height: 44px; padding: 0 24px; border-radius: 100px; display: flex; align-items: center; justify-content: center; text-decoration: none; font-weight: 700; font-size: 13px; transition: all 0.3s ease; white-space: nowrap; cursor: pointer; }
-    .discord { background: rgba(88, 101, 242, 0.15); color: var(--discord-text); border: 1px solid rgba(88, 101, 242, 0.3); }
-    .discord:hover { background: var(--discord); color: white; transform: translateY(-2px); box-shadow: 0 10px 25px rgba(88, 101, 242, 0.4); }
+/* SEARCH */
+.nav-search {
+    flex-grow: 1;
+    max-width: 400px;
+    position: relative;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
 
-    /* ===================== */
-    /* DASHBOARD & FILTERS   */
-    /* ===================== */
-    .container { width: 100%; display: flex; flex-direction: column; align-items: center; padding: 0 20px 80px 20px; gap: 20px; box-sizing: border-box; }
-    .stats-panel { width: min(920px, 95vw); display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
-    .stat-box { background: var(--stat-bg); border: 1px solid var(--glass-border); border-radius: 20px; padding: 18px 24px; backdrop-filter: blur(10px); transition: all 0.3s; }
-    .stat-box:hover { border-color: var(--glass-border-hover); transform: translateY(-2px); box-shadow: 0 10px 30px var(--shadow-dark); }
-    .stat-label { font-size: 11px; text-transform: uppercase; color: var(--text-muted); font-weight: 700; letter-spacing: 1px; transition: color 0.5s; }
-    .stat-value { font-size: 24px; font-weight: 900; color: var(--text-main); margin-top: 4px; transition: color 0.5s; }
-    .stat-box:nth-child(2) .stat-value { color: var(--accent-2); }
-    .filter-wrapper { width: min(920px, 95vw); display: flex; gap: 10px; overflow-x: auto; padding: 5px 0 15px 0; -ms-overflow-style: none; scrollbar-width: none; }
-    .filter-wrapper::-webkit-scrollbar { display: none; }
-    .filter-btn { padding: 8px 16px; border-radius: 100px; font-size: 12px; font-weight: 700; text-transform: uppercase; background: var(--input-bg); border: 1px solid var(--glass-border); color: var(--text-muted); cursor: pointer; transition: all 0.3s; white-space: nowrap; }
-    .filter-btn:hover { background: var(--id-hover); color: var(--text-main); transform: translateY(-1px); }
-    .filter-btn.active { background: var(--text-main); color: var(--bg-color); border-color: var(--text-main); box-shadow: 0 5px 15px rgba(255,255,255,0.1); }
+#search-input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px 20px 12px 45px;
+    font-family: 'Rubik', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    background: var(--input-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    border-radius: 30px; 
+    outline: none;
+    transition: all 0.3s ease;
+}
 
-    /* ===================== */
-    /* ELEGANT CARD LAYOUT   */
-    /* ===================== */
-    #levelsContainer { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 25px; perspective: 1000px; }
-    .card { width: min(920px, 95vw); height: 240px; display: flex; border-radius: 26px; overflow: hidden; background: var(--card-bg); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); box-shadow: 0 20px 45px var(--shadow-dark); position: relative; opacity: 0; transform: translateY(35px); transition: background 0.5s ease, border-color 0.5s ease, box-shadow 0.3s ease, opacity 0.5s ease; transform-style: preserve-3d; }
-    @keyframes cardEnter { to { opacity: 1; transform: translateY(0); } }
-    .card:hover { border-color: var(--glass-border-hover); box-shadow: 0 30px 60px var(--shadow-hover), 0 0 40px rgba(155, 123, 255, 0.15); z-index: 10; }
-    .left { width: 40%; height: 100%; position: relative; cursor: pointer; background: #000; overflow: hidden; flex-shrink: 0; }
-    .left img, .right img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
-    .card:hover .left img, .card:hover .right img { transform: scale(1.06); }
-    .left iframe { width: 100%; height: 100%; border: none; }
-    .right { width: 60%; height: 100%; position: relative; overflow: hidden; }
-    .card-ui-layer { position: absolute; inset: 0; z-index: 2; background: var(--card-gradient); padding: 26px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; transition: background 0.5s ease; }
+#search-input::placeholder { color: var(--text-dim); }
+#search-input:focus {
+    background: var(--input-focus);
+    border-color: var(--border-hover);
+}
+
+.search-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    color: var(--text-dim);
+    pointer-events: none;
+}
+#search-input:focus + .search-icon { color: var(--text-main); }
+
+/* BUTTONS */
+.theme-btn {
+    background: var(--theme-btn-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    font-size: 18px;
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+.theme-btn:hover { border-color: var(--border-hover); transform: scale(1.05); }
+
+.nav-credits-btn {
+    background: var(--theme-btn-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    padding: 0 16px;
+    height: 40px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-family: 'Rubik', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+.nav-credits-btn:hover {
+    border-color: var(--border-hover);
+    transform: translateY(-1px);
+}
+.nav-credits-btn.active {
+    background: var(--tab-active-bg);
+    color: var(--tab-active-text);
+    border-color: var(--tab-active-bg);
+    box-shadow: 0 0 15px var(--shadow-color);
+}
+
+.discord-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #5865F2;
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 14px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    border: none;
+    height: 40px;
+    box-sizing: border-box;
+}
+.discord-btn:hover {
+    background: #4752C4;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(88, 101, 242, 0.5);
+}
+.discord-btn svg { width: 20px; height: 20px; fill: currentColor; }
+
+/* TABS */
+.tabs-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-top: 25px;
+}
+.tabs { display: flex; gap: 10px; width: min(900px, 95vw); flex-wrap: wrap; }
+.tab-btn {
+    padding: 12px 24px;
+    background: var(--card-bg);
+    border: 2px solid var(--tab-border);
+    color: var(--text-main);
+    border-radius: 12px;
+    cursor: pointer;
+    font-family: 'Rubik', sans-serif;
+    font-weight: 800;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    flex: 1;
+    text-align: center;
+}
+.tab-btn:hover { border-color: var(--border-hover); }
+.tab-btn.active {
+    background: var(--tab-active-bg);
+    color: var(--tab-active-text);
+    border-color: var(--tab-active-bg);
+    box-shadow: 0 0 15px var(--shadow-color);
+}
+
+/* CONTAINERS */
+.container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    gap: 15px;
+    box-sizing: border-box;
+}
+
+/* CARDS (LEVELS) */
+.card {
+    width: min(900px, 95vw);
+    height: 220px;
+    display: flex;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    background: var(--card-bg);
+    position: relative;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px var(--shadow-color);
+    border-color: var(--border-hover);
+}
+
+.left {
+    width: 35%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--card-grad-1) 0%, var(--card-grad-2) 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+    box-sizing: border-box;
+    z-index: 2;
+    border-right: 2px solid var(--border-color);
+}
+.right {
+    width: 65%;
+    height: 100%;
+    position: relative;
+    cursor: pointer;
+    background: #000;
+}
+.right img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.3s;
+}
+.right:hover img { opacity: 0.6; }
+
+.play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    background-color: rgba(255, 0, 0, 0.8);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    pointer-events: none;
+}
+.play-button::after {
+    content: "";
+    display: block;
+    border-style: solid;
+    border-width: 12px 0 12px 20px;
+    border-color: transparent transparent transparent white;
+    margin-left: 6px;
+}
+.right:hover .play-button { background-color: #ff0000; transform: translate(-50%, -50%) scale(1.15); }
+
+.place { font-size: 24px; font-weight: 800; color: var(--text-main); margin-bottom: 4px; }
+.verifier { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-dim); font-weight: 700; margin-bottom: 8px; }
+.sub { font-size: 12px; color: var(--text-sub); line-height: 1.4; }
+
+/* PACK BADGES & VICTORS BTN */
+.pack-badges { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; margin-bottom: 8px; }
+.pack-badge {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    background: var(--input-bg);
+    border: 1px solid var(--border-color);
+    padding: 4px 8px;
+    border-radius: 6px;
+    color: var(--text-dim);
+}
+
+.level-points {
+    font-size: 15px; font-weight: 800; color: #ffcf40;
+    padding: 6px 14px; border-radius: 8px; display: inline-block;
+    width: max-content; text-transform: uppercase; letter-spacing: 1px;
+    background: rgba(255, 207, 64, 0.15); border: 1px solid rgba(255, 207, 64, 0.3);
+}
+
+.view-victors-btn {
+    background: none;
+    border: 1px solid var(--border-color);
+    color: var(--text-dim);
+    font-family: 'Rubik', sans-serif;
+    font-size: 10px;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 5px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: all 0.2s ease;
+    display: block;
+    width: max-content;
+}
+.view-victors-btn:hover {
+    border-color: var(--border-hover);
+    color: var(--text-main);
+    background: var(--input-bg);
+}
+
+/* LIST CARDS (Leaderboard & Packs & Credits) */
+.list-card {
+    width: min(900px, 95vw);
+    background: linear-gradient(135deg, var(--card-bg) 0%, var(--card-grad-2) 100%);
+    border: 1px solid var(--border-color);
+    border-radius: 18px;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+.list-card:hover { transform: translateY(-2px); border-color: var(--border-hover); box-shadow: 0 5px 15px var(--shadow-color); }
+.pack-card { cursor: pointer; }
+
+.list-header { display: flex; justify-content: space-between; align-items: center; }
+.list-title { font-size: 22px; font-weight: 800; color: var(--text-main); }
+.list-highlight { font-size: 20px; font-weight: 800; color: #ffcf40; }
+.list-subtitle { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-sub); margin-top: 5px; }
+.list-items { font-size: 14px; color: var(--text-dim); line-height: 1.5; }
+
+/* CREDITS SPECIFIC */
+.credits-card {
+    align-items: center;
+    text-align: center;
+    padding: 50px 20px;
+}
+.credits-title { font-size: 32px; margin-bottom: 5px; }
+.credits-author { font-size: 18px; color: var(--text-dim); }
+.credits-author strong { color: var(--text-main); font-weight: 800; }
+
+/* PACK VIEW INTERFACE */
+.pack-view-header {
+    width: min(900px, 95vw);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 0 0 15px 0;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 10px;
+}
+.back-btn {
+    background: var(--input-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'Rubik', sans-serif;
+    font-weight: 700;
+    transition: all 0.2s ease;
+}
+.back-btn:hover { background: var(--tab-active-bg); color: var(--tab-active-text); }
+.pack-view-title { font-size: 22px; font-weight: 800; margin: 0; color: var(--text-main); }
+.pack-levels-wrapper { display: flex; flex-direction: column; align-items: center; gap: 15px; width: 100%; }
+
+.hidden-section { display: none !important; }
+
+/* LEADERBOARD FILTER BANNER */
+#leaderboard-filter-banner {
+    width: min(900px, 95vw);
+    background: var(--banner-bg);
+    border: 1px solid var(--banner-border);
+    padding: 12px;
+    border-radius: 12px;
+    text-align: center;
+    font-weight: 600;
+    color: var(--text-main);
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+#leaderboard-filter-banner:hover {
+    opacity: 0.8;
+}
+.filter-clear-txt {
+    font-size: 12px;
+    color: var(--text-dim);
+    margin-left: 10px;
+    text-decoration: underline;
+}
+
+/* ========================= */
+/* MOBILE RESPONSIVENESS */
+/* ========================= */
+@media (max-width: 768px){
+    /* Stack Navbar Items */
+    .navbar { flex-direction: column; align-items: stretch; gap: 15px; }
+    .nav-actions { width: 100%; justify-content: space-between; }
+    .nav-search { width: 100%; max-width: 100%; order: -1; } /* Search on top for mobile */
     
-    .play-overlay { position: absolute; inset: 0; background: var(--play-overlay); display: flex; justify-content: center; align-items: center; transition: background 0.3s; }
-    .left:hover .play-overlay { background: var(--play-overlay-hover); }
-    .play-btn { width: 56px; height: 56px; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255,255,255,0.4); backdrop-filter: blur(12px); border-radius: 50%; display: flex; justify-content: center; align-items: center; transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
-    .play-btn::after { content: ''; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 16px solid white; margin-left: 5px; }
-    .left:hover .play-btn { transform: scale(1.15); background: white; box-shadow: 0 0 30px rgba(255,255,255,0.6); }
-    .left:hover .play-btn::after { border-left-color: black; }
-
-    .ui-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; }
-    .title-wrapper { display: flex; align-items: center; gap: 12px; }
-    .rank-badge { background: var(--rank-badge-bg); border: 1px solid var(--glass-border); color: var(--accent-1); padding: 4px 12px; border-radius: 10px; font-weight: 900; font-size: 15px; transition: background 0.5s; }
-    .title { font-size: 26px; font-weight: 900; letter-spacing: -0.5px; text-shadow: 0 2px 10px var(--text-shadow); transition: text-shadow 0.5s; }
-    .sub { font-size: 14px; color: var(--text-muted); margin-top: 8px; font-weight: 500; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; transition: color 0.5s;}
-    .sub b { color: var(--text-main); transition: color 0.5s; }
-    .id-copy { cursor: pointer; padding: 2px 6px; border-radius: 6px; background: var(--id-bg); border: 1px solid var(--glass-border); transition: all 0.2s; display: inline-flex; align-items: center; gap: 4px; color: var(--text-main); }
-    .id-copy:hover { background: var(--id-hover); }
-    .tags-container { display: flex; gap: 6px; margin-top: 10px; flex-wrap: wrap;}
-    .tag { font-size: 10px; font-weight: 700; text-transform: uppercase; padding: 4px 8px; border-radius: 6px; background: rgba(155, 123, 255, 0.1); color: var(--accent-1); border: 1px solid rgba(155, 123, 255, 0.2); }
-    .tag.cyan { background: rgba(0, 212, 255, 0.1); color: var(--accent-2); border-color: rgba(0, 212, 255, 0.2); }
-    .chance { font-weight: 900; font-size: 22px; color: var(--accent-2); text-shadow: 0 0 20px rgba(0, 212, 255, 0.4); }
-
-    .ui-bottom { display: flex; justify-content: flex-end; gap: 10px; }
-    .action-btn { padding: 8px 20px; border-radius: 12px; background: var(--id-bg); border: 1px solid var(--glass-border); font-size: 13px; font-weight: 700; text-decoration: none; color: var(--text-main); transition: all 0.3s; display: flex; align-items: center; gap: 6px; cursor: pointer; }
-    .action-btn:hover { background: var(--wr-hover-bg); color: var(--wr-hover-color); transform: translateY(-2px); box-shadow: 0 10px 20px var(--shadow-dark); }
-    .action-btn.icon-only { padding: 8px 12px; }
-
-    /* ===================== */
-    /* MODAL OVERLAY (NEW)   */
-    /* ===================== */
-    .modal-overlay {
-        position: fixed; inset: 0; z-index: 10000;
-        background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(15px);
-        display: flex; justify-content: center; align-items: center;
-        opacity: 0; pointer-events: none;
-        transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    .modal-overlay.active { opacity: 1; pointer-events: all; }
+    /* Make Cards Vertical */
+    .card { flex-direction: column-reverse; height: auto; }
+    .left { width: 100%; border-right: none; border-top: 1px solid var(--border-color); padding: 15px; }
+    .right { width: 100%; height: 220px; } /* Give thumbnail a fixed height */
     
-    .modal-content {
-        width: min(900px, 92vw); max-height: 90vh;
-        background: var(--modal-bg); border: 1px solid var(--glass-border);
-        border-radius: 26px; box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 50px rgba(155, 123, 255, 0.1);
-        display: flex; flex-direction: column; overflow-y: auto; overflow-x: hidden;
-        transform: scale(0.9) translateY(30px); transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-    .modal-overlay.active .modal-content { transform: scale(1) translateY(0); }
+    .pack-view-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .tabs { justify-content: center; }
+}
 
-    /* Modal custom scrollbar */
-    .modal-content::-webkit-scrollbar { width: 6px; }
-    .modal-content::-webkit-scrollbar-thumb { background: var(--accent-1); border-radius: 10px; }
-
-    .modal-header {
-        display: flex; justify-content: space-between; align-items: center;
-        padding: 24px 30px; border-bottom: 1px solid var(--glass-border);
-        background: rgba(0,0,0,0.1);
-    }
-    .modal-header-left { display: flex; align-items: center; gap: 15px; }
-    .modal-close-btn {
-        background: var(--id-bg); border: 1px solid var(--glass-border); color: var(--text-main);
-        width: 36px; height: 36px; border-radius: 50%; font-size: 20px; display: flex;
-        justify-content: center; align-items: center; cursor: pointer; transition: all 0.2s;
-    }
-    .modal-close-btn:hover { background: var(--accent-pink); color: white; transform: rotate(90deg); border-color: var(--accent-pink); }
-
-    .modal-video-container { width: 100%; aspect-ratio: 16/9; background: #000; position: relative; }
-    .modal-video-container iframe { width: 100%; height: 100%; border: none; }
-
-    .modal-body { padding: 30px; display: flex; flex-direction: column; gap: 25px; }
-    .modal-stats-grid {
-        display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;
-    }
-    .m-stat {
-        background: var(--id-bg); border: 1px solid var(--glass-border); border-radius: 16px;
-        padding: 16px; display: flex; flex-direction: column; gap: 4px;
-    }
-    .m-stat-label { font-size: 11px; text-transform: uppercase; color: var(--text-muted); font-weight: 700; }
-    .m-stat-val { font-size: 18px; font-weight: 700; color: var(--text-main); }
-    .m-stat-val.highlight { color: var(--accent-2); }
-    
-    .modal-desc {
-        font-size: 15px; line-height: 1.6; color: var(--text-muted);
-        background: rgba(0,0,0,0.1); padding: 20px; border-radius: 16px; border: 1px dashed var(--glass-border);
-    }
-    .modal-footer {
-        display: flex; justify-content: flex-end; gap: 15px;
-        padding: 0 30px 30px 30px;
-    }
-
-    /* SKELETON LOADER */
-    .skeleton-card { width: min(920px, 95vw); height: 240px; border-radius: 26px; background: var(--skeleton-base); border: 1px solid var(--glass-border); position: relative; overflow: hidden; }
-    .skeleton-card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, transparent, var(--skeleton-shine), transparent); transform: translateX(-100%); animation: shimmer 1.5s infinite; opacity: 0.3; }
-    @keyframes shimmer { 100% { transform: translateX(100%); } }
-
-    #backToTop { position: fixed; bottom: 30px; left: 30px; width: 50px; height: 50px; border-radius: 50%; background: var(--text-main); color: var(--bg-color); border: none; font-size: 24px; font-weight: 900; cursor: pointer; box-shadow: 0 10px 25px var(--shadow-dark); z-index: 1000; opacity: 0; transform: translateY(20px) scale(0.8); pointer-events: none; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-    #backToTop.visible { opacity: 1; transform: translateY(0) scale(1); pointer-events: all; }
-    #backToTop:hover { transform: translateY(-5px) scale(1.1); box-shadow: 0 15px 35px rgba(155, 123, 255, 0.4); }
-
-    .toast-container { position: fixed; bottom: 30px; right: 30px; display: flex; flex-direction: column; gap: 10px; z-index: 10001; }
-    .toast { background: var(--toast-bg); backdrop-filter: blur(10px); border: 1px solid var(--accent-1); color: var(--text-main); padding: 12px 20px; border-radius: 12px; font-size: 14px; font-weight: 600; box-shadow: 0 10px 30px var(--shadow-dark); transform: translateX(120%); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.5s, color 0.5s; display: flex; align-items: center; gap: 10px; }
-    .toast.show { transform: translateX(0); }
-    .empty-state { text-align: center; padding: 50px; border: 1px dashed var(--empty-border); border-radius: 20px; color: var(--text-muted); font-weight: 500; display: none; width: min(920px, 95vw); box-sizing: border-box; }
-
-    @media(max-width: 900px) {
-        .navbar { flex-direction: column; height: auto; padding: 20px; border-radius: 24px; gap: 15px; top: 12px; width: 94%; }
-        .right-nav { flex-wrap: wrap; justify-content: center; width: 100%; gap: 10px; }
-        #searchBar { width: 100% !important; }
-        .sort-dropdown, .btn, .theme-toggle { width: 100%; }
-        .theme-toggle { border-radius: 100px; height: 44px; }
-        body { padding-top: 320px; }
-        .stats-panel { gap: 12px; width: 94%; }
-        .card { flex-direction: column; height: auto; width: 94vw; border-radius: 20px; }
-        .left { width: 100%; height: 190px; }
-        .right { width: 100%; height: auto; }
-        .card-ui-layer { position: relative; padding: 20px; background: var(--bg-color); gap: 20px; }
-        .ui-top { flex-direction: column; gap: 12px; }
-        .chance { align-self: flex-start; font-size: 20px; }
-        .ui-bottom { width: 100%; flex-wrap: wrap; }
-        .action-btn { flex: 1; justify-content: center; box-sizing: border-box; }
-        .cursor-glow { display: none; }
-        #backToTop { bottom: 20px; left: 20px; width: 45px; height: 45px; font-size: 20px;}
-        
-        .modal-header { padding: 20px; }
-        .modal-body { padding: 20px; gap: 20px; }
-        .modal-footer { padding: 0 20px 20px 20px; flex-direction: column; }
-    }
-    @keyframes moveGradient { 0% { background-position: 0% 50%; } 100% { background-position: 100% 50%; } }
+@media (max-width: 480px){
+    .right { height: 180px; }
+    .place { font-size: 20px; }
+    .list-title { font-size: 18px; }
+    .list-highlight { font-size: 16px; }
+    .level-points { font-size: 12px; padding: 4px 10px; }
+    .tab-btn { padding: 10px; font-size: 14px; flex: 1 1 45%; }
+}
 </style>
 </head>
-
 <body>
 
-<!-- UI OVERLAYS -->
-<div id="scrollProgress"></div>
-<div class="ambient-bg"></div>
-<div class="cursor-glow" id="cursorGlow"></div>
-<div class="toast-container" id="toastBox"></div>
-<button id="backToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" aria-label="Scroll to top">↑</button>
+<nav class="navbar">
+    <div class="nav-title">USKC spam list</div>
+    
+    <div class="nav-search" id="nav-search">
+        <input type="text" id="search-input" placeholder="Search level by name...">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+    </div>
 
-<!-- LEVEL INFO MODAL -->
-<div id="levelModal" class="modal-overlay" onclick="if(event.target === this) closeModal()">
-    <div class="modal-content">
-        <div class="modal-header">
-            <div class="modal-header-left">
-                <div class="rank-badge" id="mRank">#1</div>
-                <div class="title" id="mTitle" style="font-size: 22px;">Level Name</div>
-            </div>
-            <button class="modal-close-btn" onclick="closeModal()">×</button>
-        </div>
-        
-        <div class="modal-video-container" id="mVideoContainer">
-            <!-- Iframe injected here via JS -->
-        </div>
+    <div class="nav-actions">
+        <button class="theme-btn" id="theme-toggle">☀️</button>
+        <button class="nav-credits-btn" id="btn-credits">Credits</button>
+        <a href="https://discord.gg/vAr7Cyv83F" target="_blank" class="discord-btn">
+            <svg viewBox="0 0 127.14 96.36">
+                <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1,105.25,105.25,0,0,0,32.19-16.14c0,0,.04-.06.05-.09h0c2.69-27.42-2.73-51.49-18.95-72.06ZM42.63,65.22C38,65.22,34.15,61,34.15,55.9S37.9,46.58,42.63,46.58c4.76,0,8.56,4.31,8.48,9.32C51.11,61,47.41,65.22,42.63,65.22Zm41.88,0c-4.73,0-8.52-4.22-8.52-9.32s3.73-9.32,8.52-9.32c4.76,0,8.56,4.31,8.48,9.32C93,61,89.28,65.22,84.51,65.22Z"/>
+            </svg>
+            Join Discord
+        </a>
+    </div>
+</nav>
 
-        <div class="modal-body">
-            <div class="modal-stats-grid">
-                <div class="m-stat">
-                    <span class="m-stat-label">Creator</span>
-                    <span class="m-stat-val" id="mAuthor">Unknown</span>
-                </div>
-                <div class="m-stat">
-                    <span class="m-stat-label">Verifier</span>
-                    <span class="m-stat-val" id="mVerifier">Unknown</span>
-                </div>
-                <div class="m-stat">
-                    <span class="m-stat-label">Level ID</span>
-                    <span class="m-stat-val id-copy" id="mID" onclick="copyData(this.innerText.replace(' 📋',''), 'ID')" style="width: max-content;">12345 📋</span>
-                </div>
-                <div class="m-stat">
-                    <span class="m-stat-label">Success Chance</span>
-                    <span class="m-stat-val highlight" id="mChance">0%</span>
-                </div>
-                <div class="m-stat">
-                    <span class="m-stat-label">Length</span>
-                    <span class="m-stat-val" id="mLength">-</span>
-                </div>
-                <div class="m-stat">
-                    <span class="m-stat-label">Objects</span>
-                    <span class="m-stat-val" id="mObjects">-</span>
-                </div>
-            </div>
-
-            <div class="modal-desc" id="mDesc">
-                No description provided for this level.
-            </div>
-        </div>
-
-        <div class="modal-footer">
-            <a class="action-btn" id="mWRBtn" href="#" target="_blank">🏆 View World Record</a>
-            <button class="action-btn" id="mShareBtn" style="background: var(--accent-1); color: white; border-color: var(--accent-1);">🔗 Copy Share Link</button>
-        </div>
+<div class="tabs-container">
+    <div class="tabs">
+        <button class="tab-btn active" id="btn-levels">Levels</button>
+        <button class="tab-btn" id="btn-leaderboard">Leaderboard</button>
+        <button class="tab-btn" id="btn-packs">Packs</button>
     </div>
 </div>
 
-<!-- NAVIGATION -->
-<div class="navbar">
-    <div class="logo" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">Luck Based List</div>
-    <div class="right-nav">
-        <input type="text" id="searchBar" placeholder="Search levels...">
-        <select id="sortSelect" class="sort-dropdown">
-            <option value="place">Sort: Placement</option>
-            <option value="chance">Sort: Lowest Chance</option>
-            <option value="alpha">Sort: Alphabetical</option>
-        </select>
-        <button class="theme-toggle" id="themeToggle" aria-label="Toggle Dark/Light Mode">
-            <svg id="sunIcon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-2.25l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" /></svg>
-            <svg id="moonIcon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" /></svg>
-        </button>
-        <a class="btn theo-btn" href="luckbasedlevellisttp" target="_blank">Technically Possible</a>
-        <a class="btn discord" href="https://discord.gg/YfQBH4v23B" target="_blank">Discord</a>
+<div class="container" id="levels-container"></div>
+<div class="container hidden-section" id="leaderboard-container">
+    <div id="leaderboard-filter-banner" class="hidden-section">
+        🏆 Showing verifier and victors for <span id="filter-level-name" style="color: #ffcf40;"></span>
+        <span class="filter-clear-txt">Click to clear</span>
     </div>
 </div>
 
-<!-- MAIN DASHBOARD -->
-<div class="container">
-    <div class="stats-panel">
-        <div class="stat-box">
-            <div class="stat-label">Total Documented</div>
-            <div class="stat-value" id="statTotal">0</div>
+<div class="container hidden-section" id="packs-container">
+    <div id="packs-list-container" style="width: 100%; display: flex; flex-direction: column; align-items: center; gap: 15px;"></div>
+    
+    <div id="pack-view-container" class="hidden-section" style="width: 100%; display: flex; flex-direction: column; align-items: center;">
+        <div class="pack-view-header">
+            <button class="back-btn" id="back-to-packs-btn">⬅ Back to Packs</button>
+            <h2 class="pack-view-title" id="pack-view-title">Pack Name</h2>
         </div>
-        <div class="stat-box">
-            <div class="stat-label">Hardest Verified</div>
-            <div class="stat-value" id="statHardest">-</div>
-        </div>
+        <div class="pack-levels-wrapper" id="pack-levels-wrapper"></div>
     </div>
+</div>
 
-    <!-- DYNAMIC FILTER BAR -->
-    <div class="filter-wrapper" id="filterWrapper"></div>
-
-    <!-- CARDS RENDER AREA -->
-    <div id="levelsContainer"></div>
-    <div id="emptyState" class="empty-state">No matches recorded for your specific parameters.</div>
+<div class="container hidden-section" id="credits-container">
+    <div class="list-card credits-card">
+        <h2 class="list-title credits-title">Credits</h2>
+        <p class="credits-author">List Coded By <strong>Myszon12.</strong></p>
+    </div>
 </div>
 
 <script>
-// --- STATE MANAGEMENT ---
-let levelsData = [];
-let currentTagFilter = 'All';
+// ==========================================
+// THEME TOGGLE LOGIC
+// ==========================================
+const themeToggle = document.getElementById("theme-toggle");
+const currentTheme = localStorage.getItem("theme") || "dark";
 
-// --- THEME ENGINE ---
-const themeToggle = document.getElementById('themeToggle');
-const savedTheme = localStorage.getItem('theme') || 'dark';
-document.documentElement.setAttribute('data-theme', savedTheme);
-
-themeToggle.addEventListener('click', () => {
-    let currentTheme = document.documentElement.getAttribute('data-theme');
-    let newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
-    showToast(`${newTheme === 'dark' ? 'Dark' : 'Light'} Mode Enabled`);
-});
-
-// --- AMBIENT EFFECTS & SCROLL LOGIC ---
-const glow = document.getElementById('cursorGlow');
-const progressBar = document.getElementById('scrollProgress');
-const backToTopBtn = document.getElementById('backToTop');
-
-document.addEventListener('mousemove', (e) => {
-    if(window.innerWidth > 900) { glow.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`; }
-});
-
-window.addEventListener('scroll', () => {
-    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    const progress = (scrollTop / scrollHeight) * 100;
-    progressBar.style.width = progress + '%';
-    if (scrollTop > 400) { backToTopBtn.classList.add('visible'); } else { backToTopBtn.classList.remove('visible'); }
-});
-
-// --- TOAST SYSTEM ---
-const toastBox = document.getElementById('toastBox');
-window.showToast = function(message) {
-    let toast = document.createElement('div');
-    toast.className = 'toast';
-    toast.innerHTML = `<span>✨</span> ${message}`;
-    toastBox.appendChild(toast);
-    setTimeout(() => toast.classList.add('show'), 10);
-    setTimeout(() => { toast.classList.remove('show'); setTimeout(() => toast.remove(), 400); }, 3000);
+if (currentTheme === "light") {
+    document.body.setAttribute("data-theme", "light");
+    themeToggle.innerText = "🌙";
 }
 
-// --- UTILITIES ---
-window.copyData = function(text, type) {
-    navigator.clipboard.writeText(text).then(() => showToast(`Copied ${type}!`)).catch(err => console.error('Copy failed', err));
+themeToggle.addEventListener("click", () => {
+    const isLight = document.body.getAttribute("data-theme") === "light";
+    if (isLight) {
+        document.body.removeAttribute("data-theme");
+        localStorage.setItem("theme", "dark");
+        themeToggle.innerText = "☀️";
+    } else {
+        document.body.setAttribute("data-theme", "light");
+        localStorage.setItem("theme", "light");
+        themeToggle.innerText = "🌙";
+    }
+});
+
+// ==========================================
+// CORE LOGIC
+// ==========================================
+const btnLevels = document.getElementById("btn-levels");
+const btnLeaderboard = document.getElementById("btn-leaderboard");
+const btnPacks = document.getElementById("btn-packs");
+const btnCredits = document.getElementById("btn-credits");
+
+const levelsContainer = document.getElementById("levels-container");
+const leaderboardContainer = document.getElementById("leaderboard-container");
+const packsContainer = document.getElementById("packs-container");
+const creditsContainer = document.getElementById("credits-container");
+
+const packsListContainer = document.getElementById("packs-list-container");
+const packViewContainer = document.getElementById("pack-view-container");
+const packLevelsWrapper = document.getElementById("pack-levels-wrapper");
+const backToPacksBtn = document.getElementById("back-to-packs-btn");
+const packViewTitle = document.getElementById("pack-view-title");
+const leaderboardFilterBanner = document.getElementById("leaderboard-filter-banner");
+const filterLevelName = document.getElementById("filter-level-name");
+
+const searchInput = document.getElementById("search-input");
+
+let levelCardsElements = []; 
+let leaderboardCardsElements = []; 
+let packCardsElements = [];
+let currentPackLevelElements = []; 
+
+const globalLevelsMap = new Map();
+const levelToPacksMap = new Map();
+
+// 🛠️ HELPER FUNCTION: Youtube Parser
+function parseYoutube(youtubeInput) {
+    if (!youtubeInput) return { id: "", start: 0 };
+    let videoId = youtubeInput.trim();
+    let startSeconds = 0;
+    if (!videoId.includes('?') && videoId.includes('&')) videoId = videoId.replace('&', '?');
+    try {
+        const urlStr = videoId.startsWith('http') ? videoId : 'https://youtube.com/' + videoId;
+        const url = new URL(urlStr);
+        if (url.hostname.includes('youtu.be')) videoId = url.pathname.slice(1);
+        else if (url.searchParams.has('v')) videoId = url.searchParams.get('v');
+        else videoId = url.pathname.split('/').pop();
+
+        const t = url.searchParams.get('t') || url.searchParams.get('start');
+        if (t) {
+            if (/^\d+s?$/.test(t)) startSeconds = parseInt(t, 10);
+            else {
+                const hMatch = t.match(/(\d+)h/), mMatch = t.match(/(\d+)m/), sMatch = t.match(/(\d+)s/);
+                if (hMatch) startSeconds += parseInt(hMatch[1], 10) * 3600;
+                if (mMatch) startSeconds += parseInt(mMatch[1], 10) * 60;
+                if (sMatch) startSeconds += parseInt(sMatch[1], 10);
+            }
+        }
+    } catch (e) {}
+    return { id: videoId, start: startSeconds };
 }
 
-window.playVideo = function(element, videoId) {
-    element.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
-    element.style.cursor = 'default';
-};
-
-// --- MODAL ENGINE (NEW) ---
-const modal = document.getElementById('levelModal');
-
-window.openModal = function(id) {
-    const level = levelsData.find(l => String(l.id) === String(id));
-    if(!level) return;
-
-    // Populate data
-    document.getElementById('mRank').innerText = `#${level.place}`;
-    document.getElementById('mTitle').innerText = level.name;
-    document.getElementById('mAuthor').innerText = level.author;
-    document.getElementById('mVerifier').innerText = level.verifier || level.wrName || 'Unknown';
-    document.getElementById('mID').innerHTML = `${level.id} <span style="font-size: 14px">📋</span>`;
-    document.getElementById('mChance').innerText = level.chance;
-    document.getElementById('mLength').innerText = level.length || 'Unknown';
-    document.getElementById('mObjects').innerText = level.objects || 'Unknown';
-    document.getElementById('mDesc').innerText = level.description || `An extremely difficult luck-based challenge by ${level.author}. With a ${level.chance} success rate, it stands at #${level.place} on the list.`;
+// 🛠️ HELPER FUNCTION: Generate Level Card DOM Element
+function createLevelCardElement(l) {
+    const exactPoints = l.points !== undefined ? l.points : 0;
+    const yt = parseYoutube(l.youtube);
     
-    document.getElementById('mWRBtn').href = level.wrLink;
-    document.getElementById('mShareBtn').onclick = () => copyData(`Check out ${level.name} (#${level.place})! ID: ${level.id}`, 'Share Text');
+    // Check if this level is in any packs
+    const associatedPacks = levelToPacksMap.get(l.name.toLowerCase()) || [];
+    let packBadgesHTML = "";
+    if (associatedPacks.length > 0) {
+        packBadgesHTML = `
+            <div class="pack-badges">
+                ${associatedPacks.map(packName => `<span class="pack-badge">${packName}</span>`).join("")}
+            </div>
+        `;
+    }
 
-    // Setup Video Embed (Autoplays inside modal)
-    document.getElementById('mVideoContainer').innerHTML = `<iframe src="https://www.youtube.com/embed/${level.youtube}?autoplay=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+    const card = document.createElement("div");
+    card.className = "card";
+    card.dataset.name = l.name.toLowerCase(); 
 
-    // Show modal & lock scroll
-    modal.classList.add('active');
-    document.body.classList.add('modal-open');
-}
+    const left = document.createElement("div");
+    left.className = "left";
+    
+    // Create the "View Victors" custom element dynamically inside left side
+    const topContent = document.createElement("div");
+    topContent.innerHTML = `
+        <div class="place">#${l.place} (${l.name})</div>
+        <div class="verifier">Verified by: ${l.verifier}</div>
+        <div class="sub">by ${l.author}<br>id: ${l.id}</div>
+        ${packBadgesHTML}
+    `;
 
-window.closeModal = function() {
-    modal.classList.remove('active');
-    document.body.classList.remove('modal-open');
-    // Clear iframe to stop video playing in background
-    setTimeout(() => { document.getElementById('mVideoContainer').innerHTML = ''; }, 400);
-}
+    const victorsBtn = document.createElement("button");
+    victorsBtn.className = "view-victors-btn";
+    victorsBtn.innerText = "Check Victors & Verifier";
+    
+    // Pre-calculate list of players related to this level (Verifier + Victors)
+    const playersList = [];
+    if (l.verifier) playersList.push(l.verifier.trim().toLowerCase());
+    if (l.victors && Array.isArray(l.victors)) {
+        l.victors.forEach(v => playersList.push(v.trim().toLowerCase()));
+    }
 
-// --- DATA PIPELINE ---
-const levelsContainer = document.getElementById("levelsContainer");
-const searchBar = document.getElementById("searchBar");
-const sortSelect = document.getElementById("sortSelect");
-const emptyState = document.getElementById("emptyState");
-const filterWrapper = document.getElementById("filterWrapper");
-
-function extractAndRenderTags(data) {
-    let tags = new Set(['All']);
-    data.forEach(l => l.tags?.forEach(t => tags.add(t)));
-    filterWrapper.innerHTML = '';
-    tags.forEach(tag => {
-        let btn = document.createElement('button');
-        btn.className = `filter-btn ${tag === currentTagFilter ? 'active' : ''}`;
-        btn.innerText = tag;
-        btn.onclick = () => { currentTagFilter = tag; extractAndRenderTags(data); processPipeline(); };
-        filterWrapper.appendChild(btn);
-    });
-}
-
-function runStatisticsCompute(data) {
-    if(data.length === 0) return;
-    document.getElementById("statTotal").innerText = data.length;
-    let hardest = data.reduce((min, l) => l.place < min.place ? l : min, data[0]);
-    document.getElementById("statHardest").innerText = hardest ? `#${hardest.place} ${hardest.name}` : "-";
-}
-
-function applyTiltEffect() {
-    if(window.innerWidth <= 900) return; 
-    const cards = document.querySelectorAll('.card');
-    cards.forEach(card => {
-        card.addEventListener('mousemove', e => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left; const y = e.clientY - rect.top;
-            const centerX = rect.width / 2; const centerY = rect.height / 2;
-            const rotateX = ((y - centerY) / centerY) * -4; 
-            const rotateY = ((x - centerX) / centerX) * 4;
-            card.style.transform = `perspective(1000px) translateY(-5px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    victorsBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        
+        // Switch to leaderboard tab
+        switchTab(btnLeaderboard, leaderboardContainer, "Search player by name...");
+        
+        // Show specific filter banner
+        leaderboardFilterBanner.classList.remove("hidden-section");
+        filterLevelName.innerText = l.name;
+        
+        // Filter the existing leaderboard elements programmatically 
+        leaderboardCardsElements.forEach(lbCard => {
+            if (playersList.includes(lbCard.dataset.player)) {
+                lbCard.style.display = "flex";
+            } else {
+                lbCard.style.display = "none";
+            }
         });
-        card.addEventListener('mouseleave', () => { card.style.transform = `perspective(1000px) translateY(0) rotateX(0deg) rotateY(0deg)`; });
     });
+    topContent.appendChild(victorsBtn);
+
+    const bottomContent = document.createElement("div");
+    bottomContent.innerHTML = `<div class="level-points">+${exactPoints} PTS</div>`;
+
+    left.appendChild(topContent);
+    left.appendChild(bottomContent);
+
+    const right = document.createElement("div");
+    right.className = "right";
+    right.innerHTML = `
+        <img src="https://img.youtube.com/vi/${yt.id}/hqdefault.jpg" loading="lazy" alt="YouTube Thumbnail">
+        <div class="play-button"></div>
+    `;
+
+    right.addEventListener("click", () => {
+        let embedUrl = `https://www.youtube.com/embed/${yt.id}?autoplay=1`;
+        if (yt.start > 0) embedUrl += `&start=${yt.start}`;
+        right.innerHTML = `
+            <iframe width="100%" height="100%" src="${embedUrl}" 
+                title="YouTube video player" frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+            </iframe>`;
+    });
+
+    card.appendChild(left);
+    card.appendChild(right);
+    return card;
 }
 
-function render(data) {
-    levelsContainer.innerHTML = "";
-    if(data.length === 0) { emptyState.style.display = "block"; return; }
-    emptyState.style.display = "none";
+// FETCH DATA CONCURRENTLY
+Promise.all([
+    fetch("levels.json").then(r => r.json()),
+    fetch("packs.json").then(r => r.json()).catch(() => []) 
+]).then(([levelsData, packsData]) => {
 
-    data.forEach((l, index) => {
-        let card = document.createElement("div");
-        card.className = "card";
-        card.style.animation = `cardEnter 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards ${index * 0.08}s`;
+    // 0. MAP LEVELS TO PACKS BEFORE GENERATING CARDS
+    packsData.forEach(pack => {
+        pack.levels.forEach(levelName => {
+            const key = levelName.toLowerCase();
+            if (!levelToPacksMap.has(key)) levelToPacksMap.set(key, []);
+            levelToPacksMap.get(key).push(pack.name);
+        });
+    });
 
-        let tagsHTML = "";
-        if (l.tags && l.tags.length > 0) {
-            tagsHTML = `<div class="tags-container">` + l.tags.map(t => `<div class="tag ${t === 'Verified' ? 'cyan' : ''}">${t}</div>`).join('') + `</div>`;
+    // 1. PROCESS LEVELS
+    levelsData.sort((a,b) => a.place - b.place);
+    
+    levelsData.forEach(l => {
+        globalLevelsMap.set(l.name.toLowerCase(), l); 
+        const card = createLevelCardElement(l);
+        levelsContainer.appendChild(card);
+        levelCardsElements.push(card); 
+    });
+
+    // 2. PROCESS LEADERBOARD
+    const leaderboardData = {};
+    levelsData.forEach(l => {
+        const exactPoints = l.points !== undefined ? Number(l.points) : 0;
+        
+        // Function to ensure players are added properly
+        const addPointsToPlayer = (playerName) => {
+            const trimmedPlayer = playerName.trim();
+            if (!leaderboardData[trimmedPlayer]) leaderboardData[trimmedPlayer] = { points: 0, beaten: [] };
+            leaderboardData[trimmedPlayer].points += exactPoints;
+            leaderboardData[trimmedPlayer].beaten.push(l.name);
         }
 
-        card.innerHTML = `
-        <div class="left" onclick="playVideo(this, '${l.youtube}')">
-            <img src="https://img.youtube.com/vi/${l.youtube}/hqdefault.jpg" alt="Thumbnail" loading="lazy">
-            <div class="play-overlay"><div class="play-btn"></div></div>
-        </div>
-        <div class="right">
-            <img src="${l.gif}" alt="Loop" style="position:absolute; inset:0; z-index:1;" loading="lazy">
-            <div class="card-ui-layer">
-                <div class="ui-top">
-                    <div class="text-group">
-                        <div class="title-wrapper">
-                            <div class="rank-badge">#${l.place}</div>
-                            <div class="title">${l.name}</div>
-                        </div>
-                        <div class="sub">
-                            Creator: <b>${l.author}</b> • ID: 
-                            <span class="id-copy" onclick="copyData('${l.id}', 'ID')">${l.id} 📋</span>
-                        </div>
-                        ${tagsHTML}
-                    </div>
-                    <div class="chance">${l.chance}</div>
-                </div>
-                <div class="ui-bottom">
-                    <!-- NEW INFO BUTTON ADDED HERE -->
-                    <button class="action-btn icon-only" onclick="openModal('${l.id}')" aria-label="Detailed Info">👁️ Info</button>
-                    <button class="action-btn icon-only" onclick="copyData('Check out ${l.name} (#${l.place})! ID: ${l.id}', 'Info')" aria-label="Share">🔗</button>
-                    <a class="action-btn" href="${l.wrLink}" target="_blank">🏆 ${l.wrName}</a>
-                </div>
+        // Add regular victors
+        if (l.victors && Array.isArray(l.victors)) {
+            l.victors.forEach(player => addPointsToPlayer(player));
+        }
+        
+        // Add verifier to the leaderboard too if they aren't skipped
+        if (l.verifier) {
+             // Some lists don't give points to verifier, assuming this list does (or at least they get listed)
+             // Uncomment next line if verifiers should inherently get points too:
+             // addPointsToPlayer(l.verifier);
+        }
+    });
+
+    const sortedPlayers = Object.keys(leaderboardData)
+        .map(name => ({ name, points: leaderboardData[name].points, beaten: leaderboardData[name].beaten }))
+        .sort((a, b) => b.points - a.points);
+
+    sortedPlayers.forEach((p, index) => {
+        const lCard = document.createElement("div");
+        lCard.className = "list-card";
+        lCard.dataset.player = p.name.toLowerCase(); 
+        lCard.innerHTML = `
+            <div class="list-header">
+                <div class="list-title">#${index + 1} ${p.name}</div>
+                <div class="list-highlight">${p.points} pts</div>
             </div>
-        </div>
+            <div class="list-subtitle">Completed levels:</div>
+            <div class="list-items">${p.beaten.join(", ")}</div>
         `;
-        levelsContainer.appendChild(card);
+        leaderboardContainer.appendChild(lCard);
+        leaderboardCardsElements.push(lCard);
     });
-    applyTiltEffect();
-}
 
-function renderSkeletons() {
-    levelsContainer.innerHTML = "";
-    emptyState.style.display = "none";
-    for(let i=0; i<3; i++) {
-        let skel = document.createElement('div');
-        skel.className = 'skeleton-card';
-        levelsContainer.appendChild(skel);
+    // 3. PROCESS PACKS
+    packsData.forEach((pack) => {
+        const validLevels = pack.levels.filter(levelName => globalLevelsMap.has(levelName.toLowerCase()));
+        if (validLevels.length === 0) return;
+
+        const pCard = document.createElement("div");
+        pCard.className = "list-card pack-card";
+        pCard.dataset.pack = pack.name.toLowerCase(); 
+
+        pCard.innerHTML = `
+            <div class="list-header">
+                <div class="list-title">${pack.name}</div>
+                <div class="list-highlight">${validLevels.length} Levels</div>
+            </div>
+            <div class="list-subtitle">Click to view levels:</div>
+            <div class="list-items">${validLevels.join(", ")}</div>
+        `;
+
+        // Click Event: Open Pack View
+        pCard.addEventListener("click", () => {
+            packsListContainer.classList.add("hidden-section");
+            packViewContainer.classList.remove("hidden-section");
+            packViewTitle.innerText = pack.name;
+            
+            packLevelsWrapper.innerHTML = "";
+            currentPackLevelElements = [];
+
+            validLevels.forEach(levelName => {
+                const levelData = globalLevelsMap.get(levelName.toLowerCase());
+                const cardElement = createLevelCardElement(levelData);
+                packLevelsWrapper.appendChild(cardElement);
+                currentPackLevelElements.push(cardElement);
+            });
+
+            searchInput.placeholder = `Search in ${pack.name}...`;
+            searchInput.value = "";
+        });
+
+        packsListContainer.appendChild(pCard);
+        packCardsElements.push(pCard);
+    });
+});
+
+// "BACK TO PACKS" BUTTON LOGIC
+backToPacksBtn.addEventListener("click", () => {
+    packViewContainer.classList.add("hidden-section");
+    packsListContainer.classList.remove("hidden-section");
+    searchInput.placeholder = "Search pack by name...";
+    searchInput.value = "";
+    searchInput.dispatchEvent(new Event('input')); 
+});
+
+
+// UNIVERSAL SEARCH IMPLEMENTATION
+searchInput.addEventListener("input", (e) => {
+    const query = e.target.value.toLowerCase();
+    
+    if (btnLevels.classList.contains("active")) {
+        levelCardsElements.forEach(card => card.style.display = card.dataset.name.includes(query) ? "flex" : "none");
+    } 
+    else if (btnLeaderboard.classList.contains("active")) {
+        // If user manually searches, disable the custom victor filter UI
+        if (!leaderboardFilterBanner.classList.contains("hidden-section")) {
+            leaderboardFilterBanner.classList.add("hidden-section");
+        }
+        leaderboardCardsElements.forEach(card => card.style.display = card.dataset.player.includes(query) ? "flex" : "none");
     }
-}
-
-function processPipeline() {
-    let query = searchBar.value.toLowerCase();
-    let sortOption = sortSelect.value;
-    let filtered = levelsData.filter(l => {
-        let matchesSearch = l.name.toLowerCase().includes(query) || l.author.toLowerCase().includes(query) || String(l.id).includes(query);
-        let matchesTag = currentTagFilter === 'All' || (l.tags && l.tags.includes(currentTagFilter));
-        return matchesSearch && matchesTag;
-    });
-
-    if(sortOption === "place") { filtered.sort((a,b) => a.place - b.place); } 
-    else if (sortOption === "chance") { filtered.sort((a,b) => parseFloat(a.chance) - parseFloat(b.chance)); } 
-    else if (sortOption === "alpha") { filtered.sort((a,b) => a.name.localeCompare(b.name)); }
-
-    renderSkeletons();
-    setTimeout(() => { render(filtered); }, 400); 
-}
-
-// --- INITIALIZATION ---
-// Added expanded extended data fields (description, length, objects, verifier) to demo payload
-const demoData = [
-    { place: 1, name: "VSC", author: "BoBoBo", verifier: "Paqeo", id: "666666", chance: "0.001%", tags: ["Extreme", "Timings", "Short"], youtube: "dQw4w9WgXcQ", gif: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3VwY2NmdXJvYmdkMDNnbW96ZHZ0b3E0bWN6ZnA1bWxpY3p6bXF6dyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7Tov7edZ6tTuOg8w/giphy.gif", wrLink: "#", wrName: "Paqeo", length: "0m 18s", objects: "14,500", description: "VSC stands as a monument to timing perfection. It requires inhuman consistency over a highly condensed period of time. This level pushed the absolute limits of verification when it was first introduced." },
-    { place: 2, name: "Tartarus", author: "Riot & More", verifier: "Dolphy", id: "123456", chance: "0.052%", tags: ["Verified", "Frame Perfect"], youtube: "dQw4w9WgXcQ", gif: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM2VwYm81b3ZkM3JicnpqNDVhcWpxZnNwbTVvNXZpdXp0cHhrNDRxbyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l0HlHFRbmaZtBRhXG/giphy.gif", wrLink: "#", wrName: "Mefewe", length: "1m 58s", objects: "32,109", description: "Once the unquestioned hardest level in the game, Tartarus features incredibly tight straight flying and brutal ship control. A true legendary extreme demon." },
-    { place: 3, name: "Acheron", author: "Zoink", verifier: "Zoink", id: "987654", chance: "0.089%", tags: ["Extreme", "Verified"], youtube: "dQw4w9WgXcQ", gif: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3VwY2NmdXJvYmdkMDNnbW96ZHZ0b3E0bWN6ZnA1bWxpY3p6bXF6dyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7Tov7edZ6tTuOg8w/giphy.gif", wrLink: "#", wrName: "Zoink", length: "2m 14s", objects: "44,992", description: "An evolution of the top 1 formula, Acheron features nearly frame-perfect inputs back to back for over two minutes, draining the stamina of even the best players." }
-];
-
-fetch("levels.json").then(r => r.json()).then(data => {
-    levelsData = data; runStatisticsCompute(levelsData); extractAndRenderTags(levelsData); processPipeline();
-}).catch(() => {
-    console.warn("levels.json not found, using demo data.");
-    levelsData = demoData; runStatisticsCompute(levelsData); extractAndRenderTags(levelsData); processPipeline();
+    else if (btnPacks.classList.contains("active")) {
+        if (!packsListContainer.classList.contains("hidden-section")) {
+            packCardsElements.forEach(card => card.style.display = card.dataset.pack.includes(query) ? "flex" : "none");
+        } else {
+            currentPackLevelElements.forEach(card => card.style.display = card.dataset.name.includes(query) ? "flex" : "none");
+        }
+    }
 });
 
-// Event Listeners
-searchBar.addEventListener("input", processPipeline);
-sortSelect.addEventListener("change", processPipeline);
-// Escape key closes modal
-document.addEventListener('keydown', (e) => {
-    if(e.key === "Escape" && modal.classList.contains('active')) closeModal();
+// HANDLE CLEARING CUSTOM FILTER FROM BANNER
+leaderboardFilterBanner.addEventListener("click", () => {
+    leaderboardFilterBanner.classList.add("hidden-section");
+    searchInput.value = "";
+    searchInput.dispatchEvent(new Event('input')); // Triggers reset & shows all cards
 });
+
+
+// HANDLE TAB SWITCHING
+function switchTab(activeBtn, activeContainer, placeholder) {
+    [btnLevels, btnLeaderboard, btnPacks, btnCredits].forEach(btn => btn.classList.remove("active"));
+    [levelsContainer, leaderboardContainer, packsContainer, creditsContainer].forEach(container => container.classList.add("hidden-section"));
+    
+    activeBtn.classList.add("active");
+    activeContainer.classList.remove("hidden-section");
+    
+    if (activeBtn === btnPacks) {
+        packViewContainer.classList.add("hidden-section");
+        packsListContainer.classList.remove("hidden-section");
+    }
+
+    if (activeBtn !== btnLeaderboard) {
+        leaderboardFilterBanner.classList.add("hidden-section");
+    }
+
+    searchInput.placeholder = placeholder;
+    searchInput.value = ""; 
+    searchInput.dispatchEvent(new Event('input')); 
+}
+
+btnLevels.addEventListener("click", () => switchTab(btnLevels, levelsContainer, "Search level by name..."));
+btnLeaderboard.addEventListener("click", () => switchTab(btnLeaderboard, leaderboardContainer, "Search player by name..."));
+btnPacks.addEventListener("click", () => switchTab(btnPacks, packsContainer, "Search pack by name..."));
+btnCredits.addEventListener("click", () => switchTab(btnCredits, creditsContainer, "No search in credits..."));
+
 </script>
-
 </body>
 </html>
