@@ -28,8 +28,6 @@
     --tab-active-bg: #ffffff;
     --tab-active-text: #000000;
     --tab-border: rgba(255, 255, 255, 0.2);
-    --banner-bg: rgba(88, 101, 242, 0.15);
-    --banner-border: rgba(88, 101, 242, 0.5);
 }
 
 [data-theme="light"] {
@@ -50,8 +48,6 @@
     --tab-active-bg: #000000;
     --tab-active-text: #ffffff;
     --tab-border: rgba(0, 0, 0, 0.2);
-    --banner-bg: rgba(88, 101, 242, 0.1);
-    --banner-border: rgba(88, 101, 242, 0.4);
 }
 
 body {
@@ -83,239 +79,94 @@ body {
     transition: background 0.3s ease, border-color 0.3s ease;
 }
 
-.nav-title {
-    font-size: 24px;
-    font-weight: 800;
-    color: var(--text-main);
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
-
-.nav-actions {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-}
+.nav-title { font-size: 24px; font-weight: 800; color: var(--text-main); text-transform: uppercase; letter-spacing: 2px; }
+.nav-actions { display: flex; gap: 10px; align-items: center; }
 
 /* SEARCH */
-.nav-search {
-    flex-grow: 1;
-    max-width: 400px;
-    position: relative;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
+.nav-search { flex-grow: 1; max-width: 400px; position: relative; transition: opacity 0.3s ease, transform 0.3s ease; }
 
 #search-input {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 12px 20px 12px 45px;
-    font-family: 'Rubik', sans-serif;
-    font-size: 15px;
-    font-weight: 600;
-    background: var(--input-bg);
-    border: 1px solid var(--border-color);
-    color: var(--text-main);
-    border-radius: 30px; 
-    outline: none;
-    transition: all 0.3s ease;
+    width: 100%; box-sizing: border-box; padding: 12px 20px 12px 45px;
+    font-family: 'Rubik', sans-serif; font-size: 15px; font-weight: 600;
+    background: var(--input-bg); border: 1px solid var(--border-color);
+    color: var(--text-main); border-radius: 30px; outline: none; transition: all 0.3s ease;
 }
 
 #search-input::placeholder { color: var(--text-dim); }
-#search-input:focus {
-    background: var(--input-focus);
-    border-color: var(--border-hover);
-}
+#search-input:focus { background: var(--input-focus); border-color: var(--border-hover); }
 
-.search-icon {
-    position: absolute;
-    left: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 18px;
-    height: 18px;
-    color: var(--text-dim);
-    pointer-events: none;
-}
+.search-icon { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); width: 18px; height: 18px; color: var(--text-dim); pointer-events: none; }
 #search-input:focus + .search-icon { color: var(--text-main); }
 
 /* BUTTONS */
 .theme-btn {
-    background: var(--theme-btn-bg);
-    border: 1px solid var(--border-color);
-    color: var(--text-main);
-    font-size: 18px;
-    width: 40px;
-    height: 40px;
-    border-radius: 12px;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: all 0.3s ease;
+    background: var(--theme-btn-bg); border: 1px solid var(--border-color); color: var(--text-main);
+    font-size: 18px; width: 40px; height: 40px; border-radius: 12px; cursor: pointer;
+    display: flex; justify-content: center; align-items: center; transition: all 0.3s ease;
 }
 .theme-btn:hover { border-color: var(--border-hover); transform: scale(1.05); }
 
 .nav-credits-btn {
-    background: var(--theme-btn-bg);
-    border: 1px solid var(--border-color);
-    color: var(--text-main);
-    padding: 0 16px;
-    height: 40px;
-    border-radius: 12px;
-    cursor: pointer;
-    font-family: 'Rubik', sans-serif;
-    font-weight: 700;
-    font-size: 14px;
-    text-transform: uppercase;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-    box-sizing: border-box;
+    background: var(--theme-btn-bg); border: 1px solid var(--border-color); color: var(--text-main);
+    padding: 0 16px; height: 40px; border-radius: 12px; cursor: pointer;
+    font-family: 'Rubik', sans-serif; font-weight: 700; font-size: 14px;
+    text-transform: uppercase; display: flex; align-items: center; justify-content: center;
+    transition: all 0.3s ease; box-sizing: border-box;
 }
-.nav-credits-btn:hover {
-    border-color: var(--border-hover);
-    transform: translateY(-1px);
-}
-.nav-credits-btn.active {
-    background: var(--tab-active-bg);
-    color: var(--tab-active-text);
-    border-color: var(--tab-active-bg);
-    box-shadow: 0 0 15px var(--shadow-color);
-}
+.nav-credits-btn:hover { border-color: var(--border-hover); transform: translateY(-1px); }
+.nav-credits-btn.active { background: var(--tab-active-bg); color: var(--tab-active-text); border-color: var(--tab-active-bg); box-shadow: 0 0 15px var(--shadow-color); }
 
 .discord-btn {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background: #5865F2;
-    color: white;
-    text-decoration: none;
-    padding: 10px 20px;
-    border-radius: 12px;
-    font-weight: 700;
-    font-size: 14px;
-    text-transform: uppercase;
-    transition: all 0.3s ease;
-    border: none;
-    height: 40px;
-    box-sizing: border-box;
+    display: flex; align-items: center; gap: 8px; background: #5865F2; color: white;
+    text-decoration: none; padding: 10px 20px; border-radius: 12px; font-weight: 700;
+    font-size: 14px; text-transform: uppercase; transition: all 0.3s ease; border: none; height: 40px; box-sizing: border-box;
 }
-.discord-btn:hover {
-    background: #4752C4;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(88, 101, 242, 0.5);
-}
+.discord-btn:hover { background: #4752C4; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(88, 101, 242, 0.5); }
 .discord-btn svg { width: 20px; height: 20px; fill: currentColor; }
 
 /* TABS */
-.tabs-container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    padding-top: 25px;
-}
+.tabs-container { width: 100%; display: flex; justify-content: center; padding-top: 25px; }
 .tabs { display: flex; gap: 10px; width: min(900px, 95vw); flex-wrap: wrap; }
 .tab-btn {
-    padding: 12px 24px;
-    background: var(--card-bg);
-    border: 2px solid var(--tab-border);
-    color: var(--text-main);
-    border-radius: 12px;
-    cursor: pointer;
-    font-family: 'Rubik', sans-serif;
-    font-weight: 800;
-    font-size: 16px;
-    transition: all 0.3s ease;
-    flex: 1;
-    text-align: center;
+    padding: 12px 24px; background: var(--card-bg); border: 2px solid var(--tab-border); color: var(--text-main);
+    border-radius: 12px; cursor: pointer; font-family: 'Rubik', sans-serif; font-weight: 800;
+    font-size: 16px; transition: all 0.3s ease; flex: 1; text-align: center;
 }
 .tab-btn:hover { border-color: var(--border-hover); }
-.tab-btn.active {
-    background: var(--tab-active-bg);
-    color: var(--tab-active-text);
-    border-color: var(--tab-active-bg);
-    box-shadow: 0 0 15px var(--shadow-color);
-}
+.tab-btn.active { background: var(--tab-active-bg); color: var(--tab-active-text); border-color: var(--tab-active-bg); box-shadow: 0 0 15px var(--shadow-color); }
 
 /* CONTAINERS */
-.container {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    gap: 15px;
-    box-sizing: border-box;
-}
+.container { width: 100%; display: flex; flex-direction: column; align-items: center; padding: 20px; gap: 15px; box-sizing: border-box; }
 
 /* CARDS (LEVELS) */
 .card {
-    width: min(900px, 95vw);
-    height: 220px;
-    display: flex;
-    border-radius: 18px;
-    overflow: hidden;
-    border: 1px solid var(--border-color);
-    background: var(--card-bg);
-    position: relative;
+    width: min(900px, 95vw); height: 220px; display: flex; border-radius: 18px; overflow: hidden;
+    border: 1px solid var(--border-color); background: var(--card-bg); position: relative;
     transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
-.card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 30px var(--shadow-color);
-    border-color: var(--border-hover);
-}
+.card:hover { transform: translateY(-3px); box-shadow: 0 10px 30px var(--shadow-color); border-color: var(--border-hover); }
 
 .left {
-    width: 35%;
-    height: 100%;
-    background: linear-gradient(135deg, var(--card-grad-1) 0%, var(--card-grad-2) 100%);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 20px;
-    box-sizing: border-box;
-    z-index: 2;
-    border-right: 2px solid var(--border-color);
+    width: 35%; height: 100%; background: linear-gradient(135deg, var(--card-grad-1) 0%, var(--card-grad-2) 100%);
+    display: flex; flex-direction: column; justify-content: space-between; padding: 20px; box-sizing: border-box;
+    z-index: 2; border-right: 2px solid var(--border-color);
+    cursor: pointer; /* Makes it clear it is clickable */
+    transition: background 0.3s ease;
 }
-.right {
-    width: 65%;
-    height: 100%;
-    position: relative;
-    cursor: pointer;
-    background: #000;
-}
-.right img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: opacity 0.3s;
-}
+.left:hover { background: linear-gradient(135deg, var(--card-grad-2) 0%, var(--card-bg) 100%); }
+
+.right { width: 65%; height: 100%; position: relative; cursor: pointer; background: #000; }
+.right img { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.3s; }
 .right:hover img { opacity: 0.6; }
 
 .play-button {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 60px;
-    height: 60px;
-    background-color: rgba(255, 0, 0, 0.8);
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    pointer-events: none;
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 60px; height: 60px;
+    background-color: rgba(255, 0, 0, 0.8); border-radius: 50%; display: flex; justify-content: center; align-items: center;
+    transition: background-color 0.3s ease, transform 0.2s ease; pointer-events: none;
 }
 .play-button::after {
-    content: "";
-    display: block;
-    border-style: solid;
-    border-width: 12px 0 12px 20px;
-    border-color: transparent transparent transparent white;
-    margin-left: 6px;
+    content: ""; display: block; border-style: solid; border-width: 12px 0 12px 20px;
+    border-color: transparent transparent transparent white; margin-left: 6px;
 }
 .right:hover .play-button { background-color: #ff0000; transform: translate(-50%, -50%) scale(1.15); }
 
@@ -323,60 +174,24 @@ body {
 .verifier { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-dim); font-weight: 700; margin-bottom: 8px; }
 .sub { font-size: 12px; color: var(--text-sub); line-height: 1.4; }
 
-/* PACK BADGES & VICTORS BTN */
-.pack-badges { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; margin-bottom: 8px; }
+/* PACK BADGES */
+.pack-badges { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
 .pack-badge {
-    font-size: 10px;
-    font-weight: 700;
-    text-transform: uppercase;
-    background: var(--input-bg);
-    border: 1px solid var(--border-color);
-    padding: 4px 8px;
-    border-radius: 6px;
-    color: var(--text-dim);
+    font-size: 10px; font-weight: 700; text-transform: uppercase; background: var(--input-bg);
+    border: 1px solid var(--border-color); padding: 4px 8px; border-radius: 6px; color: var(--text-dim);
 }
 
 .level-points {
-    font-size: 15px; font-weight: 800; color: #ffcf40;
-    padding: 6px 14px; border-radius: 8px; display: inline-block;
-    width: max-content; text-transform: uppercase; letter-spacing: 1px;
+    font-size: 15px; font-weight: 800; color: #ffcf40; padding: 6px 14px; border-radius: 8px;
+    display: inline-block; width: max-content; text-transform: uppercase; letter-spacing: 1px;
     background: rgba(255, 207, 64, 0.15); border: 1px solid rgba(255, 207, 64, 0.3);
-}
-
-.view-victors-btn {
-    background: none;
-    border: 1px solid var(--border-color);
-    color: var(--text-dim);
-    font-family: 'Rubik', sans-serif;
-    font-size: 10px;
-    text-transform: uppercase;
-    font-weight: 700;
-    padding: 5px 10px;
-    border-radius: 6px;
-    cursor: pointer;
-    margin-top: 8px;
-    transition: all 0.2s ease;
-    display: block;
-    width: max-content;
-}
-.view-victors-btn:hover {
-    border-color: var(--border-hover);
-    color: var(--text-main);
-    background: var(--input-bg);
 }
 
 /* LIST CARDS (Leaderboard & Packs & Credits) */
 .list-card {
-    width: min(900px, 95vw);
-    background: linear-gradient(135deg, var(--card-bg) 0%, var(--card-grad-2) 100%);
-    border: 1px solid var(--border-color);
-    border-radius: 18px;
-    padding: 20px;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    transition: transform 0.2s ease, border-color 0.2s ease;
+    width: min(900px, 95vw); background: linear-gradient(135deg, var(--card-bg) 0%, var(--card-grad-2) 100%);
+    border: 1px solid var(--border-color); border-radius: 18px; padding: 20px; box-sizing: border-box;
+    display: flex; flex-direction: column; gap: 10px; transition: transform 0.2s ease, border-color 0.2s ease;
 }
 .list-card:hover { transform: translateY(-2px); border-color: var(--border-hover); box-shadow: 0 5px 15px var(--shadow-color); }
 .pack-card { cursor: pointer; }
@@ -388,35 +203,19 @@ body {
 .list-items { font-size: 14px; color: var(--text-dim); line-height: 1.5; }
 
 /* CREDITS SPECIFIC */
-.credits-card {
-    align-items: center;
-    text-align: center;
-    padding: 50px 20px;
-}
+.credits-card { align-items: center; text-align: center; padding: 50px 20px; }
 .credits-title { font-size: 32px; margin-bottom: 5px; }
 .credits-author { font-size: 18px; color: var(--text-dim); }
 .credits-author strong { color: var(--text-main); font-weight: 800; }
 
 /* PACK VIEW INTERFACE */
 .pack-view-header {
-    width: min(900px, 95vw);
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    padding: 0 0 15px 0;
-    border-bottom: 1px solid var(--border-color);
-    margin-bottom: 10px;
+    width: min(900px, 95vw); display: flex; align-items: center; gap: 20px;
+    padding: 0 0 15px 0; border-bottom: 1px solid var(--border-color); margin-bottom: 10px;
 }
 .back-btn {
-    background: var(--input-bg);
-    border: 1px solid var(--border-color);
-    color: var(--text-main);
-    padding: 10px 15px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-family: 'Rubik', sans-serif;
-    font-weight: 700;
-    transition: all 0.2s ease;
+    background: var(--input-bg); border: 1px solid var(--border-color); color: var(--text-main);
+    padding: 10px 15px; border-radius: 8px; cursor: pointer; font-family: 'Rubik', sans-serif; font-weight: 700; transition: all 0.2s ease;
 }
 .back-btn:hover { background: var(--tab-active-bg); color: var(--tab-active-text); }
 .pack-view-title { font-size: 22px; font-weight: 800; margin: 0; color: var(--text-main); }
@@ -424,54 +223,68 @@ body {
 
 .hidden-section { display: none !important; }
 
-/* LEADERBOARD FILTER BANNER */
-#leaderboard-filter-banner {
-    width: min(900px, 95vw);
-    background: var(--banner-bg);
-    border: 1px solid var(--banner-border);
-    padding: 12px;
-    border-radius: 12px;
-    text-align: center;
-    font-weight: 600;
-    color: var(--text-main);
-    cursor: pointer;
-    transition: opacity 0.2s ease;
-}
-#leaderboard-filter-banner:hover {
-    opacity: 0.8;
-}
-.filter-clear-txt {
-    font-size: 12px;
-    color: var(--text-dim);
-    margin-left: 10px;
-    text-decoration: underline;
-}
-
 /* ========================= */
+/* MODAL STYLES (LEVEL INFO & VICTORS) */
+/* ========================= */
+.modal-overlay {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    display: flex; justify-content: center; align-items: center; z-index: 1000;
+    opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+}
+.modal-overlay.active { opacity: 1; pointer-events: all; }
+.modal-content {
+    background: linear-gradient(135deg, var(--card-bg) 0%, var(--card-grad-2) 100%);
+    border: 1px solid var(--border-color); border-radius: 20px;
+    width: min(650px, 90vw); max-height: 85vh; padding: 30px; box-sizing: border-box;
+    position: relative; overflow-y: auto; color: var(--text-main);
+    transform: translateY(-20px); transition: transform 0.3s ease;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+}
+.modal-overlay.active .modal-content { transform: translateY(0); }
+.modal-close {
+    position: absolute; top: 20px; right: 20px; background: var(--input-bg);
+    border: 1px solid var(--border-color); color: var(--text-main);
+    width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center;
+    justify-content: center; cursor: pointer; transition: all 0.2s ease; font-weight: bold;
+}
+.modal-close:hover { background: var(--text-main); color: var(--bg-main); transform: scale(1.1); }
+.modal-header { border-bottom: 1px solid var(--border-color); padding-bottom: 20px; margin-bottom: 20px; }
+.modal-title { font-size: 32px; font-weight: 800; color: var(--text-main); }
+.modal-victors-section { margin-top: 20px; }
+.modal-victors-title { font-size: 20px; font-weight: 700; color: #ffcf40; margin-bottom: 15px; display: flex; align-items: center; justify-content: space-between;}
+.modal-victors-list { display: flex; flex-direction: column; gap: 10px; }
+.victor-item {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 12px 18px; background: var(--input-bg); border: 1px solid var(--border-color);
+    border-radius: 12px; transition: border-color 0.2s ease;
+}
+.victor-item:hover { border-color: var(--border-hover); }
+.victor-name { font-weight: 800; font-size: 16px; color: var(--text-main); }
+.victor-link {
+    color: #ff4747; background: rgba(255, 71, 71, 0.1); padding: 6px 12px;
+    border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 13px;
+    display: flex; align-items: center; gap: 5px; transition: all 0.2s ease;
+}
+.victor-link:hover { background: rgba(255, 71, 71, 0.2); transform: translateY(-1px); }
+
 /* MOBILE RESPONSIVENESS */
-/* ========================= */
 @media (max-width: 768px){
-    /* Stack Navbar Items */
-    .navbar { flex-direction: column; align-items: stretch; gap: 15px; }
-    .nav-actions { width: 100%; justify-content: space-between; }
-    .nav-search { width: 100%; max-width: 100%; order: -1; } /* Search on top for mobile */
-    
-    /* Make Cards Vertical */
-    .card { flex-direction: column-reverse; height: auto; }
-    .left { width: 100%; border-right: none; border-top: 1px solid var(--border-color); padding: 15px; }
-    .right { width: 100%; height: 220px; } /* Give thumbnail a fixed height */
-    
-    .pack-view-header { flex-direction: column; align-items: flex-start; gap: 10px; }
-    .tabs { justify-content: center; }
+    .navbar { flex-direction: row; }
+    .nav-search { order: 3; max-width: 100%; margin-top: 10px; }
+    .card { height: 230px; }
 }
-
 @media (max-width: 480px){
-    .right { height: 180px; }
-    .place { font-size: 20px; }
+    .card { height: 210px; }
+    .place { font-size: 18px; }
     .list-title { font-size: 18px; }
     .list-highlight { font-size: 16px; }
+    .left { padding: 12px; }
     .level-points { font-size: 12px; padding: 4px 10px; }
-    .tab-btn { padding: 10px; font-size: 14px; flex: 1 1 45%; }
+    .tab-btn { padding: 10px 15px; font-size: 14px; flex-basis: 45%; }
+    .pack-view-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .modal-content { padding: 20px; }
+    .modal-title { font-size: 24px; }
 }
 </style>
 </head>
@@ -509,13 +322,9 @@ body {
 </div>
 
 <div class="container" id="levels-container"></div>
-<div class="container hidden-section" id="leaderboard-container">
-    <div id="leaderboard-filter-banner" class="hidden-section">
-        🏆 Showing verifier and victors for <span id="filter-level-name" style="color: #ffcf40;"></span>
-        <span class="filter-clear-txt">Click to clear</span>
-    </div>
-</div>
+<div class="container hidden-section" id="leaderboard-container"></div>
 
+<!-- Master Packs Container -->
 <div class="container hidden-section" id="packs-container">
     <div id="packs-list-container" style="width: 100%; display: flex; flex-direction: column; align-items: center; gap: 15px;"></div>
     
@@ -528,6 +337,7 @@ body {
     </div>
 </div>
 
+<!-- Credits Container -->
 <div class="container hidden-section" id="credits-container">
     <div class="list-card credits-card">
         <h2 class="list-title credits-title">Credits</h2>
@@ -535,9 +345,17 @@ body {
     </div>
 </div>
 
+<!-- INFO & VICTORS MODAL -->
+<div id="level-modal" class="modal-overlay">
+    <div class="modal-content">
+        <button class="modal-close" id="modal-close-btn">✕</button>
+        <div id="modal-body"></div>
+    </div>
+</div>
+
 <script>
 // ==========================================
-// THEME TOGGLE LOGIC
+// THEME TOGGLE LOGIC (Saved to Local Storage)
 // ==========================================
 const themeToggle = document.getElementById("theme-toggle");
 const currentTheme = localStorage.getItem("theme") || "dark";
@@ -578,10 +396,13 @@ const packViewContainer = document.getElementById("pack-view-container");
 const packLevelsWrapper = document.getElementById("pack-levels-wrapper");
 const backToPacksBtn = document.getElementById("back-to-packs-btn");
 const packViewTitle = document.getElementById("pack-view-title");
-const leaderboardFilterBanner = document.getElementById("leaderboard-filter-banner");
-const filterLevelName = document.getElementById("filter-level-name");
 
 const searchInput = document.getElementById("search-input");
+
+// Modal Variables
+const levelModal = document.getElementById("level-modal");
+const modalCloseBtn = document.getElementById("modal-close-btn");
+const modalBody = document.getElementById("modal-body");
 
 let levelCardsElements = []; 
 let leaderboardCardsElements = []; 
@@ -618,6 +439,71 @@ function parseYoutube(youtubeInput) {
     return { id: videoId, start: startSeconds };
 }
 
+// 🛠️ HELPER FUNCTION: Open Modal Detail View
+function openLevelModal(l, associatedPacks) {
+    const exactPoints = l.points !== undefined ? l.points : 0;
+    
+    // Create badges for modal
+    let packBadgesHTML = "";
+    if (associatedPacks && associatedPacks.length > 0) {
+        packBadgesHTML = `
+            <div class="pack-badges" style="margin-top: 15px;">
+                ${associatedPacks.map(packName => `<span class="pack-badge" style="font-size: 12px; padding: 6px 10px;">${packName}</span>`).join("")}
+            </div>
+        `;
+    }
+
+    // Process Victors list
+    let victorsHTML = "";
+    if (l.victors && l.victors.length > 0) {
+        victorsHTML = l.victors.map(v => {
+            // Support 'PlayerName=YoutubeLink' format
+            const parts = v.split('=');
+            const playerName = parts[0].trim();
+            const playerLink = parts.length > 1 ? parts[1].trim() : null;
+            
+            let linkBtn = playerLink 
+                ? `<a href="${playerLink}" target="_blank" class="victor-link">▶ Watch Video</a>` 
+                : `<span style="font-size: 13px; color: var(--text-sub);">No video</span>`;
+            
+            return `
+                <div class="victor-item">
+                    <div class="victor-name">${playerName}</div>
+                    <div>${linkBtn}</div>
+                </div>
+            `;
+        }).join("");
+    } else {
+        victorsHTML = `<div class="victor-item"><span class="victor-name" style="color: var(--text-dim);">No victors yet.</span></div>`;
+    }
+
+    modalBody.innerHTML = `
+        <div class="modal-header">
+            <div class="modal-title">#${l.place} ${l.name}</div>
+            <div class="verifier" style="margin-top: 8px; font-size: 13px;">Verified by: ${l.verifier}</div>
+            <div class="sub" style="font-size: 14px; margin-top: 5px;">by ${l.author} • id: ${l.id}</div>
+            <div class="level-points" style="margin-top: 15px; font-size: 18px;">+${exactPoints} PTS</div>
+            ${packBadgesHTML}
+        </div>
+        <div class="modal-victors-section">
+            <div class="modal-victors-title">
+                Victors (${l.victors ? l.victors.length : 0})
+            </div>
+            <div class="modal-victors-list">
+                ${victorsHTML}
+            </div>
+        </div>
+    `;
+
+    levelModal.classList.add("active");
+}
+
+// Close Modal Logic
+modalCloseBtn.addEventListener("click", () => levelModal.classList.remove("active"));
+levelModal.addEventListener("click", (e) => {
+    if (e.target === levelModal) levelModal.classList.remove("active");
+});
+
 // 🛠️ HELPER FUNCTION: Generate Level Card DOM Element
 function createLevelCardElement(l) {
     const exactPoints = l.points !== undefined ? l.points : 0;
@@ -640,53 +526,21 @@ function createLevelCardElement(l) {
 
     const left = document.createElement("div");
     left.className = "left";
-    
-    // Create the "View Victors" custom element dynamically inside left side
-    const topContent = document.createElement("div");
-    topContent.innerHTML = `
-        <div class="place">#${l.place} (${l.name})</div>
-        <div class="verifier">Verified by: ${l.verifier}</div>
-        <div class="sub">by ${l.author}<br>id: ${l.id}</div>
-        ${packBadgesHTML}
+    left.title = "Click to view full info & victors";
+    left.innerHTML = `
+        <div>
+            <div class="place">#${l.place} (${l.name})</div>
+            <div class="verifier">Verified by: ${l.verifier}</div>
+            <div class="sub">by ${l.author}<br>id: ${l.id}</div>
+            ${packBadgesHTML}
+        </div>
+        <div class="level-points">+${exactPoints} PTS</div>
     `;
 
-    const victorsBtn = document.createElement("button");
-    victorsBtn.className = "view-victors-btn";
-    victorsBtn.innerText = "Check Victors & Verifier";
-    
-    // Pre-calculate list of players related to this level (Verifier + Victors)
-    const playersList = [];
-    if (l.verifier) playersList.push(l.verifier.trim().toLowerCase());
-    if (l.victors && Array.isArray(l.victors)) {
-        l.victors.forEach(v => playersList.push(v.trim().toLowerCase()));
-    }
-
-    victorsBtn.addEventListener("click", (e) => {
-        e.stopPropagation();
-        
-        // Switch to leaderboard tab
-        switchTab(btnLeaderboard, leaderboardContainer, "Search player by name...");
-        
-        // Show specific filter banner
-        leaderboardFilterBanner.classList.remove("hidden-section");
-        filterLevelName.innerText = l.name;
-        
-        // Filter the existing leaderboard elements programmatically 
-        leaderboardCardsElements.forEach(lbCard => {
-            if (playersList.includes(lbCard.dataset.player)) {
-                lbCard.style.display = "flex";
-            } else {
-                lbCard.style.display = "none";
-            }
-        });
+    // ADDED EVENT LISTENER FOR LEFT CLICK -> Open Modal
+    left.addEventListener("click", () => {
+        openLevelModal(l, associatedPacks);
     });
-    topContent.appendChild(victorsBtn);
-
-    const bottomContent = document.createElement("div");
-    bottomContent.innerHTML = `<div class="level-points">+${exactPoints} PTS</div>`;
-
-    left.appendChild(topContent);
-    left.appendChild(bottomContent);
 
     const right = document.createElement("div");
     right.className = "right";
@@ -739,25 +593,16 @@ Promise.all([
     const leaderboardData = {};
     levelsData.forEach(l => {
         const exactPoints = l.points !== undefined ? Number(l.points) : 0;
-        
-        // Function to ensure players are added properly
-        const addPointsToPlayer = (playerName) => {
-            const trimmedPlayer = playerName.trim();
-            if (!leaderboardData[trimmedPlayer]) leaderboardData[trimmedPlayer] = { points: 0, beaten: [] };
-            leaderboardData[trimmedPlayer].points += exactPoints;
-            leaderboardData[trimmedPlayer].beaten.push(l.name);
-        }
-
-        // Add regular victors
         if (l.victors && Array.isArray(l.victors)) {
-            l.victors.forEach(player => addPointsToPlayer(player));
-        }
-        
-        // Add verifier to the leaderboard too if they aren't skipped
-        if (l.verifier) {
-             // Some lists don't give points to verifier, assuming this list does (or at least they get listed)
-             // Uncomment next line if verifiers should inherently get points too:
-             // addPointsToPlayer(l.verifier);
+            l.victors.forEach(playerEntry => {
+                // Parse string: player might be "Name=Link"
+                const parts = playerEntry.split('=');
+                const trimmedPlayer = parts[0].trim();
+                
+                if (!leaderboardData[trimmedPlayer]) leaderboardData[trimmedPlayer] = { points: 0, beaten: [] };
+                leaderboardData[trimmedPlayer].points += exactPoints;
+                leaderboardData[trimmedPlayer].beaten.push(l.name);
+            });
         }
     });
 
@@ -842,10 +687,6 @@ searchInput.addEventListener("input", (e) => {
         levelCardsElements.forEach(card => card.style.display = card.dataset.name.includes(query) ? "flex" : "none");
     } 
     else if (btnLeaderboard.classList.contains("active")) {
-        // If user manually searches, disable the custom victor filter UI
-        if (!leaderboardFilterBanner.classList.contains("hidden-section")) {
-            leaderboardFilterBanner.classList.add("hidden-section");
-        }
         leaderboardCardsElements.forEach(card => card.style.display = card.dataset.player.includes(query) ? "flex" : "none");
     }
     else if (btnPacks.classList.contains("active")) {
@@ -855,15 +696,8 @@ searchInput.addEventListener("input", (e) => {
             currentPackLevelElements.forEach(card => card.style.display = card.dataset.name.includes(query) ? "flex" : "none");
         }
     }
+    // Search is inactive when Credits tab is active
 });
-
-// HANDLE CLEARING CUSTOM FILTER FROM BANNER
-leaderboardFilterBanner.addEventListener("click", () => {
-    leaderboardFilterBanner.classList.add("hidden-section");
-    searchInput.value = "";
-    searchInput.dispatchEvent(new Event('input')); // Triggers reset & shows all cards
-});
-
 
 // HANDLE TAB SWITCHING
 function switchTab(activeBtn, activeContainer, placeholder) {
@@ -876,10 +710,6 @@ function switchTab(activeBtn, activeContainer, placeholder) {
     if (activeBtn === btnPacks) {
         packViewContainer.classList.add("hidden-section");
         packsListContainer.classList.remove("hidden-section");
-    }
-
-    if (activeBtn !== btnLeaderboard) {
-        leaderboardFilterBanner.classList.add("hidden-section");
     }
 
     searchInput.placeholder = placeholder;
