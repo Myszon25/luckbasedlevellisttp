@@ -187,7 +187,7 @@ body {
     background: rgba(255, 207, 64, 0.15); border: 1px solid rgba(255, 207, 64, 0.3);
 }
 
-/* LIST CARDS (Leaderboard & Packs & Credits) */
+/* LIST CARDS (Leaderboard, Packs, Credits, Rules) */
 .list-card {
     width: min(900px, 95vw); background: linear-gradient(135deg, var(--card-bg) 0%, var(--card-grad-2) 100%);
     border: 1px solid var(--border-color); border-radius: 18px; padding: 20px; box-sizing: border-box;
@@ -268,6 +268,13 @@ body {
 }
 .victor-link:hover { background: rgba(255, 71, 71, 0.2); transform: translateY(-1px); }
 
+.verifier-link {
+    color: #5865F2; background: rgba(88, 101, 242, 0.1); padding: 6px 12px;
+    border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 13px;
+    display: inline-flex; align-items: center; gap: 5px; transition: all 0.2s ease; margin-top: 10px;
+}
+.verifier-link:hover { background: rgba(88, 101, 242, 0.2); transform: translateY(-1px); }
+
 /* MOBILE RESPONSIVENESS */
 @media (max-width: 768px){
     .navbar { flex-direction: row; }
@@ -318,6 +325,8 @@ body {
         <button class="tab-btn active" id="btn-levels">Levels</button>
         <button class="tab-btn" id="btn-leaderboard">Leaderboard</button>
         <button class="tab-btn" id="btn-packs">Packs</button>
+        <!-- ADDED RULES TAB -->
+        <button class="tab-btn" id="btn-rules">Rules</button>
     </div>
 </div>
 
@@ -334,6 +343,14 @@ body {
             <h2 class="pack-view-title" id="pack-view-title">Pack Name</h2>
         </div>
         <div class="pack-levels-wrapper" id="pack-levels-wrapper"></div>
+    </div>
+</div>
+
+<!-- Rules Container -->
+<div class="container hidden-section" id="rules-container">
+    <div class="list-card" id="rules-content">
+        <h2 class="list-title" style="margin-bottom: 10px;">List Rules</h2>
+        <p class="list-items">Loading rules...</p>
     </div>
 </div>
 
@@ -384,11 +401,13 @@ themeToggle.addEventListener("click", () => {
 const btnLevels = document.getElementById("btn-levels");
 const btnLeaderboard = document.getElementById("btn-leaderboard");
 const btnPacks = document.getElementById("btn-packs");
+const btnRules = document.getElementById("btn-rules");
 const btnCredits = document.getElementById("btn-credits");
 
 const levelsContainer = document.getElementById("levels-container");
 const leaderboardContainer = document.getElementById("leaderboard-container");
 const packsContainer = document.getElementById("packs-container");
+const rulesContainer = document.getElementById("rules-container");
 const creditsContainer = document.getElementById("credits-container");
 
 const packsListContainer = document.getElementById("packs-list-container");
@@ -453,6 +472,15 @@ function openLevelModal(l, associatedPacks) {
         `;
     }
 
+    // Process Verifier Video Link
+    const yt = parseYoutube(l.youtube);
+    let verifierLinkHTML = "";
+    if (yt.id) {
+        let ytUrl = `https://www.youtube.com/watch?v=${yt.id}`;
+        if (yt.start > 0) ytUrl += `&t=${yt.start}s`;
+        verifierLinkHTML = `<a href="${ytUrl}" target="_blank" class="verifier-link">▶ Watch Verifier Video</a>`;
+    }
+
     // Process Victors list
     let victorsHTML = "";
     if (l.victors && l.victors.length > 0) {
@@ -481,7 +509,8 @@ function openLevelModal(l, associatedPacks) {
         <div class="modal-header">
             <div class="modal-title">#${l.place} ${l.name}</div>
             <div class="verifier" style="margin-top: 8px; font-size: 13px;">Verified by: ${l.verifier}</div>
-            <div class="sub" style="font-size: 14px; margin-top: 5px;">by ${l.author} • id: ${l.id}</div>
+            ${verifierLinkHTML}
+            <div class="sub" style="font-size: 14px; margin-top: 10px;">by ${l.author} • id: ${l.id}</div>
             <div class="level-points" style="margin-top: 15px; font-size: 18px;">+${exactPoints} PTS</div>
             ${packBadgesHTML}
         </div>
@@ -537,7 +566,7 @@ function createLevelCardElement(l) {
         <div class="level-points">+${exactPoints} PTS</div>
     `;
 
-    // ADDED EVENT LISTENER FOR LEFT CLICK -> Open Modal
+    // Open Modal on left click
     left.addEventListener("click", () => {
         openLevelModal(l, associatedPacks);
     });
@@ -564,11 +593,12 @@ function createLevelCardElement(l) {
     return card;
 }
 
-// FETCH DATA CONCURRENTLY
+// FETCH DATA CONCURRENTLY (Added rules.json)
 Promise.all([
     fetch("levels.json").then(r => r.json()),
-    fetch("packs.json").then(r => r.json()).catch(() => []) 
-]).then(([levelsData, packsData]) => {
+    fetch("packs.json").then(r => r.json()).catch(() => []),
+    fetch("rules.json").then(r => r.json()).catch(() => []) 
+]).then(([levelsData, packsData, rulesData]) => {
 
     // 0. MAP LEVELS TO PACKS BEFORE GENERATING CARDS
     packsData.forEach(pack => {
@@ -595,7 +625,6 @@ Promise.all([
         const exactPoints = l.points !== undefined ? Number(l.points) : 0;
         if (l.victors && Array.isArray(l.victors)) {
             l.victors.forEach(playerEntry => {
-                // Parse string: player might be "Name=Link"
                 const parts = playerEntry.split('=');
                 const trimmedPlayer = parts[0].trim();
                 
@@ -644,7 +673,6 @@ Promise.all([
             <div class="list-items">${validLevels.join(", ")}</div>
         `;
 
-        // Click Event: Open Pack View
         pCard.addEventListener("click", () => {
             packsListContainer.classList.add("hidden-section");
             packViewContainer.classList.remove("hidden-section");
@@ -667,6 +695,25 @@ Promise.all([
         packsListContainer.appendChild(pCard);
         packCardsElements.push(pCard);
     });
+
+    // 4. PROCESS RULES
+    const rulesContent = document.getElementById("rules-content");
+    if (rulesData && rulesData.length > 0) {
+        let rulesHTML = '<h2 class="list-title" style="margin-bottom: 15px;">List Rules</h2><ol style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 12px; color: var(--text-dim); font-size: 15px; line-height: 1.5;">';
+        
+        rulesData.forEach(rule => {
+            if (typeof rule === 'string') {
+                rulesHTML += `<li>${rule}</li>`;
+            } else if (rule.title && rule.description) {
+                rulesHTML += `<li><strong style="color: var(--text-main); font-size: 16px;">${rule.title}</strong><br>${rule.description}</li>`;
+            }
+        });
+        
+        rulesHTML += '</ol>';
+        rulesContent.innerHTML = rulesHTML;
+    } else {
+        rulesContent.innerHTML = '<h2 class="list-title">List Rules</h2><p class="list-items">No rules have been added yet.</p>';
+    }
 });
 
 // "BACK TO PACKS" BUTTON LOGIC
@@ -677,7 +724,6 @@ backToPacksBtn.addEventListener("click", () => {
     searchInput.value = "";
     searchInput.dispatchEvent(new Event('input')); 
 });
-
 
 // UNIVERSAL SEARCH IMPLEMENTATION
 searchInput.addEventListener("input", (e) => {
@@ -696,13 +742,13 @@ searchInput.addEventListener("input", (e) => {
             currentPackLevelElements.forEach(card => card.style.display = card.dataset.name.includes(query) ? "flex" : "none");
         }
     }
-    // Search is inactive when Credits tab is active
+    // Search is inactive when Credits or Rules tab is active
 });
 
 // HANDLE TAB SWITCHING
 function switchTab(activeBtn, activeContainer, placeholder) {
-    [btnLevels, btnLeaderboard, btnPacks, btnCredits].forEach(btn => btn.classList.remove("active"));
-    [levelsContainer, leaderboardContainer, packsContainer, creditsContainer].forEach(container => container.classList.add("hidden-section"));
+    [btnLevels, btnLeaderboard, btnPacks, btnRules, btnCredits].forEach(btn => btn.classList.remove("active"));
+    [levelsContainer, leaderboardContainer, packsContainer, rulesContainer, creditsContainer].forEach(container => container.classList.add("hidden-section"));
     
     activeBtn.classList.add("active");
     activeContainer.classList.remove("hidden-section");
@@ -720,6 +766,7 @@ function switchTab(activeBtn, activeContainer, placeholder) {
 btnLevels.addEventListener("click", () => switchTab(btnLevels, levelsContainer, "Search level by name..."));
 btnLeaderboard.addEventListener("click", () => switchTab(btnLeaderboard, leaderboardContainer, "Search player by name..."));
 btnPacks.addEventListener("click", () => switchTab(btnPacks, packsContainer, "Search pack by name..."));
+btnRules.addEventListener("click", () => switchTab(btnRules, rulesContainer, "Search is disabled in rules..."));
 btnCredits.addEventListener("click", () => switchTab(btnCredits, creditsContainer, "No search in credits..."));
 
 </script>
