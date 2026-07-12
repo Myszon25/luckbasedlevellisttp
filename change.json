@@ -1,5 +1,5 @@
 {
-  "listName": "My Custom Spam List",
+  "listName": "you name",
   "discordLink": "https://discord.gg/yourCustomInviteCode",
-  "enablePacks": false
+  "enablePacks": true
 }
