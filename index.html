@@ -63,57 +63,35 @@ body {
 /* NAVBAR */
 /* ========================= */
 .navbar {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px max(5vw, 20px);
-    background: var(--nav-bg);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border-bottom: 1px solid var(--border-color);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    gap: 15px;
+    display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center;
+    padding: 15px max(5vw, 20px); background: var(--nav-bg); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+    border-bottom: 1px solid var(--border-color); position: sticky; top: 0; z-index: 100; gap: 15px;
     transition: background 0.3s ease, border-color 0.3s ease;
 }
-
 .nav-title { font-size: 24px; font-weight: 800; color: var(--text-main); text-transform: uppercase; letter-spacing: 2px; }
 .nav-actions { display: flex; gap: 10px; align-items: center; }
 
 /* SEARCH */
 .nav-search { flex-grow: 1; max-width: 400px; position: relative; transition: opacity 0.3s ease, transform 0.3s ease; }
-
 #search-input {
     width: 100%; box-sizing: border-box; padding: 12px 20px 12px 45px;
     font-family: 'Rubik', sans-serif; font-size: 15px; font-weight: 600;
     background: var(--input-bg); border: 1px solid var(--border-color);
     color: var(--text-main); border-radius: 30px; outline: none; transition: all 0.3s ease;
 }
-
 #search-input::placeholder { color: var(--text-dim); }
 #search-input:focus { background: var(--input-focus); border-color: var(--border-hover); }
-
 .search-icon { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); width: 18px; height: 18px; color: var(--text-dim); pointer-events: none; }
 #search-input:focus + .search-icon { color: var(--text-main); }
 
-/* BUTTONS */
-.theme-btn {
+/* BUTTONS & TABS */
+.theme-btn, .nav-credits-btn {
     background: var(--theme-btn-bg); border: 1px solid var(--border-color); color: var(--text-main);
-    font-size: 18px; width: 40px; height: 40px; border-radius: 12px; cursor: pointer;
-    display: flex; justify-content: center; align-items: center; transition: all 0.3s ease;
+    border-radius: 12px; cursor: pointer; display: flex; justify-content: center; align-items: center; transition: all 0.3s ease; height: 40px; box-sizing: border-box;
 }
-.theme-btn:hover { border-color: var(--border-hover); transform: scale(1.05); }
-
-.nav-credits-btn {
-    background: var(--theme-btn-bg); border: 1px solid var(--border-color); color: var(--text-main);
-    padding: 0 16px; height: 40px; border-radius: 12px; cursor: pointer;
-    font-family: 'Rubik', sans-serif; font-weight: 700; font-size: 14px;
-    text-transform: uppercase; display: flex; align-items: center; justify-content: center;
-    transition: all 0.3s ease; box-sizing: border-box;
-}
-.nav-credits-btn:hover { border-color: var(--border-hover); transform: translateY(-1px); }
+.theme-btn { font-size: 18px; width: 40px; }
+.nav-credits-btn { padding: 0 16px; font-family: 'Rubik', sans-serif; font-weight: 700; font-size: 14px; text-transform: uppercase; }
+.theme-btn:hover, .nav-credits-btn:hover { border-color: var(--border-hover); transform: translateY(-1px); }
 .nav-credits-btn.active { background: var(--tab-active-bg); color: var(--tab-active-text); border-color: var(--tab-active-bg); box-shadow: 0 0 15px var(--shadow-color); }
 
 .discord-btn {
@@ -124,7 +102,6 @@ body {
 .discord-btn:hover { background: #4752C4; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(88, 101, 242, 0.5); }
 .discord-btn svg { width: 20px; height: 20px; fill: currentColor; }
 
-/* TABS */
 .tabs-container { width: 100%; display: flex; justify-content: center; padding-top: 25px; }
 .tabs { display: flex; gap: 10px; width: min(900px, 95vw); flex-wrap: wrap; }
 .tab-btn {
@@ -135,10 +112,11 @@ body {
 .tab-btn:hover { border-color: var(--border-hover); }
 .tab-btn.active { background: var(--tab-active-bg); color: var(--tab-active-text); border-color: var(--tab-active-bg); box-shadow: 0 0 15px var(--shadow-color); }
 
-/* CONTAINERS */
 .container { width: 100%; display: flex; flex-direction: column; align-items: center; padding: 20px; gap: 15px; box-sizing: border-box; }
 
+/* ========================= */
 /* CARDS (LEVELS) */
+/* ========================= */
 .card {
     width: min(900px, 95vw); height: 220px; display: flex; border-radius: 18px; overflow: hidden;
     border: 1px solid var(--border-color); background: var(--card-bg); position: relative;
@@ -149,16 +127,12 @@ body {
 .left {
     width: 35%; height: 100%; background: linear-gradient(135deg, var(--card-grad-1) 0%, var(--card-grad-2) 100%);
     display: flex; flex-direction: column; justify-content: space-between; padding: 20px; box-sizing: border-box;
-    z-index: 2; border-right: 2px solid var(--border-color);
-    cursor: pointer; /* Makes it clear it is clickable */
-    transition: background 0.3s ease;
+    z-index: 2; border-right: 2px solid var(--border-color); cursor: pointer; transition: background 0.3s ease;
 }
 .left:hover { background: linear-gradient(135deg, var(--card-grad-2) 0%, var(--card-bg) 100%); }
-
 .right { width: 65%; height: 100%; position: relative; cursor: pointer; background: #000; }
 .right img { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.3s; }
 .right:hover img { opacity: 0.6; }
-
 .play-button {
     position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 60px; height: 60px;
     background-color: rgba(255, 0, 0, 0.8); border-radius: 50%; display: flex; justify-content: center; align-items: center;
@@ -173,58 +147,44 @@ body {
 .place { font-size: 24px; font-weight: 800; color: var(--text-main); margin-bottom: 4px; }
 .verifier { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-dim); font-weight: 700; margin-bottom: 8px; }
 .sub { font-size: 12px; color: var(--text-sub); line-height: 1.4; }
-
-/* PACK BADGES */
 .pack-badges { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
-.pack-badge {
-    font-size: 10px; font-weight: 700; text-transform: uppercase; background: var(--input-bg);
-    border: 1px solid var(--border-color); padding: 4px 8px; border-radius: 6px; color: var(--text-dim);
-}
+.pack-badge { font-size: 10px; font-weight: 700; text-transform: uppercase; background: var(--input-bg); border: 1px solid var(--border-color); padding: 4px 8px; border-radius: 6px; color: var(--text-dim); }
+.level-points { font-size: 15px; font-weight: 800; color: #ffcf40; padding: 6px 14px; border-radius: 8px; display: inline-block; width: max-content; text-transform: uppercase; letter-spacing: 1px; background: rgba(255, 207, 64, 0.15); border: 1px solid rgba(255, 207, 64, 0.3); }
 
-.level-points {
-    font-size: 15px; font-weight: 800; color: #ffcf40; padding: 6px 14px; border-radius: 8px;
-    display: inline-block; width: max-content; text-transform: uppercase; letter-spacing: 1px;
-    background: rgba(255, 207, 64, 0.15); border: 1px solid rgba(255, 207, 64, 0.3);
-}
-
-/* LIST CARDS (Leaderboard, Packs, Credits, Rules) */
+/* LIST CARDS (Leaderboard, Packs, etc.) */
 .list-card {
     width: min(900px, 95vw); background: linear-gradient(135deg, var(--card-bg) 0%, var(--card-grad-2) 100%);
     border: 1px solid var(--border-color); border-radius: 18px; padding: 20px; box-sizing: border-box;
     display: flex; flex-direction: column; gap: 10px; transition: transform 0.2s ease, border-color 0.2s ease;
 }
 .list-card:hover { transform: translateY(-2px); border-color: var(--border-hover); box-shadow: 0 5px 15px var(--shadow-color); }
-.pack-card { cursor: pointer; }
-
+.interactive-card { cursor: pointer; }
 .list-header { display: flex; justify-content: space-between; align-items: center; }
 .list-title { font-size: 22px; font-weight: 800; color: var(--text-main); }
 .list-highlight { font-size: 20px; font-weight: 800; color: #ffcf40; }
 .list-subtitle { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-sub); margin-top: 5px; }
 .list-items { font-size: 14px; color: var(--text-dim); line-height: 1.5; }
 
-/* CREDITS SPECIFIC */
+/* Interactive Links */
+.interactive-link { color: #ffcf40; cursor: pointer; transition: all 0.2s ease; text-decoration: none; }
+.interactive-link:hover { color: var(--text-main); text-decoration: underline; }
+.interactive-link.level-link { background: var(--input-bg); padding: 4px 8px; border-radius: 6px; border: 1px solid var(--border-color); display: inline-block; margin: 3px; font-weight: bold; }
+.interactive-link.level-link:hover { background: var(--border-hover); text-decoration: none; color: var(--text-main); }
+
+/* CREDITS & PACK VIEW */
 .credits-card { align-items: center; text-align: center; padding: 50px 20px; }
 .credits-title { font-size: 32px; margin-bottom: 5px; }
 .credits-author { font-size: 18px; color: var(--text-dim); }
 .credits-author strong { color: var(--text-main); font-weight: 800; }
-
-/* PACK VIEW INTERFACE */
-.pack-view-header {
-    width: min(900px, 95vw); display: flex; align-items: center; gap: 20px;
-    padding: 0 0 15px 0; border-bottom: 1px solid var(--border-color); margin-bottom: 10px;
-}
-.back-btn {
-    background: var(--input-bg); border: 1px solid var(--border-color); color: var(--text-main);
-    padding: 10px 15px; border-radius: 8px; cursor: pointer; font-family: 'Rubik', sans-serif; font-weight: 700; transition: all 0.2s ease;
-}
+.pack-view-header { width: min(900px, 95vw); display: flex; align-items: center; gap: 20px; padding: 0 0 15px 0; border-bottom: 1px solid var(--border-color); margin-bottom: 10px; }
+.back-btn { background: var(--input-bg); border: 1px solid var(--border-color); color: var(--text-main); padding: 10px 15px; border-radius: 8px; cursor: pointer; font-family: 'Rubik', sans-serif; font-weight: 700; transition: all 0.2s ease; }
 .back-btn:hover { background: var(--tab-active-bg); color: var(--tab-active-text); }
 .pack-view-title { font-size: 22px; font-weight: 800; margin: 0; color: var(--text-main); }
 .pack-levels-wrapper { display: flex; flex-direction: column; align-items: center; gap: 15px; width: 100%; }
-
 .hidden-section { display: none !important; }
 
 /* ========================= */
-/* MODAL STYLES (LEVEL INFO & VICTORS) */
+/* MODALS (LEVEL INFO & PLAYER PROFILE) */
 /* ========================= */
 .modal-overlay {
     position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
@@ -238,21 +198,18 @@ body {
     border: 1px solid var(--border-color); border-radius: 20px;
     width: min(650px, 90vw); max-height: 85vh; padding: 30px; box-sizing: border-box;
     position: relative; overflow-y: auto; color: var(--text-main);
-    transform: translateY(-20px); transition: transform 0.3s ease;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    transform: translateY(-20px); transition: transform 0.3s ease; box-shadow: 0 20px 50px rgba(0,0,0,0.5);
 }
 .modal-overlay.active .modal-content { transform: translateY(0); }
 .modal-close {
-    position: absolute; top: 20px; right: 20px; background: var(--input-bg);
-    border: 1px solid var(--border-color); color: var(--text-main);
-    width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center;
-    justify-content: center; cursor: pointer; transition: all 0.2s ease; font-weight: bold;
+    position: absolute; top: 20px; right: 20px; background: var(--input-bg); border: 1px solid var(--border-color); color: var(--text-main);
+    width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s ease; font-weight: bold;
 }
 .modal-close:hover { background: var(--text-main); color: var(--bg-main); transform: scale(1.1); }
 .modal-header { border-bottom: 1px solid var(--border-color); padding-bottom: 20px; margin-bottom: 20px; }
 .modal-title { font-size: 32px; font-weight: 800; color: var(--text-main); }
-.modal-victors-section { margin-top: 20px; }
-.modal-victors-title { font-size: 20px; font-weight: 700; color: #ffcf40; margin-bottom: 15px; display: flex; align-items: center; justify-content: space-between;}
+.modal-victors-section { margin-top: 25px; }
+.modal-victors-title { font-size: 20px; font-weight: 700; color: #ffcf40; margin-bottom: 15px; border-bottom: 1px dashed var(--border-color); padding-bottom: 5px;}
 .modal-victors-list { display: flex; flex-direction: column; gap: 10px; }
 .victor-item {
     display: flex; justify-content: space-between; align-items: center;
@@ -267,7 +224,6 @@ body {
     display: flex; align-items: center; gap: 5px; transition: all 0.2s ease;
 }
 .victor-link:hover { background: rgba(255, 71, 71, 0.2); transform: translateY(-1px); }
-
 .verifier-link {
     color: #5865F2; background: rgba(88, 101, 242, 0.1); padding: 6px 12px;
     border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 13px;
@@ -289,7 +245,6 @@ body {
     .left { padding: 12px; }
     .level-points { font-size: 12px; padding: 4px 10px; }
     .tab-btn { padding: 10px 15px; font-size: 14px; flex-basis: 45%; }
-    .pack-view-header { flex-direction: column; align-items: flex-start; gap: 10px; }
     .modal-content { padding: 20px; }
     .modal-title { font-size: 24px; }
 }
@@ -312,9 +267,7 @@ body {
         <button class="theme-btn" id="theme-toggle">☀️</button>
         <button class="nav-credits-btn" id="btn-credits">Credits</button>
         <a href="https://discord.gg/vAr7Cyv83F" target="_blank" class="discord-btn">
-            <svg viewBox="0 0 127.14 96.36">
-                <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1,105.25,105.25,0,0,0,32.19-16.14c0,0,.04-.06.05-.09h0c2.69-27.42-2.73-51.49-18.95-72.06ZM42.63,65.22C38,65.22,34.15,61,34.15,55.9S37.9,46.58,42.63,46.58c4.76,0,8.56,4.31,8.48,9.32C51.11,61,47.41,65.22,42.63,65.22Zm41.88,0c-4.73,0-8.52-4.22-8.52-9.32s3.73-9.32,8.52-9.32c4.76,0,8.56,4.31,8.48,9.32C93,61,89.28,65.22,84.51,65.22Z"/>
-            </svg>
+            <svg viewBox="0 0 127.14 96.36"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1,105.25,105.25,0,0,0,32.19-16.14c0,0,.04-.06.05-.09h0c2.69-27.42-2.73-51.49-18.95-72.06ZM42.63,65.22C38,65.22,34.15,61,34.15,55.9S37.9,46.58,42.63,46.58c4.76,0,8.56,4.31,8.48,9.32C51.11,61,47.41,65.22,42.63,65.22Zm41.88,0c-4.73,0-8.52-4.22-8.52-9.32s3.73-9.32,8.52-9.32c4.76,0,8.56,4.31,8.48,9.32C93,61,89.28,65.22,84.51,65.22Z"/></svg>
             Join Discord
         </a>
     </div>
@@ -325,7 +278,6 @@ body {
         <button class="tab-btn active" id="btn-levels">Levels</button>
         <button class="tab-btn" id="btn-leaderboard">Leaderboard</button>
         <button class="tab-btn" id="btn-packs">Packs</button>
-        <!-- ADDED RULES TAB -->
         <button class="tab-btn" id="btn-rules">Rules</button>
     </div>
 </div>
@@ -333,10 +285,8 @@ body {
 <div class="container" id="levels-container"></div>
 <div class="container hidden-section" id="leaderboard-container"></div>
 
-<!-- Master Packs Container -->
 <div class="container hidden-section" id="packs-container">
     <div id="packs-list-container" style="width: 100%; display: flex; flex-direction: column; align-items: center; gap: 15px;"></div>
-    
     <div id="pack-view-container" class="hidden-section" style="width: 100%; display: flex; flex-direction: column; align-items: center;">
         <div class="pack-view-header">
             <button class="back-btn" id="back-to-packs-btn">⬅ Back to Packs</button>
@@ -346,15 +296,10 @@ body {
     </div>
 </div>
 
-<!-- Rules Container -->
 <div class="container hidden-section" id="rules-container">
-    <div class="list-card" id="rules-content">
-        <h2 class="list-title" style="margin-bottom: 10px;">List Rules</h2>
-        <p class="list-items">Loading rules...</p>
-    </div>
+    <div class="list-card" id="rules-content"></div>
 </div>
 
-<!-- Credits Container -->
 <div class="container hidden-section" id="credits-container">
     <div class="list-card credits-card">
         <h2 class="list-title credits-title">Credits</h2>
@@ -362,7 +307,6 @@ body {
     </div>
 </div>
 
-<!-- INFO & VICTORS MODAL -->
 <div id="level-modal" class="modal-overlay">
     <div class="modal-content">
         <button class="modal-close" id="modal-close-btn">✕</button>
@@ -370,18 +314,23 @@ body {
     </div>
 </div>
 
+<div id="player-modal" class="modal-overlay">
+    <div class="modal-content">
+        <button class="modal-close" id="player-modal-close-btn">✕</button>
+        <div id="player-modal-body"></div>
+    </div>
+</div>
+
 <script>
 // ==========================================
-// THEME TOGGLE LOGIC (Saved to Local Storage)
+// THEME TOGGLE LOGIC
 // ==========================================
 const themeToggle = document.getElementById("theme-toggle");
 const currentTheme = localStorage.getItem("theme") || "dark";
-
 if (currentTheme === "light") {
     document.body.setAttribute("data-theme", "light");
     themeToggle.innerText = "🌙";
 }
-
 themeToggle.addEventListener("click", () => {
     const isLight = document.body.getAttribute("data-theme") === "light";
     if (isLight) {
@@ -396,7 +345,7 @@ themeToggle.addEventListener("click", () => {
 });
 
 // ==========================================
-// CORE LOGIC
+// GLOBAL VARIABLES & CONTAINERS
 // ==========================================
 const btnLevels = document.getElementById("btn-levels");
 const btnLeaderboard = document.getElementById("btn-leaderboard");
@@ -410,18 +359,13 @@ const packsContainer = document.getElementById("packs-container");
 const rulesContainer = document.getElementById("rules-container");
 const creditsContainer = document.getElementById("credits-container");
 
-const packsListContainer = document.getElementById("packs-list-container");
-const packViewContainer = document.getElementById("pack-view-container");
-const packLevelsWrapper = document.getElementById("pack-levels-wrapper");
-const backToPacksBtn = document.getElementById("back-to-packs-btn");
-const packViewTitle = document.getElementById("pack-view-title");
-
 const searchInput = document.getElementById("search-input");
 
-// Modal Variables
+// Modals
 const levelModal = document.getElementById("level-modal");
-const modalCloseBtn = document.getElementById("modal-close-btn");
 const modalBody = document.getElementById("modal-body");
+const playerModal = document.getElementById("player-modal");
+const playerModalBody = document.getElementById("player-modal-body");
 
 let levelCardsElements = []; 
 let leaderboardCardsElements = []; 
@@ -430,6 +374,7 @@ let currentPackLevelElements = [];
 
 const globalLevelsMap = new Map();
 const levelToPacksMap = new Map();
+let globalLeaderboardData = {}; // Stores player stats for modals
 
 // 🛠️ HELPER FUNCTION: Youtube Parser
 function parseYoutube(youtubeInput) {
@@ -458,96 +403,127 @@ function parseYoutube(youtubeInput) {
     return { id: videoId, start: startSeconds };
 }
 
-// 🛠️ HELPER FUNCTION: Open Modal Detail View
+// 🛠️ HELPER FUNCTION: Open LEVEL Modal
 function openLevelModal(l, associatedPacks) {
     const exactPoints = l.points !== undefined ? l.points : 0;
-    
-    // Create badges for modal
-    let packBadgesHTML = "";
-    if (associatedPacks && associatedPacks.length > 0) {
-        packBadgesHTML = `
-            <div class="pack-badges" style="margin-top: 15px;">
-                ${associatedPacks.map(packName => `<span class="pack-badge" style="font-size: 12px; padding: 6px 10px;">${packName}</span>`).join("")}
-            </div>
-        `;
-    }
-
-    // Process Verifier Video Link
     const yt = parseYoutube(l.youtube);
-    let verifierLinkHTML = "";
-    if (yt.id) {
-        let ytUrl = `https://www.youtube.com/watch?v=${yt.id}`;
-        if (yt.start > 0) ytUrl += `&t=${yt.start}s`;
-        verifierLinkHTML = `<a href="${ytUrl}" target="_blank" class="verifier-link">▶ Watch Verifier Video</a>`;
-    }
+    
+    let packBadgesHTML = associatedPacks && associatedPacks.length > 0 
+        ? `<div class="pack-badges" style="margin-top: 15px;">${associatedPacks.map(p => `<span class="pack-badge" style="font-size: 12px; padding: 6px 10px;">${p}</span>`).join("")}</div>`
+        : "";
 
-    // Process Victors list
-    let victorsHTML = "";
-    if (l.victors && l.victors.length > 0) {
-        victorsHTML = l.victors.map(v => {
-            // Support 'PlayerName=YoutubeLink' format
+    let verifierLinkHTML = yt.id 
+        ? `<a href="https://www.youtube.com/watch?v=${yt.id}${yt.start > 0 ? `&t=${yt.start}s` : ''}" target="_blank" class="verifier-link">▶ Watch Verifier Video</a>` 
+        : "";
+
+    let verifierHTML = l.verifier 
+        ? `<div class="victor-item">
+             <div class="victor-name interactive-link" data-player="${l.verifier}" title="Click to view player profile">${l.verifier} 🔍</div>
+             <div>${verifierLinkHTML}</div>
+           </div>`
+        : `<div class="victor-item"><span class="victor-name" style="color: var(--text-dim);">Unknown</span></div>`;
+
+    let victorsHTML = l.victors && l.victors.length > 0 
+        ? l.victors.map(v => {
             const parts = v.split('=');
             const playerName = parts[0].trim();
             const playerLink = parts.length > 1 ? parts[1].trim() : null;
-            
-            let linkBtn = playerLink 
-                ? `<a href="${playerLink}" target="_blank" class="victor-link">▶ Watch Video</a>` 
-                : `<span style="font-size: 13px; color: var(--text-sub);">No video</span>`;
-            
+            let linkBtn = playerLink ? `<a href="${playerLink}" target="_blank" class="victor-link">▶ Watch Video</a>` : `<span style="font-size: 13px; color: var(--text-sub);">No video</span>`;
             return `
                 <div class="victor-item">
-                    <div class="victor-name">${playerName}</div>
+                    <div class="victor-name interactive-link" data-player="${playerName}" title="Click to view player profile">${playerName} 🔍</div>
                     <div>${linkBtn}</div>
-                </div>
-            `;
-        }).join("");
-    } else {
-        victorsHTML = `<div class="victor-item"><span class="victor-name" style="color: var(--text-dim);">No victors yet.</span></div>`;
-    }
+                </div>`;
+          }).join("")
+        : `<div class="victor-item"><span class="victor-name" style="color: var(--text-dim);">No victors yet.</span></div>`;
 
     modalBody.innerHTML = `
         <div class="modal-header">
             <div class="modal-title">#${l.place} ${l.name}</div>
-            <div class="verifier" style="margin-top: 8px; font-size: 13px;">Verified by: ${l.verifier}</div>
-            ${verifierLinkHTML}
             <div class="sub" style="font-size: 14px; margin-top: 10px;">by ${l.author} • id: ${l.id}</div>
             <div class="level-points" style="margin-top: 15px; font-size: 18px;">+${exactPoints} PTS</div>
             ${packBadgesHTML}
         </div>
+
         <div class="modal-victors-section">
-            <div class="modal-victors-title">
-                Victors (${l.victors ? l.victors.length : 0})
-            </div>
-            <div class="modal-victors-list">
-                ${victorsHTML}
-            </div>
+            <div class="modal-victors-title">Verifier</div>
+            <div class="modal-victors-list">${verifierHTML}</div>
+        </div>
+
+        <div class="modal-victors-section">
+            <div class="modal-victors-title">Victors (${l.victors ? l.victors.length : 0})</div>
+            <div class="modal-victors-list">${victorsHTML}</div>
         </div>
     `;
 
+    playerModal.classList.remove("active");
     levelModal.classList.add("active");
 }
 
-// Close Modal Logic
-modalCloseBtn.addEventListener("click", () => levelModal.classList.remove("active"));
-levelModal.addEventListener("click", (e) => {
-    if (e.target === levelModal) levelModal.classList.remove("active");
+// 🛠️ HELPER FUNCTION: Open PLAYER Modal
+function openPlayerModal(playerName) {
+    const pData = globalLeaderboardData[playerName];
+    if (!pData) return;
+
+    let verifiedHTML = pData.verified.length > 0 
+        ? pData.verified.map(lvl => `<span class="interactive-link level-link" data-level="${lvl}" title="Click to view level info">${lvl}</span>`).join(" ") 
+        : `<span style="color:var(--text-dim); font-size:14px;">No levels verified.</span>`;
+
+    let beatenHTML = pData.beaten.length > 0 
+        ? pData.beaten.map(lvl => `<span class="interactive-link level-link" data-level="${lvl}" title="Click to view level info">${lvl}</span>`).join(" ") 
+        : `<span style="color:var(--text-dim); font-size:14px;">No levels completed yet.</span>`;
+
+    playerModalBody.innerHTML = `
+        <div class="modal-header">
+            <div class="modal-title" style="color: #ffcf40;">${playerName}</div>
+            <div class="level-points" style="margin-top: 15px; font-size: 18px;">${pData.points} Total PTS</div>
+        </div>
+        <div class="modal-victors-section">
+            <div class="modal-victors-title" style="color: var(--text-main); font-size: 18px;">Levels Verified (${pData.verified.length})</div>
+            <div style="line-height: 2;">${verifiedHTML}</div>
+        </div>
+        <div class="modal-victors-section">
+            <div class="modal-victors-title" style="color: var(--text-main); font-size: 18px;">Levels Completed (${pData.beaten.length})</div>
+            <div style="line-height: 2;">${beatenHTML}</div>
+        </div>
+    `;
+
+    levelModal.classList.remove("active");
+    playerModal.classList.add("active");
+}
+
+// 🛠️ EVENT DELEGATION FOR CLICKABLE LINKS (Works in Modals AND on Leaderboard)
+document.addEventListener('click', (e) => {
+    // Player Clicked
+    if (e.target.closest('[data-player]')) {
+        e.stopPropagation();
+        const playerName = e.target.closest('[data-player]').dataset.player;
+        openPlayerModal(playerName);
+    }
+    // Level Clicked
+    else if (e.target.closest('[data-level]')) {
+        e.stopPropagation();
+        const levelName = e.target.closest('[data-level]').dataset.level;
+        const levelData = globalLevelsMap.get(levelName.toLowerCase());
+        if (levelData) {
+            const associatedPacks = levelToPacksMap.get(levelName.toLowerCase()) || [];
+            openLevelModal(levelData, associatedPacks);
+        }
+    }
 });
 
-// 🛠️ HELPER FUNCTION: Generate Level Card DOM Element
+// Close Modals
+document.getElementById("modal-close-btn").addEventListener("click", () => levelModal.classList.remove("active"));
+document.getElementById("player-modal-close-btn").addEventListener("click", () => playerModal.classList.remove("active"));
+levelModal.addEventListener("click", (e) => { if (e.target === levelModal) levelModal.classList.remove("active"); });
+playerModal.addEventListener("click", (e) => { if (e.target === playerModal) playerModal.classList.remove("active"); });
+
+// 🛠️ HELPER FUNCTION: Generate Level Card DOM
 function createLevelCardElement(l) {
     const exactPoints = l.points !== undefined ? l.points : 0;
     const yt = parseYoutube(l.youtube);
-    
-    // Check if this level is in any packs
     const associatedPacks = levelToPacksMap.get(l.name.toLowerCase()) || [];
-    let packBadgesHTML = "";
-    if (associatedPacks.length > 0) {
-        packBadgesHTML = `
-            <div class="pack-badges">
-                ${associatedPacks.map(packName => `<span class="pack-badge">${packName}</span>`).join("")}
-            </div>
-        `;
-    }
+    let packBadgesHTML = associatedPacks.length > 0 ? `<div class="pack-badges">${associatedPacks.map(p => `<span class="pack-badge">${p}</span>`).join("")}</div>` : "";
 
     const card = document.createElement("div");
     card.className = "card";
@@ -555,7 +531,6 @@ function createLevelCardElement(l) {
 
     const left = document.createElement("div");
     left.className = "left";
-    left.title = "Click to view full info & victors";
     left.innerHTML = `
         <div>
             <div class="place">#${l.place} (${l.name})</div>
@@ -565,42 +540,30 @@ function createLevelCardElement(l) {
         </div>
         <div class="level-points">+${exactPoints} PTS</div>
     `;
-
-    // Open Modal on left click
-    left.addEventListener("click", () => {
-        openLevelModal(l, associatedPacks);
-    });
+    left.addEventListener("click", () => openLevelModal(l, associatedPacks));
 
     const right = document.createElement("div");
     right.className = "right";
-    right.innerHTML = `
-        <img src="https://img.youtube.com/vi/${yt.id}/hqdefault.jpg" loading="lazy" alt="YouTube Thumbnail">
-        <div class="play-button"></div>
-    `;
-
+    right.innerHTML = `<img src="https://img.youtube.com/vi/${yt.id}/hqdefault.jpg" loading="lazy" alt="Thumbnail"><div class="play-button"></div>`;
     right.addEventListener("click", () => {
-        let embedUrl = `https://www.youtube.com/embed/${yt.id}?autoplay=1`;
-        if (yt.start > 0) embedUrl += `&start=${yt.start}`;
-        right.innerHTML = `
-            <iframe width="100%" height="100%" src="${embedUrl}" 
-                title="YouTube video player" frameborder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-            </iframe>`;
+        let embedUrl = `https://www.youtube.com/embed/${yt.id}?autoplay=1${yt.start > 0 ? `&start=${yt.start}` : ''}`;
+        right.innerHTML = `<iframe width="100%" height="100%" src="${embedUrl}" title="YouTube video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
     });
 
-    card.appendChild(left);
-    card.appendChild(right);
+    card.appendChild(left); card.appendChild(right);
     return card;
 }
 
-// FETCH DATA CONCURRENTLY (Added rules.json)
+// ==========================================
+// FETCH & PROCESS DATA
+// ==========================================
 Promise.all([
     fetch("levels.json").then(r => r.json()),
     fetch("packs.json").then(r => r.json()).catch(() => []),
     fetch("rules.json").then(r => r.json()).catch(() => []) 
 ]).then(([levelsData, packsData, rulesData]) => {
 
-    // 0. MAP LEVELS TO PACKS BEFORE GENERATING CARDS
+    // 0. MAP LEVELS TO PACKS
     packsData.forEach(pack => {
         pack.levels.forEach(levelName => {
             const key = levelName.toLowerCase();
@@ -611,7 +574,6 @@ Promise.all([
 
     // 1. PROCESS LEVELS
     levelsData.sort((a,b) => a.place - b.place);
-    
     levelsData.forEach(l => {
         globalLevelsMap.set(l.name.toLowerCase(), l); 
         const card = createLevelCardElement(l);
@@ -619,71 +581,93 @@ Promise.all([
         levelCardsElements.push(card); 
     });
 
-    // 2. PROCESS LEADERBOARD
-    const leaderboardData = {};
+    // 2. PROCESS LEADERBOARD (NOW INCLUDES VERIFIERS)
+    function initPlayer(name) {
+        if (!globalLeaderboardData[name]) globalLeaderboardData[name] = { points: 0, beaten: [], verified: [] };
+    }
+
     levelsData.forEach(l => {
         const exactPoints = l.points !== undefined ? Number(l.points) : 0;
+        
+        // Add points for Verifier
+        if (l.verifier) {
+            initPlayer(l.verifier);
+            globalLeaderboardData[l.verifier].points += exactPoints;
+            if (!globalLeaderboardData[l.verifier].verified.includes(l.name)) {
+                globalLeaderboardData[l.verifier].verified.push(l.name);
+            }
+        }
+
+        // Add points for Victors
         if (l.victors && Array.isArray(l.victors)) {
             l.victors.forEach(playerEntry => {
-                const parts = playerEntry.split('=');
-                const trimmedPlayer = parts[0].trim();
-                
-                if (!leaderboardData[trimmedPlayer]) leaderboardData[trimmedPlayer] = { points: 0, beaten: [] };
-                leaderboardData[trimmedPlayer].points += exactPoints;
-                leaderboardData[trimmedPlayer].beaten.push(l.name);
+                const trimmedPlayer = playerEntry.split('=')[0].trim();
+                initPlayer(trimmedPlayer);
+                globalLeaderboardData[trimmedPlayer].points += exactPoints;
+                if (!globalLeaderboardData[trimmedPlayer].beaten.includes(l.name)) {
+                    globalLeaderboardData[trimmedPlayer].beaten.push(l.name);
+                }
             });
         }
     });
 
-    const sortedPlayers = Object.keys(leaderboardData)
-        .map(name => ({ name, points: leaderboardData[name].points, beaten: leaderboardData[name].beaten }))
+    const sortedPlayers = Object.keys(globalLeaderboardData)
+        .map(name => ({ name, ...globalLeaderboardData[name] }))
         .sort((a, b) => b.points - a.points);
 
     sortedPlayers.forEach((p, index) => {
         const lCard = document.createElement("div");
-        lCard.className = "list-card";
-        lCard.dataset.player = p.name.toLowerCase(); 
+        lCard.className = "list-card interactive-card";
+        lCard.dataset.player = p.name; // Click whole card to open player profile
+        
+        let displayItems = "";
+        if (p.beaten.length > 0) {
+            displayItems += `<b>Completed:</b> ${p.beaten.map(lvl => `<span class="interactive-link level-link" data-level="${lvl}">${lvl}</span>`).join(" ")}<br>`;
+        }
+        if (p.verified.length > 0) {
+            displayItems += `<b style="color:var(--text-main);">Verified:</b> ${p.verified.map(lvl => `<span class="interactive-link level-link" data-level="${lvl}">${lvl}</span>`).join(" ")}`;
+        }
+
         lCard.innerHTML = `
             <div class="list-header">
                 <div class="list-title">#${index + 1} ${p.name}</div>
                 <div class="list-highlight">${p.points} pts</div>
             </div>
-            <div class="list-subtitle">Completed levels:</div>
-            <div class="list-items">${p.beaten.join(", ")}</div>
+            <div class="list-items" style="margin-top: 5px;">${displayItems}</div>
         `;
+        
         leaderboardContainer.appendChild(lCard);
         leaderboardCardsElements.push(lCard);
     });
 
     // 3. PROCESS PACKS
+    const packsListContainer = document.getElementById("packs-list-container");
     packsData.forEach((pack) => {
-        const validLevels = pack.levels.filter(levelName => globalLevelsMap.has(levelName.toLowerCase()));
+        const validLevels = pack.levels.filter(lvl => globalLevelsMap.has(lvl.toLowerCase()));
         if (validLevels.length === 0) return;
 
         const pCard = document.createElement("div");
-        pCard.className = "list-card pack-card";
+        pCard.className = "list-card interactive-card";
         pCard.dataset.pack = pack.name.toLowerCase(); 
-
         pCard.innerHTML = `
             <div class="list-header">
                 <div class="list-title">${pack.name}</div>
                 <div class="list-highlight">${validLevels.length} Levels</div>
             </div>
-            <div class="list-subtitle">Click to view levels:</div>
             <div class="list-items">${validLevels.join(", ")}</div>
         `;
 
         pCard.addEventListener("click", () => {
             packsListContainer.classList.add("hidden-section");
-            packViewContainer.classList.remove("hidden-section");
-            packViewTitle.innerText = pack.name;
+            document.getElementById("pack-view-container").classList.remove("hidden-section");
+            document.getElementById("pack-view-title").innerText = pack.name;
             
+            const packLevelsWrapper = document.getElementById("pack-levels-wrapper");
             packLevelsWrapper.innerHTML = "";
             currentPackLevelElements = [];
 
             validLevels.forEach(levelName => {
-                const levelData = globalLevelsMap.get(levelName.toLowerCase());
-                const cardElement = createLevelCardElement(levelData);
+                const cardElement = createLevelCardElement(globalLevelsMap.get(levelName.toLowerCase()));
                 packLevelsWrapper.appendChild(cardElement);
                 currentPackLevelElements.push(cardElement);
             });
@@ -700,52 +684,41 @@ Promise.all([
     const rulesContent = document.getElementById("rules-content");
     if (rulesData && rulesData.length > 0) {
         let rulesHTML = '<h2 class="list-title" style="margin-bottom: 15px;">List Rules</h2><ol style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 12px; color: var(--text-dim); font-size: 15px; line-height: 1.5;">';
-        
         rulesData.forEach(rule => {
-            if (typeof rule === 'string') {
-                rulesHTML += `<li>${rule}</li>`;
-            } else if (rule.title && rule.description) {
-                rulesHTML += `<li><strong style="color: var(--text-main); font-size: 16px;">${rule.title}</strong><br>${rule.description}</li>`;
-            }
+            if (typeof rule === 'string') rulesHTML += `<li>${rule}</li>`;
+            else if (rule.title && rule.description) rulesHTML += `<li><strong style="color: var(--text-main); font-size: 16px;">${rule.title}</strong><br>${rule.description}</li>`;
         });
-        
-        rulesHTML += '</ol>';
-        rulesContent.innerHTML = rulesHTML;
+        rulesContent.innerHTML = rulesHTML + '</ol>';
     } else {
-        rulesContent.innerHTML = '<h2 class="list-title">List Rules</h2><p class="list-items">No rules have been added yet.</p>';
+        rulesContent.innerHTML = '<h2 class="list-title">List Rules</h2><p class="list-items">No rules added yet.</p>';
     }
 });
 
-// "BACK TO PACKS" BUTTON LOGIC
-backToPacksBtn.addEventListener("click", () => {
-    packViewContainer.classList.add("hidden-section");
-    packsListContainer.classList.remove("hidden-section");
+// BACK TO PACKS
+document.getElementById("back-to-packs-btn").addEventListener("click", () => {
+    document.getElementById("pack-view-container").classList.add("hidden-section");
+    document.getElementById("packs-list-container").classList.remove("hidden-section");
     searchInput.placeholder = "Search pack by name...";
-    searchInput.value = "";
-    searchInput.dispatchEvent(new Event('input')); 
+    searchInput.value = ""; searchInput.dispatchEvent(new Event('input')); 
 });
 
-// UNIVERSAL SEARCH IMPLEMENTATION
+// SEARCH LOGIC
 searchInput.addEventListener("input", (e) => {
     const query = e.target.value.toLowerCase();
-    
     if (btnLevels.classList.contains("active")) {
         levelCardsElements.forEach(card => card.style.display = card.dataset.name.includes(query) ? "flex" : "none");
-    } 
-    else if (btnLeaderboard.classList.contains("active")) {
-        leaderboardCardsElements.forEach(card => card.style.display = card.dataset.player.includes(query) ? "flex" : "none");
-    }
-    else if (btnPacks.classList.contains("active")) {
-        if (!packsListContainer.classList.contains("hidden-section")) {
+    } else if (btnLeaderboard.classList.contains("active")) {
+        leaderboardCardsElements.forEach(card => card.style.display = card.dataset.player.toLowerCase().includes(query) ? "flex" : "none");
+    } else if (btnPacks.classList.contains("active")) {
+        if (!document.getElementById("packs-list-container").classList.contains("hidden-section")) {
             packCardsElements.forEach(card => card.style.display = card.dataset.pack.includes(query) ? "flex" : "none");
         } else {
             currentPackLevelElements.forEach(card => card.style.display = card.dataset.name.includes(query) ? "flex" : "none");
         }
     }
-    // Search is inactive when Credits or Rules tab is active
 });
 
-// HANDLE TAB SWITCHING
+// TAB SWITCHING
 function switchTab(activeBtn, activeContainer, placeholder) {
     [btnLevels, btnLeaderboard, btnPacks, btnRules, btnCredits].forEach(btn => btn.classList.remove("active"));
     [levelsContainer, leaderboardContainer, packsContainer, rulesContainer, creditsContainer].forEach(container => container.classList.add("hidden-section"));
@@ -754,13 +727,12 @@ function switchTab(activeBtn, activeContainer, placeholder) {
     activeContainer.classList.remove("hidden-section");
     
     if (activeBtn === btnPacks) {
-        packViewContainer.classList.add("hidden-section");
-        packsListContainer.classList.remove("hidden-section");
+        document.getElementById("pack-view-container").classList.add("hidden-section");
+        document.getElementById("packs-list-container").classList.remove("hidden-section");
     }
 
     searchInput.placeholder = placeholder;
-    searchInput.value = ""; 
-    searchInput.dispatchEvent(new Event('input')); 
+    searchInput.value = ""; searchInput.dispatchEvent(new Event('input')); 
 }
 
 btnLevels.addEventListener("click", () => switchTab(btnLevels, levelsContainer, "Search level by name..."));
