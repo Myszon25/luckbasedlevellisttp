@@ -28,6 +28,7 @@
     --tab-active-bg: #ffffff;
     --tab-active-text: #000000;
     --tab-border: rgba(255, 255, 255, 0.2);
+    --accent: #ffcf40;
 }
 
 [data-theme="light"] {
@@ -48,6 +49,7 @@
     --tab-active-bg: #000000;
     --tab-active-text: #ffffff;
     --tab-border: rgba(0, 0, 0, 0.2);
+    --accent: #d9a000;
 }
 
 body {
@@ -79,7 +81,7 @@ body {
     background: var(--input-bg); border: 1px solid var(--border-color);
     color: var(--text-main); border-radius: 30px; outline: none; transition: all 0.3s ease;
 }
-#search-input::placeholder { color: var(--text-dim); }
+#search-input::placeholder { color: var(--text-dim); font-weight: 400; }
 #search-input:focus { background: var(--input-focus); border-color: var(--border-hover); }
 .search-icon { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); width: 18px; height: 18px; color: var(--text-dim); pointer-events: none; }
 #search-input:focus + .search-icon { color: var(--text-main); }
@@ -149,27 +151,21 @@ body {
 .sub { font-size: 12px; color: var(--text-sub); line-height: 1.4; }
 .pack-badges { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
 .pack-badge { font-size: 10px; font-weight: 700; text-transform: uppercase; background: var(--input-bg); border: 1px solid var(--border-color); padding: 4px 8px; border-radius: 6px; color: var(--text-dim); }
-.level-points { font-size: 15px; font-weight: 800; color: #ffcf40; padding: 6px 14px; border-radius: 8px; display: inline-block; width: max-content; text-transform: uppercase; letter-spacing: 1px; background: rgba(255, 207, 64, 0.15); border: 1px solid rgba(255, 207, 64, 0.3); }
+.level-points { font-size: 15px; font-weight: 800; color: var(--accent); padding: 6px 14px; border-radius: 8px; display: inline-block; width: max-content; text-transform: uppercase; letter-spacing: 1px; background: rgba(255, 207, 64, 0.1); border: 1px solid rgba(255, 207, 64, 0.2); }
 
 /* LIST CARDS (Leaderboard, Packs, etc.) */
 .list-card {
     width: min(900px, 95vw); background: linear-gradient(135deg, var(--card-bg) 0%, var(--card-grad-2) 100%);
-    border: 1px solid var(--border-color); border-radius: 18px; padding: 20px; box-sizing: border-box;
-    display: flex; flex-direction: column; gap: 10px; transition: transform 0.2s ease, border-color 0.2s ease;
+    border: 1px solid var(--border-color); border-radius: 18px; padding: 22px; box-sizing: border-box;
+    display: flex; flex-direction: column; gap: 6px; transition: transform 0.2s ease, border-color 0.2s ease;
 }
 .list-card:hover { transform: translateY(-2px); border-color: var(--border-hover); box-shadow: 0 5px 15px var(--shadow-color); }
 .interactive-card { cursor: pointer; }
 .list-header { display: flex; justify-content: space-between; align-items: center; }
-.list-title { font-size: 22px; font-weight: 800; color: var(--text-main); }
-.list-highlight { font-size: 20px; font-weight: 800; color: #ffcf40; }
-.list-subtitle { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-sub); margin-top: 5px; }
+.list-title { font-size: 20px; font-weight: 800; color: var(--text-main); }
+.list-highlight { font-size: 18px; font-weight: 800; color: var(--accent); }
+.list-subtitle { font-size: 12px; color: var(--text-sub); font-weight: 600; }
 .list-items { font-size: 14px; color: var(--text-dim); line-height: 1.5; }
-
-/* Interactive Links */
-.interactive-link { color: #ffcf40; cursor: pointer; transition: all 0.2s ease; text-decoration: none; }
-.interactive-link:hover { color: var(--text-main); text-decoration: underline; }
-.interactive-link.level-link { background: var(--input-bg); padding: 4px 8px; border-radius: 6px; border: 1px solid var(--border-color); display: inline-block; margin: 3px; font-weight: bold; }
-.interactive-link.level-link:hover { background: var(--border-hover); text-decoration: none; color: var(--text-main); }
 
 /* CREDITS & PACK VIEW */
 .credits-card { align-items: center; text-align: center; padding: 50px 20px; }
@@ -188,7 +184,7 @@ body {
 /* ========================= */
 .modal-overlay {
     position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-    background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
     display: flex; justify-content: center; align-items: center; z-index: 1000;
     opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
 }
@@ -196,7 +192,7 @@ body {
 .modal-content {
     background: linear-gradient(135deg, var(--card-bg) 0%, var(--card-grad-2) 100%);
     border: 1px solid var(--border-color); border-radius: 20px;
-    width: min(650px, 90vw); max-height: 85vh; padding: 30px; box-sizing: border-box;
+    width: min(650px, 90vw); max-height: 85vh; padding: 35px; box-sizing: border-box;
     position: relative; overflow-y: auto; color: var(--text-main);
     transform: translateY(-20px); transition: transform 0.3s ease; box-shadow: 0 20px 50px rgba(0,0,0,0.5);
 }
@@ -206,30 +202,47 @@ body {
     width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s ease; font-weight: bold;
 }
 .modal-close:hover { background: var(--text-main); color: var(--bg-main); transform: scale(1.1); }
-.modal-header { border-bottom: 1px solid var(--border-color); padding-bottom: 20px; margin-bottom: 20px; }
-.modal-title { font-size: 32px; font-weight: 800; color: var(--text-main); }
+.modal-header { border-bottom: 1px solid var(--border-color); padding-bottom: 20px; margin-bottom: 25px; }
+.modal-title { font-size: 28px; font-weight: 800; color: var(--text-main); }
 .modal-victors-section { margin-top: 25px; }
-.modal-victors-title { font-size: 20px; font-weight: 700; color: #ffcf40; margin-bottom: 15px; border-bottom: 1px dashed var(--border-color); padding-bottom: 5px;}
-.modal-victors-list { display: flex; flex-direction: column; gap: 10px; }
+.modal-victors-title { font-size: 16px; font-weight: 700; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+.modal-victors-list { display: flex; flex-direction: column; gap: 8px; }
+
+/* Sleek Victor Items */
 .victor-item {
     display: flex; justify-content: space-between; align-items: center;
-    padding: 12px 18px; background: var(--input-bg); border: 1px solid var(--border-color);
-    border-radius: 12px; transition: border-color 0.2s ease;
+    padding: 10px 15px; background: rgba(255, 255, 255, 0.02); border: 1px solid transparent;
+    border-radius: 10px; transition: all 0.2s ease;
 }
-.victor-item:hover { border-color: var(--border-hover); }
-.victor-name { font-weight: 800; font-size: 16px; color: var(--text-main); }
+.victor-item:hover { background: var(--input-bg); border-color: var(--border-color); }
+.victor-name { font-weight: 700; font-size: 16px; color: var(--text-main); }
+
+/* Interactive Hover for Player Names */
+.interactive-player { cursor: pointer; transition: color 0.2s ease; }
+.interactive-player:hover { color: var(--accent); }
+
+/* Clean Links */
 .victor-link {
-    color: #ff4747; background: rgba(255, 71, 71, 0.1); padding: 6px 12px;
-    border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 13px;
+    color: var(--text-sub); text-decoration: none; font-weight: 600; font-size: 12px;
     display: flex; align-items: center; gap: 5px; transition: all 0.2s ease;
 }
-.victor-link:hover { background: rgba(255, 71, 71, 0.2); transform: translateY(-1px); }
+.victor-link:hover { color: #ff4747; }
 .verifier-link {
-    color: #5865F2; background: rgba(88, 101, 242, 0.1); padding: 6px 12px;
-    border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 13px;
-    display: inline-flex; align-items: center; gap: 5px; transition: all 0.2s ease; margin-top: 10px;
+    color: var(--text-sub); text-decoration: none; font-weight: 600; font-size: 12px;
+    display: inline-flex; align-items: center; gap: 5px; transition: all 0.2s ease; margin-top: 5px;
 }
-.verifier-link:hover { background: rgba(88, 101, 242, 0.2); transform: translateY(-1px); }
+.verifier-link:hover { color: #5865F2; }
+
+/* Player Profile Specifics */
+.player-profile-points { font-size: 24px; font-weight: 800; color: var(--accent); margin-top: 5px; }
+.player-tags-container { display: flex; flex-wrap: wrap; gap: 8px; }
+.player-level-tag {
+    display: inline-block; background: var(--input-bg); border: 1px solid var(--border-color);
+    color: var(--text-dim); padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 600;
+    cursor: pointer; transition: all 0.2s ease;
+}
+.player-level-tag:hover { background: var(--text-main); color: var(--bg-main); border-color: var(--text-main); }
+.empty-text { font-size: 14px; color: var(--text-sub); font-style: italic; }
 
 /* MOBILE RESPONSIVENESS */
 @media (max-width: 768px){
@@ -240,13 +253,10 @@ body {
 @media (max-width: 480px){
     .card { height: 210px; }
     .place { font-size: 18px; }
-    .list-title { font-size: 18px; }
-    .list-highlight { font-size: 16px; }
-    .left { padding: 12px; }
-    .level-points { font-size: 12px; padding: 4px 10px; }
+    .left { padding: 15px; }
     .tab-btn { padding: 10px 15px; font-size: 14px; flex-basis: 45%; }
-    .modal-content { padding: 20px; }
-    .modal-title { font-size: 24px; }
+    .modal-content { padding: 25px 20px; }
+    .modal-title { font-size: 22px; }
 }
 </style>
 </head>
@@ -307,6 +317,7 @@ body {
     </div>
 </div>
 
+<!-- MODALS -->
 <div id="level-modal" class="modal-overlay">
     <div class="modal-content">
         <button class="modal-close" id="modal-close-btn">✕</button>
@@ -345,7 +356,7 @@ themeToggle.addEventListener("click", () => {
 });
 
 // ==========================================
-// GLOBAL VARIABLES & CONTAINERS
+// GLOBALS
 // ==========================================
 const btnLevels = document.getElementById("btn-levels");
 const btnLeaderboard = document.getElementById("btn-leaderboard");
@@ -358,10 +369,8 @@ const leaderboardContainer = document.getElementById("leaderboard-container");
 const packsContainer = document.getElementById("packs-container");
 const rulesContainer = document.getElementById("rules-container");
 const creditsContainer = document.getElementById("credits-container");
-
 const searchInput = document.getElementById("search-input");
 
-// Modals
 const levelModal = document.getElementById("level-modal");
 const modalBody = document.getElementById("modal-body");
 const playerModal = document.getElementById("player-modal");
@@ -374,9 +383,8 @@ let currentPackLevelElements = [];
 
 const globalLevelsMap = new Map();
 const levelToPacksMap = new Map();
-let globalLeaderboardData = {}; // Stores player stats for modals
+let globalLeaderboardData = {}; 
 
-// 🛠️ HELPER FUNCTION: Youtube Parser
 function parseYoutube(youtubeInput) {
     if (!youtubeInput) return { id: "", start: 0 };
     let videoId = youtubeInput.trim();
@@ -403,45 +411,47 @@ function parseYoutube(youtubeInput) {
     return { id: videoId, start: startSeconds };
 }
 
-// 🛠️ HELPER FUNCTION: Open LEVEL Modal
+// ==========================================
+// MODAL RENDERERS
+// ==========================================
 function openLevelModal(l, associatedPacks) {
     const exactPoints = l.points !== undefined ? l.points : 0;
     const yt = parseYoutube(l.youtube);
     
     let packBadgesHTML = associatedPacks && associatedPacks.length > 0 
-        ? `<div class="pack-badges" style="margin-top: 15px;">${associatedPacks.map(p => `<span class="pack-badge" style="font-size: 12px; padding: 6px 10px;">${p}</span>`).join("")}</div>`
+        ? `<div class="pack-badges" style="margin-top: 12px;">${associatedPacks.map(p => `<span class="pack-badge">${p}</span>`).join("")}</div>`
         : "";
 
     let verifierLinkHTML = yt.id 
-        ? `<a href="https://www.youtube.com/watch?v=${yt.id}${yt.start > 0 ? `&t=${yt.start}s` : ''}" target="_blank" class="verifier-link">▶ Watch Verifier Video</a>` 
+        ? `<a href="https://www.youtube.com/watch?v=${yt.id}${yt.start > 0 ? `&t=${yt.start}s` : ''}" target="_blank" class="verifier-link">▶ Video</a>` 
         : "";
 
     let verifierHTML = l.verifier 
         ? `<div class="victor-item">
-             <div class="victor-name interactive-link" data-player="${l.verifier}" title="Click to view player profile">${l.verifier} 🔍</div>
+             <div class="victor-name interactive-player" data-player="${l.verifier}">${l.verifier}</div>
              <div>${verifierLinkHTML}</div>
            </div>`
-        : `<div class="victor-item"><span class="victor-name" style="color: var(--text-dim);">Unknown</span></div>`;
+        : `<div class="victor-item"><span class="victor-name" style="color: var(--text-dim); font-weight: 400;">Unknown</span></div>`;
 
     let victorsHTML = l.victors && l.victors.length > 0 
         ? l.victors.map(v => {
             const parts = v.split('=');
             const playerName = parts[0].trim();
             const playerLink = parts.length > 1 ? parts[1].trim() : null;
-            let linkBtn = playerLink ? `<a href="${playerLink}" target="_blank" class="victor-link">▶ Watch Video</a>` : `<span style="font-size: 13px; color: var(--text-sub);">No video</span>`;
+            let linkBtn = playerLink ? `<a href="${playerLink}" target="_blank" class="victor-link">▶ Video</a>` : `<span style="font-size: 12px; color: var(--text-sub);">No video</span>`;
             return `
                 <div class="victor-item">
-                    <div class="victor-name interactive-link" data-player="${playerName}" title="Click to view player profile">${playerName} 🔍</div>
+                    <div class="victor-name interactive-player" data-player="${playerName}">${playerName}</div>
                     <div>${linkBtn}</div>
                 </div>`;
           }).join("")
-        : `<div class="victor-item"><span class="victor-name" style="color: var(--text-dim);">No victors yet.</span></div>`;
+        : `<div class="victor-item"><span class="victor-name" style="color: var(--text-dim); font-weight: 400;">No victors yet.</span></div>`;
 
     modalBody.innerHTML = `
         <div class="modal-header">
             <div class="modal-title">#${l.place} ${l.name}</div>
-            <div class="sub" style="font-size: 14px; margin-top: 10px;">by ${l.author} • id: ${l.id}</div>
-            <div class="level-points" style="margin-top: 15px; font-size: 18px;">+${exactPoints} PTS</div>
+            <div class="sub" style="font-size: 14px; margin-top: 6px;">by ${l.author} • id: ${l.id}</div>
+            <div class="level-points" style="margin-top: 12px;">+${exactPoints} PTS</div>
             ${packBadgesHTML}
         </div>
 
@@ -460,31 +470,30 @@ function openLevelModal(l, associatedPacks) {
     levelModal.classList.add("active");
 }
 
-// 🛠️ HELPER FUNCTION: Open PLAYER Modal
 function openPlayerModal(playerName) {
     const pData = globalLeaderboardData[playerName];
     if (!pData) return;
 
     let verifiedHTML = pData.verified.length > 0 
-        ? pData.verified.map(lvl => `<span class="interactive-link level-link" data-level="${lvl}" title="Click to view level info">${lvl}</span>`).join(" ") 
-        : `<span style="color:var(--text-dim); font-size:14px;">No levels verified.</span>`;
+        ? pData.verified.map(lvl => `<span class="player-level-tag" data-level="${lvl}">${lvl}</span>`).join("") 
+        : `<span class="empty-text">No levels verified.</span>`;
 
     let beatenHTML = pData.beaten.length > 0 
-        ? pData.beaten.map(lvl => `<span class="interactive-link level-link" data-level="${lvl}" title="Click to view level info">${lvl}</span>`).join(" ") 
-        : `<span style="color:var(--text-dim); font-size:14px;">No levels completed yet.</span>`;
+        ? pData.beaten.map(lvl => `<span class="player-level-tag" data-level="${lvl}">${lvl}</span>`).join("") 
+        : `<span class="empty-text">No levels completed yet.</span>`;
 
     playerModalBody.innerHTML = `
         <div class="modal-header">
-            <div class="modal-title" style="color: #ffcf40;">${playerName}</div>
-            <div class="level-points" style="margin-top: 15px; font-size: 18px;">${pData.points} Total PTS</div>
+            <div class="modal-title">${playerName}</div>
+            <div class="player-profile-points">${pData.points} PTS</div>
         </div>
         <div class="modal-victors-section">
-            <div class="modal-victors-title" style="color: var(--text-main); font-size: 18px;">Levels Verified (${pData.verified.length})</div>
-            <div style="line-height: 2;">${verifiedHTML}</div>
+            <div class="modal-victors-title">Verified (${pData.verified.length})</div>
+            <div class="player-tags-container">${verifiedHTML}</div>
         </div>
         <div class="modal-victors-section">
-            <div class="modal-victors-title" style="color: var(--text-main); font-size: 18px;">Levels Completed (${pData.beaten.length})</div>
-            <div style="line-height: 2;">${beatenHTML}</div>
+            <div class="modal-victors-title">Completed (${pData.beaten.length})</div>
+            <div class="player-tags-container">${beatenHTML}</div>
         </div>
     `;
 
@@ -492,22 +501,20 @@ function openPlayerModal(playerName) {
     playerModal.classList.add("active");
 }
 
-// 🛠️ EVENT DELEGATION FOR CLICKABLE LINKS (Works in Modals AND on Leaderboard)
+// ==========================================
+// EVENT DELEGATION (Clicks inside Modals)
+// ==========================================
 document.addEventListener('click', (e) => {
-    // Player Clicked
     if (e.target.closest('[data-player]')) {
         e.stopPropagation();
-        const playerName = e.target.closest('[data-player]').dataset.player;
-        openPlayerModal(playerName);
+        openPlayerModal(e.target.closest('[data-player]').dataset.player);
     }
-    // Level Clicked
     else if (e.target.closest('[data-level]')) {
         e.stopPropagation();
         const levelName = e.target.closest('[data-level]').dataset.level;
         const levelData = globalLevelsMap.get(levelName.toLowerCase());
         if (levelData) {
-            const associatedPacks = levelToPacksMap.get(levelName.toLowerCase()) || [];
-            openLevelModal(levelData, associatedPacks);
+            openLevelModal(levelData, levelToPacksMap.get(levelName.toLowerCase()) || []);
         }
     }
 });
@@ -518,7 +525,9 @@ document.getElementById("player-modal-close-btn").addEventListener("click", () =
 levelModal.addEventListener("click", (e) => { if (e.target === levelModal) levelModal.classList.remove("active"); });
 playerModal.addEventListener("click", (e) => { if (e.target === playerModal) playerModal.classList.remove("active"); });
 
-// 🛠️ HELPER FUNCTION: Generate Level Card DOM
+// ==========================================
+// DOM GENERATORS
+// ==========================================
 function createLevelCardElement(l) {
     const exactPoints = l.points !== undefined ? l.points : 0;
     const yt = parseYoutube(l.youtube);
@@ -533,8 +542,8 @@ function createLevelCardElement(l) {
     left.className = "left";
     left.innerHTML = `
         <div>
-            <div class="place">#${l.place} (${l.name})</div>
-            <div class="verifier">Verified by: ${l.verifier}</div>
+            <div class="place">#${l.place} ${l.name}</div>
+            <div class="verifier">Verified by: ${l.verifier || "Unknown"}</div>
             <div class="sub">by ${l.author}<br>id: ${l.id}</div>
             ${packBadgesHTML}
         </div>
@@ -555,7 +564,7 @@ function createLevelCardElement(l) {
 }
 
 // ==========================================
-// FETCH & PROCESS DATA
+// DATA FETCHING & INITIALIZATION
 // ==========================================
 Promise.all([
     fetch("levels.json").then(r => r.json()),
@@ -563,7 +572,6 @@ Promise.all([
     fetch("rules.json").then(r => r.json()).catch(() => []) 
 ]).then(([levelsData, packsData, rulesData]) => {
 
-    // 0. MAP LEVELS TO PACKS
     packsData.forEach(pack => {
         pack.levels.forEach(levelName => {
             const key = levelName.toLowerCase();
@@ -572,7 +580,6 @@ Promise.all([
         });
     });
 
-    // 1. PROCESS LEVELS
     levelsData.sort((a,b) => a.place - b.place);
     levelsData.forEach(l => {
         globalLevelsMap.set(l.name.toLowerCase(), l); 
@@ -581,7 +588,6 @@ Promise.all([
         levelCardsElements.push(card); 
     });
 
-    // 2. PROCESS LEADERBOARD (NOW INCLUDES VERIFIERS)
     function initPlayer(name) {
         if (!globalLeaderboardData[name]) globalLeaderboardData[name] = { points: 0, beaten: [], verified: [] };
     }
@@ -589,7 +595,6 @@ Promise.all([
     levelsData.forEach(l => {
         const exactPoints = l.points !== undefined ? Number(l.points) : 0;
         
-        // Add points for Verifier
         if (l.verifier) {
             initPlayer(l.verifier);
             globalLeaderboardData[l.verifier].points += exactPoints;
@@ -598,7 +603,6 @@ Promise.all([
             }
         }
 
-        // Add points for Victors
         if (l.victors && Array.isArray(l.victors)) {
             l.victors.forEach(playerEntry => {
                 const trimmedPlayer = playerEntry.split('=')[0].trim();
@@ -618,29 +622,24 @@ Promise.all([
     sortedPlayers.forEach((p, index) => {
         const lCard = document.createElement("div");
         lCard.className = "list-card interactive-card";
-        lCard.dataset.player = p.name; // Click whole card to open player profile
+        lCard.dataset.player = p.name.toLowerCase(); 
         
-        let displayItems = "";
-        if (p.beaten.length > 0) {
-            displayItems += `<b>Completed:</b> ${p.beaten.map(lvl => `<span class="interactive-link level-link" data-level="${lvl}">${lvl}</span>`).join(" ")}<br>`;
-        }
-        if (p.verified.length > 0) {
-            displayItems += `<b style="color:var(--text-main);">Verified:</b> ${p.verified.map(lvl => `<span class="interactive-link level-link" data-level="${lvl}">${lvl}</span>`).join(" ")}`;
-        }
-
+        // Minimalistic Leaderboard Item
         lCard.innerHTML = `
             <div class="list-header">
                 <div class="list-title">#${index + 1} ${p.name}</div>
-                <div class="list-highlight">${p.points} pts</div>
+                <div class="list-highlight">${p.points} PTS</div>
             </div>
-            <div class="list-items" style="margin-top: 5px;">${displayItems}</div>
+            <div class="list-subtitle">
+                ${p.verified.length} Verified • ${p.beaten.length} Completed
+            </div>
         `;
         
+        lCard.addEventListener("click", () => openPlayerModal(p.name));
         leaderboardContainer.appendChild(lCard);
         leaderboardCardsElements.push(lCard);
     });
 
-    // 3. PROCESS PACKS
     const packsListContainer = document.getElementById("packs-list-container");
     packsData.forEach((pack) => {
         const validLevels = pack.levels.filter(lvl => globalLevelsMap.has(lvl.toLowerCase()));
@@ -652,7 +651,7 @@ Promise.all([
         pCard.innerHTML = `
             <div class="list-header">
                 <div class="list-title">${pack.name}</div>
-                <div class="list-highlight">${validLevels.length} Levels</div>
+                <div class="list-highlight" style="font-size: 16px;">${validLevels.length} Levels</div>
             </div>
             <div class="list-items">${validLevels.join(", ")}</div>
         `;
@@ -680,7 +679,6 @@ Promise.all([
         packCardsElements.push(pCard);
     });
 
-    // 4. PROCESS RULES
     const rulesContent = document.getElementById("rules-content");
     if (rulesData && rulesData.length > 0) {
         let rulesHTML = '<h2 class="list-title" style="margin-bottom: 15px;">List Rules</h2><ol style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 12px; color: var(--text-dim); font-size: 15px; line-height: 1.5;">';
@@ -694,7 +692,9 @@ Promise.all([
     }
 });
 
-// BACK TO PACKS
+// ==========================================
+// NAVIGATION & SEARCH
+// ==========================================
 document.getElementById("back-to-packs-btn").addEventListener("click", () => {
     document.getElementById("pack-view-container").classList.add("hidden-section");
     document.getElementById("packs-list-container").classList.remove("hidden-section");
@@ -702,13 +702,12 @@ document.getElementById("back-to-packs-btn").addEventListener("click", () => {
     searchInput.value = ""; searchInput.dispatchEvent(new Event('input')); 
 });
 
-// SEARCH LOGIC
 searchInput.addEventListener("input", (e) => {
     const query = e.target.value.toLowerCase();
     if (btnLevels.classList.contains("active")) {
         levelCardsElements.forEach(card => card.style.display = card.dataset.name.includes(query) ? "flex" : "none");
     } else if (btnLeaderboard.classList.contains("active")) {
-        leaderboardCardsElements.forEach(card => card.style.display = card.dataset.player.toLowerCase().includes(query) ? "flex" : "none");
+        leaderboardCardsElements.forEach(card => card.style.display = card.dataset.player.includes(query) ? "flex" : "none");
     } else if (btnPacks.classList.contains("active")) {
         if (!document.getElementById("packs-list-container").classList.contains("hidden-section")) {
             packCardsElements.forEach(card => card.style.display = card.dataset.pack.includes(query) ? "flex" : "none");
@@ -718,7 +717,6 @@ searchInput.addEventListener("input", (e) => {
     }
 });
 
-// TAB SWITCHING
 function switchTab(activeBtn, activeContainer, placeholder) {
     [btnLevels, btnLeaderboard, btnPacks, btnRules, btnCredits].forEach(btn => btn.classList.remove("active"));
     [levelsContainer, leaderboardContainer, packsContainer, rulesContainer, creditsContainer].forEach(container => container.classList.add("hidden-section"));
