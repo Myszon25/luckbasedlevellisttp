@@ -431,7 +431,7 @@ themeToggle.addEventListener("click", () => {
 });
 
 // ==========================================
-// GLOBALS
+// GLOBALS & REUSE CONFIG
 // ==========================================
 const btnLevels = document.getElementById("btn-levels");
 const btnLeaderboard = document.getElementById("btn-leaderboard");
@@ -455,11 +455,18 @@ let levelCardsElements = [];
 let leaderboardCardsElements = []; 
 let packCardsElements = [];
 let currentPackLevelElements = [];
-let fullLevelsData = []; // 🔥 NEW: Stored globally for the Random feature
+let fullLevelsData = []; 
 
 const globalLevelsMap = new Map();
 const levelToPacksMap = new Map();
 let globalLeaderboardData = {}; 
+
+// Local default configuration tracker updated via change.json
+let appConfig = {
+    listName: "USKC spam list",
+    discordLink: "https://discord.gg/vAr7Cyv83F",
+    enablePacks: true
+};
 
 function parseYoutube(youtubeInput) {
     if (!youtubeInput) return { id: "", start: 0 };
@@ -493,8 +500,8 @@ function openLevelModal(l, associatedPacks) {
     const exactPoints = l.points !== undefined ? l.points : 0;
     const yt = parseYoutube(l.youtube);
     
-    // 🔥 UPDATED: Clickable Pack Badges inside Modal
-    let packBadgesHTML = associatedPacks && associatedPacks.length > 0 
+    // Checks if packs are globally enabled before injecting them inside modal layouts
+    let packBadgesHTML = (appConfig.enablePacks && associatedPacks && associatedPacks.length > 0) 
         ? `<div class="pack-badges" style="margin-top: 12px;">${associatedPacks.map(p => `<span class="pack-badge interactive-pack" onclick="event.stopPropagation(); jumpToPack('${p.replace(/'/g, "\\'")}');">${p}</span>`).join("")}</div>`
         : "";
 
@@ -600,15 +607,11 @@ document.getElementById("player-modal-close-btn").addEventListener("click", () =
 levelModal.addEventListener("click", (e) => { if (e.target === levelModal) levelModal.classList.remove("active"); });
 playerModal.addEventListener("click", (e) => { if (e.target === playerModal) playerModal.classList.remove("active"); });
 
-// 🔥 NEW: Function to Jump to a Pack
+// Function to Jump to a Pack
 function jumpToPack(packName) {
-    // 1. Close the modal
+    if (!appConfig.enablePacks) return; // Prevent tab jumping if config blocks packs
     levelModal.classList.remove("active");
-    
-    // 2. Switch to the Packs tab
     switchTab(btnPacks, packsContainer, "Search pack by name...");
-    
-    // 3. Find the correct pack card and simulate a click to open it
     const targetPackCard = packCardsElements.find(card => card.dataset.pack === packName.toLowerCase());
     if (targetPackCard) {
         targetPackCard.click();
@@ -623,8 +626,8 @@ function createLevelCardElement(l) {
     const yt = parseYoutube(l.youtube);
     const associatedPacks = levelToPacksMap.get(l.name.toLowerCase()) || [];
     
-    // 🔥 UPDATED: Clickable Pack Badges on the Cards
-    let packBadgesHTML = associatedPacks.length > 0 ?
+    // Pack badges render conditionally based on configuration settings
+    let packBadgesHTML = (appConfig.enablePacks && associatedPacks.length > 0) ?
     `<div class="pack-badges">${associatedPacks.map(p => `<span class="pack-badge interactive-pack" onclick="event.stopPropagation(); jumpToPack('${p.replace(/'/g, "\\'")}');">${p}</span>`).join("")}</div>` : "";
 
     const card = document.createElement("div");
@@ -660,10 +663,32 @@ function createLevelCardElement(l) {
 Promise.all([
     fetch("levels.json").then(r => r.json()),
     fetch("packs.json").then(r => r.json()).catch(() => []),
-    fetch("rules.json").then(r => r.json()).catch(() => []) 
-]).then(([levelsData, packsData, rulesData]) => {
+    fetch("rules.json").then(r => r.json()).catch(() => []),
+    fetch("change.json").then(r => r.json()).catch(() => ({})) // Fetches the setup alterations dynamically
+]).then(([levelsData, packsData, rulesData, changeData]) => {
 
-    fullLevelsData = levelsData; // Store for Random Button
+    // Evaluate configurations instantly upon retrieval
+    if (changeData) {
+        if (changeData.listName) {
+            appConfig.listName = changeData.listName;
+            document.title = changeData.listName;
+            const headingTitle = document.querySelector(".nav-title");
+            if (headingTitle) headingTitle.innerText = changeData.listName;
+        }
+        if (changeData.discordLink) {
+            appConfig.discordLink = changeData.discordLink;
+            const discordAnchor = document.querySelector(".discord-btn");
+            if (discordAnchor) discordAnchor.href = changeData.discordLink;
+        }
+        if (changeData.enablePacks !== undefined) {
+            appConfig.enablePacks = changeData.enablePacks;
+            if (!appConfig.enablePacks && btnPacks) {
+                btnPacks.style.display = "none";
+            }
+        }
+    }
+
+    fullLevelsData = levelsData; 
 
     packsData.forEach(pack => {
         pack.levels.forEach(levelName => {
@@ -717,7 +742,6 @@ Promise.all([
         lCard.className = "list-card interactive-card";
         lCard.dataset.player = p.name.toLowerCase(); 
         
-        // Minimalistic Leaderboard Item
         lCard.innerHTML = `
             <div class="list-header">
                 <div class="list-title">#${index + 1} ${p.name}</div>
@@ -733,43 +757,46 @@ Promise.all([
         leaderboardCardsElements.push(lCard);
     });
 
-    const packsListContainer = document.getElementById("packs-list-container");
-    packsData.forEach((pack) => {
-        const validLevels = pack.levels.filter(lvl => globalLevelsMap.has(lvl.toLowerCase()));
-        if (validLevels.length === 0) return;
+    // Only process pack card structures if enablePacks configuration evaluates to true
+    if (appConfig.enablePacks) {
+        const packsListContainer = document.getElementById("packs-list-container");
+        packsData.forEach((pack) => {
+            const validLevels = pack.levels.filter(lvl => globalLevelsMap.has(lvl.toLowerCase()));
+            if (validLevels.length === 0) return;
 
-        const pCard = document.createElement("div");
-        pCard.className = "list-card interactive-card";
-        pCard.dataset.pack = pack.name.toLowerCase(); 
-        pCard.innerHTML = `
-            <div class="list-header">
-                <div class="list-title">${pack.name}</div>
-                <div class="list-highlight" style="font-size: 16px;">${validLevels.length} Levels</div>
-            </div>
-            <div class="list-items">${validLevels.join(", ")}</div>
-        `;
+            const pCard = document.createElement("div");
+            pCard.className = "list-card interactive-card";
+            pCard.dataset.pack = pack.name.toLowerCase(); 
+            pCard.innerHTML = `
+                <div class="list-header">
+                    <div class="list-title">${pack.name}</div>
+                    <div class="list-highlight" style="font-size: 16px;">${validLevels.length} Levels</div>
+                </div>
+                <div class="list-items">${validLevels.join(", ")}</div>
+            `;
 
-        pCard.addEventListener("click", () => {
-            packsListContainer.classList.add("hidden-section");
-            document.getElementById("pack-view-container").classList.remove("hidden-section");
-             document.getElementById("pack-view-title").innerText = pack.name;
-            
-            const packLevelsWrapper = document.getElementById("pack-levels-wrapper");
-            packLevelsWrapper.innerHTML = "";
-            currentPackLevelElements = [];
+            pCard.addEventListener("click", () => {
+                packsListContainer.classList.add("hidden-section");
+                document.getElementById("pack-view-container").classList.remove("hidden-section");
+                document.getElementById("pack-view-title").innerText = pack.name;
+                
+                const packLevelsWrapper = document.getElementById("pack-levels-wrapper");
+                packLevelsWrapper.innerHTML = "";
+                currentPackLevelElements = [];
 
-            validLevels.forEach(levelName => {
-                const cardElement = createLevelCardElement(globalLevelsMap.get(levelName.toLowerCase()));
-                packLevelsWrapper.appendChild(cardElement);
-                currentPackLevelElements.push(cardElement);
+                validLevels.forEach(levelName => {
+                    const cardElement = createLevelCardElement(globalLevelsMap.get(levelName.toLowerCase()));
+                    packLevelsWrapper.appendChild(cardElement);
+                    currentPackLevelElements.push(cardElement);
+                });
+                searchInput.placeholder = `Search in ${pack.name}...`;
+                searchInput.value = "";
             });
-            searchInput.placeholder = `Search in ${pack.name}...`;
-            searchInput.value = "";
-        });
 
-        packsListContainer.appendChild(pCard);
-        packCardsElements.push(pCard);
-    });
+            packsListContainer.appendChild(pCard);
+            packCardsElements.push(pCard);
+        });
+    }
 
     const rulesContent = document.getElementById("rules-content");
     if (rulesData && rulesData.length > 0) {
@@ -784,7 +811,7 @@ Promise.all([
     }
 });
 
-// 🔥 NEW: Random Level Logic
+// Random Level Logic
 document.getElementById("btn-random").addEventListener("click", () => {
     if (!fullLevelsData || fullLevelsData.length === 0) return;
     const randomLvl = fullLevelsData[Math.floor(Math.random() * fullLevelsData.length)];
@@ -807,7 +834,7 @@ searchInput.addEventListener("input", (e) => {
         levelCardsElements.forEach(card => card.style.display = card.dataset.name.includes(query) ? "flex" : "none");
     } else if (btnLeaderboard.classList.contains("active")) {
         leaderboardCardsElements.forEach(card => card.style.display = card.dataset.player.includes(query) ? "flex" : "none");
-    } else if (btnPacks.classList.contains("active")) {
+    } else if (btnPacks.classList.contains("active") && appConfig.enablePacks) {
         if (!document.getElementById("packs-list-container").classList.contains("hidden-section")) {
             packCardsElements.forEach(card => card.style.display = card.dataset.pack.includes(query) ? "flex" : "none");
          } else {
@@ -823,7 +850,7 @@ function switchTab(activeBtn, activeContainer, placeholder) {
     activeBtn.classList.add("active");
     activeContainer.classList.remove("hidden-section");
     
-    if (activeBtn === btnPacks) {
+    if (activeBtn === btnPacks && appConfig.enablePacks) {
         document.getElementById("pack-view-container").classList.add("hidden-section");
         document.getElementById("packs-list-container").classList.remove("hidden-section");
     }
@@ -834,7 +861,9 @@ function switchTab(activeBtn, activeContainer, placeholder) {
 
 btnLevels.addEventListener("click", () => switchTab(btnLevels, levelsContainer, "Search level by name..."));
 btnLeaderboard.addEventListener("click", () => switchTab(btnLeaderboard, leaderboardContainer, "Search player by name..."));
-btnPacks.addEventListener("click", () => switchTab(btnPacks, packsContainer, "Search pack by name..."));
+btnPacks.addEventListener("click", () => {
+    if(appConfig.enablePacks) switchTab(btnPacks, packsContainer, "Search pack by name...");
+});
 btnRules.addEventListener("click", () => switchTab(btnRules, rulesContainer, "Search is disabled in rules..."));
 btnCredits.addEventListener("click", () => switchTab(btnCredits, creditsContainer, "No search in credits..."));
 
