@@ -19,9 +19,6 @@
     "verifier": "me",
     "id": "12345678",
     "youtube": "65RJQig1tZc",
-    "gif": "https://media0.giphy.com/media/.../giphy.gif",
-    "wrName": "Verification video",
-    "wrLink": "https://youtube.com/watch?v=example2",
     "points": 1,
     "victors": []
   },
@@ -32,9 +29,6 @@
     "verifier": "me",
     "id": "12345678",
     "youtube": "65RJQig1tZc",
-    "gif": "https://media0.giphy.com/media/.../giphy.gif",
-    "wrName": "Verification video",
-    "wrLink": "https://youtube.com/watch?v=example2",
     "points": 1,
     "victors": []
   },
@@ -45,9 +39,6 @@
     "verifier": "me",
     "id": "12345678",
     "youtube": "65RJQig1tZc",
-    "gif": "(this is uselless  it was in older version now it dont matter but deleting this might cause website problem)",
-    "wrName": "Verification video",
-    "wrLink": "",
     "points": 1,
     "victors": []
   }
