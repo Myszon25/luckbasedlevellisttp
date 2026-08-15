@@ -6,7 +6,7 @@
     "id": "371027",
     "youtube": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
     "duration": "1:35",
-    "points": 1000
+    "category": "Possible"
   },
   {
     "place": 2,
@@ -15,15 +15,24 @@
     "id": "26890242",
     "youtube": "https://www.youtube.com/watch?v=abcdefg",
     "duration": "1:20",
-    "points": 950
+    "category": "Possible"
   },
   {
-    "place": 3,
+    "place": 1,
+    "name": "Silent Clubstep",
+    "author": "TheRealSailent",
+    "id": "123456",
+    "youtube": "https://www.youtube.com/watch?v=hijklmn",
+    "duration": "2:10",
+    "category": "Impossible"
+  },
+  {
+    "place": 1,
     "name": "Tartarus",
     "author": "Dolphy",
     "id": "3677634",
     "youtube": "https://www.youtube.com/watch?v=xyz1234",
     "duration": "1:55",
-    "points": 900
+    "category": "Extreme"
   }
 ]
