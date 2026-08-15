@@ -148,6 +148,7 @@ body {
     -ms-overflow-style: none;
 }
 .categories::-webkit-scrollbar { display: none; }
+
 .category-btn {
     padding: 10px 20px;
     background: var(--card-bg);
@@ -198,9 +199,11 @@ body {
     z-index: 2; border-right: 2px solid var(--border-color); cursor: pointer; transition: background 0.3s ease;
 }
 .left:hover { background: linear-gradient(135deg, var(--card-grad-2) 0%, var(--card-bg) 100%); }
+
 .right { width: 65%; height: 100%; position: relative; cursor: pointer; background: #000; }
 .right img { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.3s, transform 0.3s; }
 .right:hover img { opacity: 0.6; transform: scale(1.02); }
+
 .play-button {
     position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 60px; height: 60px;
     background-color: rgba(255, 0, 0, 0.8); border-radius: 50%; display: flex; justify-content: center; align-items: center;
@@ -262,6 +265,7 @@ body {
 .list-highlight { font-size: 18px; font-weight: 800; color: var(--accent); }
 .list-subtitle { font-size: 12px; color: var(--text-sub); font-weight: 600; }
 .list-items { font-size: 14px; color: var(--text-dim); line-height: 1.5; }
+.notice-text { white-space: pre-line; word-break: break-word; }
 
 .credits-card { align-items: center; text-align: center; padding: 50px 20px; }
 .credits-title { font-size: 32px; margin-bottom: 5px; }
@@ -406,10 +410,12 @@ body {
 <script>
 const themeToggle = document.getElementById("theme-toggle");
 const currentTheme = localStorage.getItem("theme") || "dark";
+
 if (currentTheme === "light") {
     document.body.setAttribute("data-theme", "light");
     themeToggle.innerText = "🌙";
 }
+
 themeToggle.addEventListener("click", () => {
     const isLight = document.body.getAttribute("data-theme") === "light";
     if (isLight) {
@@ -431,6 +437,7 @@ const levelsContainer = document.getElementById("levels-container");
 const rulesContainer = document.getElementById("rules-container");
 const creditsContainer = document.getElementById("credits-container");
 const searchInput = document.getElementById("search-input");
+const navSearch = document.getElementById("nav-search");
 
 const levelModal = document.getElementById("level-modal");
 const modalBody = document.getElementById("modal-body");
@@ -438,27 +445,44 @@ const modalBody = document.getElementById("modal-body");
 const categoryButtonsContainer = document.getElementById("category-buttons");
 const categoriesBar = document.getElementById("categories-bar");
 
-let currentLevelCards = []; 
-let categoriesList = [];
-let levelsByCategory = {};
-let currentCategory = "";
+let currentLevelCards = [];
+let categoryData = [];
+let currentCategoryIndex = 0;
 
 let appConfig = {
     listName: "USKC spam list",
     discordLink: "https://discord.gg/Z5PSQ7VNkF"
 };
 
+function escapeHTML(value) {
+    return String(value === null || value === undefined ? "" : value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+}
+
+function safeFileUrl(fileName) {
+    return fileName.split("/").map(encodeURIComponent).join("/");
+}
+
 function parseYoutube(youtubeInput) {
     if (!youtubeInput) return { id: "", start: 0 };
+
     let videoId = youtubeInput.trim();
     let startSeconds = 0;
+
     if (!videoId.includes('?') && videoId.includes('&')) videoId = videoId.replace('&', '?');
+
     try {
         const urlStr = videoId.startsWith('http') ? videoId : 'https://youtube.com/' + videoId;
         const url = new URL(urlStr);
+
         if (url.hostname.includes('youtu.be')) videoId = url.pathname.slice(1);
         else if (url.searchParams.has('v')) videoId = url.searchParams.get('v');
         else videoId = url.pathname.split('/').pop();
+
         const t = url.searchParams.get('t') || url.searchParams.get('start');
         if (t) {
             if (/^\d+s?$/.test(t)) startSeconds = parseInt(t, 10);
@@ -470,166 +494,376 @@ function parseYoutube(youtubeInput) {
             }
         }
     } catch (e) {}
+
     return { id: videoId, start: startSeconds };
 }
 
-function openLevelModal(l, catName) {
-    const yt = parseYoutube(l.youtube);
-    
-    modalBody.innerHTML = `
-        <div class="modal-header">
-            <div class="modal-title">#${l.place} ${l.name}</div>
-            <div class="sub" style="font-size: 14px; margin-top: 6px; line-height: 1.5;">
-                <strong>Creator:</strong> ${l.author} <br> 
-                <span class="copy-id" onclick="navigator.clipboard.writeText('${l.id}'); const orig=this.innerHTML; this.innerHTML='Copied! ✓'; setTimeout(()=>this.innerHTML=orig, 1500);">ID: ${l.id} 📋</span>
-            </div>
-            <div style="display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap;">
-                <div class="modal-tag category">${catName}</div>
-                <div class="modal-tag duration">⏱️ ${l.duration || '0:00'}</div>
-            </div>
-        </div>
-
-        <div style="margin-top: 25px; aspect-ratio: 16/9; width: 100%; border-radius: 12px; overflow: hidden; background: #000; box-shadow: 0 10px 25px rgba(0,0,0,0.5);">
-            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/${yt.id}?autoplay=0${yt.start > 0 ? `&start=${yt.start}` : ''}" title="YouTube video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+function showNotice(title, message) {
+    levelsContainer.innerHTML = `
+        <div class="list-card">
+            <div class="list-title">${escapeHTML(title)}</div>
+            <div class="list-items notice-text">${escapeHTML(message)}</div>
         </div>
     `;
-    levelModal.classList.add("active");
 }
 
-document.getElementById("modal-close-btn").addEventListener("click", () => levelModal.classList.remove("active"));
-levelModal.addEventListener("click", (e) => { if (e.target === levelModal) levelModal.classList.remove("active"); });
+function normalizeCategories(raw) {
+    if (!Array.isArray(raw)) return [];
 
-function createLevelCardElement(l, catName) {
-    const yt = parseYoutube(l.youtube);
-    
-    const card = document.createElement("div");
-    card.className = "card";
-    card.dataset.name = l.name.toLowerCase();
-    
-    const left = document.createElement("div");
-    left.className = "left";
-    left.innerHTML = `
-        <div>
-            <div class="place">#${l.place} ${l.name}</div>
-            <div class="sub" style="font-size: 13px; margin-bottom: 4px; font-weight: 600;">by ${l.author}</div>
-            <div class="sub" style="font-size: 11px; color: var(--text-dim);">ID: ${l.id}</div>
-        </div>
-        <div class="category-badge">${catName}</div>
-    `;
-    left.addEventListener("click", () => openLevelModal(l, catName));
+    return raw.map(item => {
+        if (typeof item === "string") {
+            const name = item.trim();
+            if (!name) return null;
 
-    const right = document.createElement("div");
-    right.className = "right";
-    right.innerHTML = `
-        <div class="video-duration">${l.duration || '0:00'}</div>
-        <img src="https://img.youtube.com/vi/${yt.id}/hqdefault.jpg" loading="lazy" alt="Thumbnail">
-        <div class="play-button"></div>
-    `;
-    right.addEventListener("click", () => {
-        let embedUrl = `https://www.youtube.com/embed/${yt.id}?autoplay=1${yt.start > 0 ? `&start=${yt.start}` : ''}`;
-        right.innerHTML = `<iframe width="100%" height="100%" src="${embedUrl}" title="YouTube video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+            return {
+                name,
+                file: `category-${name.toLowerCase().trim()}.json`,
+                levels: [],
+                error: ""
+            };
+        }
+
+        if (item && typeof item === "object") {
+            const name = String(item.name || item.title || item.category || item.label || "").trim();
+            if (!name) return null;
+
+            const file = String(
+                item.file ||
+                item.fileName ||
+                item.filename ||
+                item.src ||
+                `category-${name.toLowerCase().trim()}.json`
+            ).trim();
+
+            return {
+                name,
+                file,
+                levels: [],
+                error: ""
+            };
+        }
+
+        return null;
+    }).filter(Boolean);
+}
+
+function getCategoryFileCandidates(cat) {
+    const lower = cat.name.toLowerCase().trim();
+    const dashed = lower.replace(/\s+/g, "-");
+
+    const candidates = [];
+
+    if (cat.file) candidates.push(cat.file);
+
+    candidates.push(
+        `category-${lower}.json`,
+        `category-${dashed}.json`,
+        `${lower}.json`,
+        `${dashed}.json`,
+        `category-${lower} list.json`,
+        `category-${dashed}-list.json`,
+        `${lower} list.json`,
+        `${dashed}-list.json`
+    );
+
+    return [...new Set(candidates)];
+}
+
+function extractLevels(data) {
+    if (Array.isArray(data)) return data;
+    if (data && Array.isArray(data.levels)) return data.levels;
+    return [];
+}
+
+async function loadCategoryLevels() {
+    if (!categoryData.length) {
+        showNotice(
+            "No categories found",
+            "Create categories.json and add category names or category objects."
+        );
+        return;
+    }
+
+    showNotice("Loading categories...", "Please wait.");
+
+    for (const cat of categoryData) {
+        const candidates = getCategoryFileCandidates(cat);
+        let loaded = false;
+        let errors = [];
+
+        for (const fileName of candidates) {
+            try {
+                const response = await fetch(safeFileUrl(fileName), { cache: "no-store" });
+
+                if (!response.ok) {
+                    errors.push(`${fileName} -> HTTP ${response.status}`);
+                    continue;
+                }
+
+                const json = await response.json();
+                cat.levels = extractLevels(json);
+                cat.loadedFile = fileName;
+                cat.error = "";
+                loaded = true;
+                break;
+            } catch (err) {
+                errors.push(`${fileName} -> ${err.message || err}`);
+            }
+        }
+
+        if (!loaded) {
+            cat.levels = [];
+            cat.error =
+                `Could not load a JSON file for "${cat.name}".\n\n` +
+                `Make sure one of these files exists:\n` +
+                candidates.map(f => `• ${f}`).join("\n") +
+                `\n\nAlso: if you opened index.html by double-clicking, run a local server instead.`;
+        }
+    }
+
+    renderCategoryLevels();
+}
+
+function renderCategoryButtons() {
+    categoryButtonsContainer.innerHTML = "";
+
+    categoryData.forEach((cat, index) => {
+        const btn = document.createElement("button");
+        btn.className = "category-btn" + (index === currentCategoryIndex ? " active" : "");
+        btn.innerText = cat.name;
+
+        btn.addEventListener("click", () => {
+            currentCategoryIndex = index;
+
+            document.querySelectorAll(".category-btn").forEach((b, i) => {
+                b.classList.toggle("active", i === index);
+            });
+
+            renderCategoryLevels();
+            filterLevels();
+        });
+
+        categoryButtonsContainer.appendChild(btn);
     });
-    
-    card.appendChild(left); 
-    card.appendChild(right);
-    return card;
 }
 
 function renderCategoryLevels() {
     levelsContainer.innerHTML = "";
     currentLevelCards = [];
-    
-    const levels = levelsByCategory[currentCategory] || [];
-    levels.sort((a,b) => a.place - b.place);
-    
-    levels.forEach(l => {
-        const card = createLevelCardElement(l, currentCategory);
+
+    const cat = categoryData[currentCategoryIndex];
+    if (!cat) return;
+
+    if (cat.error) {
+        showNotice(`Problem loading ${cat.name}`, cat.error);
+        return;
+    }
+
+    if (!cat.levels.length) {
+        showNotice(
+            `No levels in ${cat.name}`,
+            `Add levels to the JSON file for this category.\nLoaded file: ${cat.loadedFile || cat.file}`
+        );
+        return;
+    }
+
+    const sortedLevels = [...cat.levels].sort((a, b) => {
+        const placeA = Number(a.place ?? 999999);
+        const placeB = Number(b.place ?? 999999);
+        return placeA - placeB;
+    });
+
+    sortedLevels.forEach(level => {
+        const card = createLevelCardElement(level, cat.name);
         levelsContainer.appendChild(card);
-        currentLevelCards.push(card); 
+        currentLevelCards.push(card);
     });
 }
 
-function switchCategory(cat) {
-    currentCategory = cat;
-    document.querySelectorAll(".category-btn").forEach(b => {
-        b.classList.toggle("active", b.innerText === cat);
+function openLevelModal(level, categoryName) {
+    const yt = parseYoutube(level.youtube);
+    const place = level.place ?? "?";
+    const duration = level.duration || "0:00";
+
+    modalBody.innerHTML = `
+        <div class="modal-header">
+            <div class="modal-title">#${escapeHTML(place)} ${escapeHTML(level.name)}</div>
+            <div class="sub" style="font-size: 14px; margin-top: 6px; line-height: 1.5;">
+                <strong>Creator:</strong> ${escapeHTML(level.author)} <br> 
+                <span class="copy-id" data-copy="${escapeHTML(level.id)}" onclick="navigator.clipboard.writeText(this.dataset.copy); const orig=this.innerHTML; this.innerHTML='Copied! ✓'; setTimeout(()=>this.innerHTML=orig, 1500);">ID: ${escapeHTML(level.id)} 📋</span>
+            </div>
+            <div style="display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap;">
+                <div class="modal-tag category">${escapeHTML(categoryName)}</div>
+                <div class="modal-tag duration">⏱️ ${escapeHTML(duration)}</div>
+            </div>
+        </div>
+
+        <div style="margin-top: 25px; aspect-ratio: 16/9; width: 100%; border-radius: 12px; overflow: hidden; background: #000; box-shadow: 0 10px 25px rgba(0,0,0,0.5);">
+            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/${encodeURIComponent(yt.id)}?autoplay=0${yt.start > 0 ? `&start=${yt.start}` : ''}" title="YouTube video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    `;
+
+    levelModal.classList.add("active");
+}
+
+function closeLevelModal() {
+    levelModal.classList.remove("active");
+
+    setTimeout(() => {
+        if (!levelModal.classList.contains("active")) {
+            modalBody.innerHTML = "";
+        }
+    }, 300);
+}
+
+document.getElementById("modal-close-btn").addEventListener("click", closeLevelModal);
+levelModal.addEventListener("click", (e) => {
+    if (e.target === levelModal) closeLevelModal();
+});
+document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeLevelModal();
+});
+
+function createLevelCardElement(level, categoryName) {
+    const yt = parseYoutube(level.youtube);
+    const place = level.place ?? "?";
+    const duration = level.duration || "0:00";
+
+    const card = document.createElement("div");
+    card.className = "card";
+    card.dataset.name = String(level.name || "").toLowerCase();
+
+    const left = document.createElement("div");
+    left.className = "left";
+    left.innerHTML = `
+        <div>
+            <div class="place">#${escapeHTML(place)} ${escapeHTML(level.name)}</div>
+            <div class="sub" style="font-size: 13px; margin-bottom: 4px; font-weight: 600;">by ${escapeHTML(level.author)}</div>
+            <div class="sub" style="font-size: 11px; color: var(--text-dim);">ID: ${escapeHTML(level.id)}</div>
+        </div>
+        <div class="category-badge">${escapeHTML(categoryName)}</div>
+    `;
+    left.addEventListener("click", () => openLevelModal(level, categoryName));
+
+    const right = document.createElement("div");
+    right.className = "right";
+    right.innerHTML = `
+        <div class="video-duration">${escapeHTML(duration)}</div>
+        <img src="https://img.youtube.com/vi/${encodeURIComponent(yt.id)}/hqdefault.jpg" loading="lazy" alt="Thumbnail">
+        <div class="play-button"></div>
+    `;
+
+    right.addEventListener("click", () => {
+        const embedUrl = `https://www.youtube.com/embed/${encodeURIComponent(yt.id)}?autoplay=1${yt.start > 0 ? `&start=${yt.start}` : ''}`;
+        right.innerHTML = `
+            <iframe width="100%" height="100%" src="${embedUrl}" title="YouTube video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        `;
     });
-    renderCategoryLevels();
+
+    card.appendChild(left);
+    card.appendChild(right);
+
+    return card;
 }
 
 function filterLevels() {
     const query = searchInput.value.toLowerCase();
+
     currentLevelCards.forEach(card => {
-        const matchesSearch = card.dataset.name.includes(query);
-        card.style.display = matchesSearch ? "flex" : "none";
+        card.style.display = card.dataset.name.includes(query) ? "flex" : "none";
     });
 }
 
 Promise.all([
-    fetch("categories.json").then(r => r.json()).catch(() => []),
-    fetch("rules.json").then(r => r.json()).catch(() => []),
-    fetch("change.json").then(r => r.json()).catch(() => ({})) 
-]).then(([catsData, rulesData, changeData]) => {
+    fetch("categories.json")
+        .then(r => {
+            if (!r.ok) throw new Error(`HTTP ${r.status}`);
+            return r.json();
+        })
+        .catch(err => {
+            window.__categoriesError = err;
+            return [];
+        }),
 
-    if (changeData) {
+    fetch("rules.json")
+        .then(r => r.json())
+        .catch(() => []),
+
+    fetch("change.json")
+        .then(r => r.json())
+        .catch(() => ({}))
+])
+.then(([categoriesRaw, rulesData, changeData]) => {
+
+    if (changeData && typeof changeData === "object") {
         if (changeData.listName) {
             appConfig.listName = changeData.listName;
             document.title = changeData.listName;
-            const headingTitle = document.getElementById("nav-title");
-            if (headingTitle) headingTitle.innerText = changeData.listName;
+            document.getElementById("nav-title").innerText = changeData.listName;
         }
+
         if (changeData.discordLink) {
             appConfig.discordLink = changeData.discordLink;
-            const discordAnchor = document.getElementById("discord-btn");
-            if (discordAnchor) discordAnchor.href = changeData.discordLink;
+            document.getElementById("discord-btn").href = changeData.discordLink;
         }
     }
 
     const rulesContent = document.getElementById("rules-content");
-    if (rulesData && rulesData.length > 0) {
+
+    if (Array.isArray(rulesData) && rulesData.length > 0) {
         let rulesHTML = '<h2 class="list-title" style="margin-bottom: 15px;">List Rules</h2><ol style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 12px; color: var(--text-dim); font-size: 15px; line-height: 1.5;">';
+
         rulesData.forEach(rule => {
-            if (typeof rule === 'string') rulesHTML += `<li>${rule}</li>`;
-            else if (rule.title && rule.description) rulesHTML += `<li><strong style="color: var(--text-main); font-size: 16px;">${rule.title}</strong><br>${rule.description}</li>`;
+            if (typeof rule === 'string') {
+                rulesHTML += `<li>${escapeHTML(rule)}</li>`;
+            } else if (rule.title && rule.description) {
+                rulesHTML += `<li><strong style="color: var(--text-main); font-size: 16px;">${escapeHTML(rule.title)}</strong><br>${escapeHTML(rule.description)}</li>`;
+            }
         });
+
         rulesContent.innerHTML = rulesHTML + '</ol>';
     } else {
         rulesContent.innerHTML = '<h2 class="list-title">List Rules</h2><p class="list-items">No rules added yet.</p>';
     }
 
-    categoriesList = catsData;
-    categoriesList.forEach((cat, index) => {
-        const btn = document.createElement("button");
-        btn.className = "category-btn" + (index === 0 ? " active" : "");
-        btn.innerText = cat;
-        btn.addEventListener("click", () => switchCategory(cat));
-        categoryButtonsContainer.appendChild(btn);
-    });
-    
-    if (categoriesList.length > 0) {
-        currentCategory = categoriesList[0];
-        
-        const fetches = categoriesList.map(cat => 
-            fetch(`${cat.toLowerCase()}.json`)
-                .then(r => r.json())
-                .then(data => { levelsByCategory[cat] = data; })
-                .catch(() => { levelsByCategory[cat] = []; })
+    if (window.__categoriesError) {
+        showNotice(
+            "Cannot load categories.json",
+            "Make sure categories.json exists in the same folder.\n\n" +
+            "Also: if you opened index.html by double-clicking, run a local server instead."
         );
-        
-        Promise.all(fetches).then(() => {
-            renderCategoryLevels();
-        });
+        return;
     }
+
+    categoryData = normalizeCategories(categoriesRaw);
+
+    if (!categoryData.length) {
+        showNotice(
+            "No categories found",
+            "Add categories to categories.json.\n\nExample:\n[\n  \"Extreme Demons\",\n  \"Possible\"\n]"
+        );
+        return;
+    }
+
+    renderCategoryButtons();
+
+    if (btnLevels.classList.contains("active")) {
+        categoriesBar.style.display = "flex";
+    }
+
+    loadCategoryLevels();
 });
 
 document.getElementById("btn-random").addEventListener("click", () => {
-    const currentLevels = levelsByCategory[currentCategory] || [];
-    if (!currentLevels || currentLevels.length === 0) return;
-    const randomLvl = currentLevels[Math.floor(Math.random() * currentLevels.length)];
-    openLevelModal(randomLvl, currentCategory);
+    const currentCat = categoryData[currentCategoryIndex];
+
+    if (!currentCat || !currentCat.levels || currentCat.levels.length === 0) return;
+
+    const randomLevel = currentCat.levels[Math.floor(Math.random() * currentCat.levels.length)];
+    openLevelModal(randomLevel, currentCat.name);
 });
 
-searchInput.addEventListener("input", (e) => {
+searchInput.addEventListener("input", () => {
     if (btnLevels.classList.contains("active")) {
         filterLevels();
     }
@@ -638,30 +872,26 @@ searchInput.addEventListener("input", (e) => {
 function switchTab(activeBtn, activeContainer, placeholder) {
     [btnLevels, btnRules, btnCredits].forEach(btn => btn?.classList.remove("active"));
     [levelsContainer, rulesContainer, creditsContainer].forEach(c => c?.classList.add("hidden-section"));
-    
+
     activeBtn.classList.add("active");
     activeContainer.classList.remove("hidden-section");
-    
-    if (activeBtn === btnLevels) {
-        categoriesBar.style.display = "flex";
-    } else {
-        categoriesBar.style.display = "none";
-    }
+
+    categoriesBar.style.display = (activeBtn === btnLevels && categoryData.length > 0) ? "flex" : "none";
 
     searchInput.value = "";
+
     if (placeholder) {
-        document.getElementById("nav-search").style.display = "block";
+        navSearch.style.display = "block";
         searchInput.placeholder = placeholder;
-        filterLevels(); 
+        filterLevels();
     } else {
-        document.getElementById("nav-search").style.display = "none";
+        navSearch.style.display = "none";
     }
 }
 
 btnLevels.addEventListener("click", () => switchTab(btnLevels, levelsContainer, "Search level by name..."));
 btnRules.addEventListener("click", () => switchTab(btnRules, rulesContainer, null));
 btnCredits.addEventListener("click", () => switchTab(btnCredits, creditsContainer, null));
-
 </script>
 </body>
 </html>
