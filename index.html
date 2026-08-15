@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title> </title>
+<title>USKC spam list</title>
 <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;700;800&display=swap" rel="stylesheet">
 
 <style>
@@ -114,7 +114,7 @@ body {
     cursor: pointer; display: flex; justify-content: center; align-items: center; transition: all 0.3s ease; height: 40px; box-sizing: border-box;
 }
 .theme-btn { font-size: 18px; width: 40px; }
-.nav-credits-btn { padding: 0 16px; font-family: 'Rubik', sans-serif; font-weight: 700; font-size: 14px; text-transform: uppercase; }
+.nav-credits-btn { padding: 0 16px; font-family: 'Rubik', sans-serif; font-weight: 700; font-size: 14px; text-transform: uppercase; text-decoration: none; }
 .theme-btn:hover, .nav-credits-btn:hover { border-color: var(--border-hover); transform: translateY(-2px); box-shadow: 0 5px 15px var(--shadow-color); }
 .nav-credits-btn.active { background: var(--tab-active-bg); color: var(--tab-active-text); border-color: var(--tab-active-bg); box-shadow: 0 0 15px var(--shadow-color); }
 
@@ -177,26 +177,26 @@ body {
 }
 .right:hover .play-button { background-color: #ff0000; transform: translate(-50%, -50%) scale(1.15); box-shadow: 0 0 20px rgba(255,0,0,0.5); }
 
-.place { font-size: 24px; font-weight: 800; color: var(--text-main); margin-bottom: 4px; }
-.verifier { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-dim); font-weight: 700; margin-bottom: 8px; }
-.sub { font-size: 12px; color: var(--text-sub); line-height: 1.4; }
-.pack-badges { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
-.pack-badge { 
-    font-size: 10px; font-weight: 700; text-transform: uppercase; background: var(--input-bg);
-    border: 1px solid var(--border-color); padding: 4px 8px; border-radius: 6px; color: var(--text-dim); 
+.video-duration {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(0, 0, 0, 0.75);
+    color: #ffffff;
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    z-index: 5;
+    letter-spacing: 0.5px;
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
 }
+.right:hover .video-duration { opacity: 0.8; }
 
-.pack-badge.interactive-pack { 
-    cursor: pointer; 
-    transition: all 0.2s ease; 
-}
-.pack-badge.interactive-pack:hover { 
-    background: var(--text-main); 
-    color: var(--bg-main); 
-    border-color: var(--text-main); 
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px var(--shadow-color);
-}
+.place { font-size: 24px; font-weight: 800; color: var(--text-main); margin-bottom: 4px; }
+.sub { font-size: 12px; color: var(--text-sub); line-height: 1.4; }
 
 .level-points { font-size: 15px; font-weight: 800; color: var(--accent);
     padding: 6px 14px; border-radius: 8px; display: inline-block; width: max-content; text-transform: uppercase; letter-spacing: 1px; background: rgba(255, 207, 64, 0.1);
@@ -211,7 +211,6 @@ body {
     animation: slideUpFade 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 .list-card:hover { transform: translateY(-4px); border-color: var(--border-hover); box-shadow: 0 10px 25px var(--shadow-color); z-index: 10; }
-.interactive-card { cursor: pointer; }
 .list-header { display: flex; justify-content: space-between; align-items: center; }
 .list-title { font-size: 20px; font-weight: 800; color: var(--text-main); }
 .list-highlight { font-size: 18px; font-weight: 800; color: var(--accent); }
@@ -222,11 +221,6 @@ body {
 .credits-title { font-size: 32px; margin-bottom: 5px; }
 .credits-author { font-size: 18px; color: var(--text-dim); }
 .credits-author strong { color: var(--text-main); font-weight: 800; }
-.pack-view-header { width: min(900px, 95vw); display: flex; align-items: center; gap: 20px; padding: 0 0 15px 0; border-bottom: 1px solid var(--border-color); margin-bottom: 10px; }
-.back-btn { background: var(--input-bg); border: 1px solid var(--border-color); color: var(--text-main); padding: 10px 15px; border-radius: 8px; cursor: pointer; font-family: 'Rubik', sans-serif; font-weight: 700; transition: all 0.2s ease; }
-.back-btn:hover { background: var(--tab-active-bg); color: var(--tab-active-text); transform: translateX(-3px); }
-.pack-view-title { font-size: 22px; font-weight: 800; margin: 0; color: var(--text-main); }
-.pack-levels-wrapper { display: flex; flex-direction: column; align-items: center; gap: 15px; width: 100%; }
 .hidden-section { display: none !important; }
 
 .modal-overlay {
@@ -255,42 +249,6 @@ body {
 .copy-id { cursor: pointer; background: var(--input-bg); border: 1px solid var(--border-color); padding: 3px 8px; border-radius: 6px; transition: all 0.2s ease; display: inline-block; margin-top: 4px; font-weight: 600;}
 .copy-id:hover { background: var(--text-main); color: var(--bg-main); border-color: var(--text-main); }
 
-.modal-victors-section { margin-top: 25px; }
-.modal-victors-title { font-size: 16px; font-weight: 700; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
-.modal-victors-list { display: flex; flex-direction: column; gap: 8px; }
-
-.victor-item {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 10px 15px; background: rgba(255, 255, 255, 0.02); border: 1px solid transparent;
-    border-radius: 10px; transition: all 0.2s ease;
-}
-.victor-item:hover { background: var(--input-bg); border-color: var(--border-color); transform: translateX(5px); }
-.victor-name { font-weight: 700; font-size: 16px; color: var(--text-main); }
-
-.interactive-player { cursor: pointer; transition: color 0.2s ease; }
-.interactive-player:hover { color: var(--accent); }
-
-.victor-link {
-    color: var(--text-sub); text-decoration: none; font-weight: 600; font-size: 12px;
-    display: flex; align-items: center; gap: 5px; transition: all 0.2s ease;
-}
-.victor-link:hover { color: #ff4747; }
-.verifier-link {
-    color: var(--text-sub); text-decoration: none; font-weight: 600; font-size: 12px;
-    display: inline-flex; align-items: center; gap: 5px; transition: all 0.2s ease; margin-top: 5px;
-}
-.verifier-link:hover { color: #5865F2; }
-
-.player-profile-points { font-size: 24px; font-weight: 800; color: var(--accent); margin-top: 5px; }
-.player-tags-container { display: flex; flex-wrap: wrap; gap: 8px; }
-.player-level-tag {
-    display: inline-block; background: var(--input-bg); border: 1px solid var(--border-color);
-    color: var(--text-dim); padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 600;
-    cursor: pointer; transition: all 0.2s ease;
-}
-.player-level-tag:hover { background: var(--text-main); color: var(--bg-main); border-color: var(--text-main); transform: translateY(-2px); box-shadow: 0 4px 10px var(--shadow-color); }
-.empty-text { font-size: 14px; color: var(--text-sub); font-style: italic; }
-
 @media (max-width: 768px){
     .navbar { flex-direction: row; }
     .nav-search { order: 3; max-width: 100%; margin-top: 10px; }
@@ -312,7 +270,7 @@ body {
 <div class="bg-blob blob-2"></div>
 
 <nav class="navbar">
-    <div class="nav-title">USKC spam list</div>
+    <div class="nav-title" id="nav-title">USKC spam list</div>
     
     <div class="nav-search" id="nav-search">
         <input type="text" id="search-input" placeholder="Search level by name...">
@@ -327,7 +285,7 @@ body {
         <button class="theme-btn" id="theme-toggle" title="Toggle Theme">☀️</button>
         <button class="nav-credits-btn" id="btn-credits">Credits</button>
         <a href="https://docs.google.com/forms/" target="_blank" class="nav-credits-btn" id="submit-btn" style="text-decoration: none;">Submit Record</a>
-        <a href="https://discord.gg/Z5PSQ7VNkF" target="_blank" class="discord-btn">
+        <a href="https://discord.gg/Z5PSQ7VNkF" target="_blank" class="discord-btn" id="discord-btn">
             <svg viewBox="0 0 127.14 96.36"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1,105.25,105.25,0,0,0,32.19-16.14c0,0,.04-.06.05-.09h0c2.69-27.42-2.73-51.49-18.95-72.06ZM42.63,65.22C38,65.22,34.15,61,34.15,55.9S37.9,46.58,42.63,46.58c4.76,0,8.56,4.31,8.48,9.32C51.11,61,47.41,65.22,42.63,65.22Zm41.88,0c-4.73,0-8.52-4.22-8.52-9.32s3.73-9.32,8.52-9.32c4.76,0,8.56,4.31,8.48,9.32C93,61,89.28,65.22,84.51,65.22Z"/></svg>
             Join Discord
         </a>
@@ -337,25 +295,11 @@ body {
 <div class="tabs-container">
     <div class="tabs">
         <button class="tab-btn active" id="btn-levels">Levels</button>
-        <button class="tab-btn" id="btn-leaderboard">Leaderboard</button>
-        <button class="tab-btn" id="btn-packs">Packs</button>
         <button class="tab-btn" id="btn-rules">Rules</button>
     </div>
 </div>
 
 <div class="container" id="levels-container"></div>
-<div class="container hidden-section" id="leaderboard-container"></div>
-
-<div class="container hidden-section" id="packs-container">
-    <div id="packs-list-container" style="width: 100%; display: flex; flex-direction: column; align-items: center; gap: 15px;"></div>
-    <div id="pack-view-container" class="hidden-section" style="width: 100%; display: flex; flex-direction: column; align-items: center;">
-        <div class="pack-view-header">
-            <button class="back-btn" id="back-to-packs-btn">⬅ Back to Packs</button>
-            <h2 class="pack-view-title" id="pack-view-title">Pack Name</h2>
-        </div>
-        <div class="pack-levels-wrapper" id="pack-levels-wrapper"></div>
-    </div>
-</div>
 
 <div class="container hidden-section" id="rules-container">
     <div class="list-card" id="rules-content"></div>
@@ -388,13 +332,6 @@ body {
     </div>
 </div>
 
-<div id="player-modal" class="modal-overlay">
-    <div class="modal-content">
-        <button class="modal-close" id="player-modal-close-btn">✕</button>
-        <div id="player-modal-body"></div>
-    </div>
-</div>
-
 <script>
 const themeToggle = document.getElementById("theme-toggle");
 const currentTheme = localStorage.getItem("theme") || "dark";
@@ -416,38 +353,24 @@ themeToggle.addEventListener("click", () => {
 });
 
 const btnLevels = document.getElementById("btn-levels");
-const btnLeaderboard = document.getElementById("btn-leaderboard");
-const btnPacks = document.getElementById("btn-packs");
 const btnRules = document.getElementById("btn-rules");
 const btnCredits = document.getElementById("btn-credits");
 
 const levelsContainer = document.getElementById("levels-container");
-const leaderboardContainer = document.getElementById("leaderboard-container");
-const packsContainer = document.getElementById("packs-container");
 const rulesContainer = document.getElementById("rules-container");
 const creditsContainer = document.getElementById("credits-container");
 const searchInput = document.getElementById("search-input");
 
 const levelModal = document.getElementById("level-modal");
 const modalBody = document.getElementById("modal-body");
-const playerModal = document.getElementById("player-modal");
-const playerModalBody = document.getElementById("player-modal-body");
 
 let levelCardsElements = []; 
-let leaderboardCardsElements = []; 
-let packCardsElements = [];
-let currentPackLevelElements = [];
 let fullLevelsData = []; 
-
-const globalLevelsMap = new Map();
-const levelToPacksMap = new Map();
-let globalLeaderboardData = {}; 
 
 let appConfig = {
     listName: "USKC spam list",
     discordLink: "https://discord.gg/Z5PSQ7VNkF",
-    submitLink: "https://docs.google.com/forms/",
-    enablePacks: true
+    submitLink: "https://docs.google.com/forms/"
 };
 
 function parseYoutube(youtubeInput) {
@@ -475,174 +398,86 @@ function parseYoutube(youtubeInput) {
     return { id: videoId, start: startSeconds };
 }
 
-function openLevelModal(l, associatedPacks) {
+function openLevelModal(l) {
     const exactPoints = l.points !== undefined ? l.points : 0;
     const yt = parseYoutube(l.youtube);
     
-    let packBadgesHTML = (appConfig.enablePacks && associatedPacks && associatedPacks.length > 0) 
-        ? `<div class="pack-badges" style="margin-top: 12px;">${associatedPacks.map(p => `<span class="pack-badge interactive-pack" onclick="event.stopPropagation(); jumpToPack('${p.replace(/'/g, "\\'")}');">${p}</span>`).join("")}</div>`
-        : "";
-
-    let verifierLinkHTML = yt.id 
-        ? `<a href="https://www.youtube.com/watch?v=${yt.id}${yt.start > 0 ? `&t=${yt.start}s` : ''}" target="_blank" class="verifier-link">▶ Video</a>` 
-        : "";
-
-    let verifierHTML = l.verifier 
-        ? `<div class="victor-item">
-             <div class="victor-name interactive-player" data-player="${l.verifier}">${l.verifier}</div>
-             <div>${verifierLinkHTML}</div>
-           </div>`
-        : `<div class="victor-item"><span class="victor-name" style="color: var(--text-dim); font-weight: 400;">Unknown</span></div>`;
-
-    let victorsHTML = l.victors && l.victors.length > 0 
-        ? l.victors.map(v => {
-            const parts = v.split('=');
-            const playerName = parts[0].trim();
-            const playerLink = parts.length > 1 ? parts[1].trim() : null;
-            let linkBtn = playerLink ? `<a href="${playerLink}" target="_blank" class="victor-link">▶ Video</a>` : `<span style="font-size: 12px; color: var(--text-sub);">No video</span>`;
-            return `
-                <div class="victor-item">
-                    <div class="victor-name interactive-player" data-player="${playerName}">${playerName}</div>
-                    <div>${linkBtn}</div>
-                </div>`;
-          }).join("")
-        : `<div class="victor-item"><span class="victor-name" style="color: var(--text-dim); font-weight: 400;">No victors yet.</span></div>`;
-
     modalBody.innerHTML = `
         <div class="modal-header">
             <div class="modal-title">#${l.place} ${l.name}</div>
-            <div class="sub" style="font-size: 14px; margin-top: 6px;">
-                by ${l.author} <br> 
+            <div class="sub" style="font-size: 14px; margin-top: 6px; line-height: 1.5;">
+                <strong>Creator:</strong> ${l.author} <br> 
                 <span class="copy-id" onclick="navigator.clipboard.writeText('${l.id}'); const orig=this.innerHTML; this.innerHTML='Copied! ✓'; setTimeout(()=>this.innerHTML=orig, 1500);">ID: ${l.id} 📋</span>
             </div>
-            <div class="level-points" style="margin-top: 12px;">+${exactPoints} PTS</div>
-            ${packBadgesHTML}
+            <div style="display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap;">
+                <div class="level-points" style="background: rgba(255, 207, 64, 0.15); color: var(--accent); border-color: rgba(255, 207, 64, 0.3);">+${exactPoints} PTS</div>
+                <div class="level-points" style="background: rgba(255, 255, 255, 0.05); color: var(--text-main); border-color: var(--border-color);">⏱️ ${l.duration || '0:00'}</div>
+            </div>
         </div>
 
-        <div class="modal-victors-section">
-            <div class="modal-victors-title">Verifier</div>
-            <div class="modal-victors-list">${verifierHTML}</div>
-         </div>
-
-        <div class="modal-victors-section">
-            <div class="modal-victors-title">Victors (${l.victors ? l.victors.length : 0})</div>
-            <div class="modal-victors-list">${victorsHTML}</div>
+        <div style="margin-top: 25px; aspect-ratio: 16/9; width: 100%; border-radius: 12px; overflow: hidden; background: #000; box-shadow: 0 10px 25px rgba(0,0,0,0.5);">
+            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/${yt.id}?autoplay=0${yt.start > 0 ? `&start=${yt.start}` : ''}" title="YouTube video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
     `;
-    playerModal.classList.remove("active");
     levelModal.classList.add("active");
 }
 
-function openPlayerModal(playerName) {
-    const pData = globalLeaderboardData[playerName];
-    if (!pData) return;
-    let verifiedHTML = pData.verified.length > 0 
-        ? pData.verified.map(lvl => `<span class="player-level-tag" data-level="${lvl}">${lvl}</span>`).join("") 
-        : `<span class="empty-text">No levels verified.</span>`;
-    let beatenHTML = pData.beaten.length > 0 
-        ? pData.beaten.map(lvl => `<span class="player-level-tag" data-level="${lvl}">${lvl}</span>`).join("") 
-        : `<span class="empty-text">No levels completed yet.</span>`;
-
-    playerModalBody.innerHTML = `
-        <div class="modal-header">
-            <div class="modal-title">${playerName}</div>
-            <div class="player-profile-points">${pData.points} PTS</div>
-        </div>
-        <div class="modal-victors-section">
-            <div class="modal-victors-title">Verified (${pData.verified.length})</div>
-            <div class="player-tags-container">${verifiedHTML}</div>
-        </div>
-        <div class="modal-victors-section">
-            <div class="modal-victors-title">Completed (${pData.beaten.length})</div>
-            <div class="player-tags-container">${beatenHTML}</div>
-        </div>
-    `;
-    levelModal.classList.remove("active");
-    playerModal.classList.add("active");
-}
-
-document.addEventListener('click', (e) => {
-    if (e.target.closest('[data-player]')) {
-        e.stopPropagation();
-        openPlayerModal(e.target.closest('[data-player]').dataset.player);
-    }
-    else if (e.target.closest('[data-level]')) {
-        e.stopPropagation();
-        const levelName = e.target.closest('[data-level]').dataset.level;
-        const levelData = globalLevelsMap.get(levelName.toLowerCase());
-        if (levelData) {
-            openLevelModal(levelData, levelToPacksMap.get(levelName.toLowerCase()) || []);
-        }
-    }
-});
-
 document.getElementById("modal-close-btn").addEventListener("click", () => levelModal.classList.remove("active"));
-document.getElementById("player-modal-close-btn").addEventListener("click", () => playerModal.classList.remove("active"));
 levelModal.addEventListener("click", (e) => { if (e.target === levelModal) levelModal.classList.remove("active"); });
-playerModal.addEventListener("click", (e) => { if (e.target === playerModal) playerModal.classList.remove("active"); });
-
-function jumpToPack(packName) {
-    if (!appConfig.enablePacks) return; 
-    levelModal.classList.remove("active");
-    switchTab(btnPacks, packsContainer, "Search pack by name...");
-    const targetPackCard = packCardsElements.find(card => card.dataset.pack === packName.toLowerCase());
-    if (targetPackCard) {
-        targetPackCard.click();
-    }
-}
 
 function createLevelCardElement(l) {
     const exactPoints = l.points !== undefined ? l.points : 0;
     const yt = parseYoutube(l.youtube);
-    const associatedPacks = levelToPacksMap.get(l.name.toLowerCase()) || [];
     
-    let packBadgesHTML = (appConfig.enablePacks && associatedPacks.length > 0) ?
-    `<div class="pack-badges">${associatedPacks.map(p => `<span class="pack-badge interactive-pack" onclick="event.stopPropagation(); jumpToPack('${p.replace(/'/g, "\\'")}');">${p}</span>`).join("")}</div>` : "";
-
     const card = document.createElement("div");
     card.className = "card";
     card.dataset.name = l.name.toLowerCase();
+    
     const left = document.createElement("div");
     left.className = "left";
     left.innerHTML = `
         <div>
             <div class="place">#${l.place} ${l.name}</div>
-            <div class="verifier">Verified by: ${l.verifier || "Unknown"}</div>
-            <div class="sub">by ${l.author}<br>id: ${l.id}</div>
-            ${packBadgesHTML}
+            <div class="sub" style="font-size: 13px; margin-bottom: 4px; font-weight: 600;">by ${l.author}</div>
+            <div class="sub" style="font-size: 11px; color: var(--text-dim);">ID: ${l.id}</div>
         </div>
         <div class="level-points">+${exactPoints} PTS</div>
     `;
-    left.addEventListener("click", () => openLevelModal(l, associatedPacks));
+    left.addEventListener("click", () => openLevelModal(l));
 
     const right = document.createElement("div");
     right.className = "right";
-    right.innerHTML = `<img src="https://img.youtube.com/vi/${yt.id}/hqdefault.jpg" loading="lazy" alt="Thumbnail"><div class="play-button"></div>`;
+    right.innerHTML = `
+        <div class="video-duration">${l.duration || '0:00'}</div>
+        <img src="https://img.youtube.com/vi/${yt.id}/hqdefault.jpg" loading="lazy" alt="Thumbnail">
+        <div class="play-button"></div>
+    `;
     right.addEventListener("click", () => {
         let embedUrl = `https://www.youtube.com/embed/${yt.id}?autoplay=1${yt.start > 0 ? `&start=${yt.start}` : ''}`;
         right.innerHTML = `<iframe width="100%" height="100%" src="${embedUrl}" title="YouTube video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
     });
-    card.appendChild(left); card.appendChild(right);
+    
+    card.appendChild(left); 
+    card.appendChild(right);
     return card;
 }
 
 Promise.all([
     fetch("levels.json").then(r => r.json()),
-    fetch("packs.json").then(r => r.json()).catch(() => []),
     fetch("rules.json").then(r => r.json()).catch(() => []),
     fetch("change.json").then(r => r.json()).catch(() => ({})) 
-]).then(([levelsData, packsData, rulesData, changeData]) => {
+]).then(([levelsData, rulesData, changeData]) => {
 
     if (changeData) {
         if (changeData.listName) {
             appConfig.listName = changeData.listName;
             document.title = changeData.listName;
-            const headingTitle = document.querySelector(".nav-title");
+            const headingTitle = document.getElementById("nav-title");
             if (headingTitle) headingTitle.innerText = changeData.listName;
         }
         if (changeData.discordLink) {
             appConfig.discordLink = changeData.discordLink;
-            const discordAnchor = document.querySelector(".discord-btn");
+            const discordAnchor = document.getElementById("discord-btn");
             if (discordAnchor) discordAnchor.href = changeData.discordLink;
         }
         if (changeData.submitLink) {
@@ -650,122 +485,16 @@ Promise.all([
             const submitAnchor = document.getElementById("submit-btn");
             if (submitAnchor) submitAnchor.href = changeData.submitLink;
         }
-        if (changeData.enablePacks !== undefined) {
-            appConfig.enablePacks = changeData.enablePacks;
-            if (!appConfig.enablePacks && btnPacks) {
-                btnPacks.style.display = "none";
-            }
-        }
     }
 
     fullLevelsData = levelsData; 
 
-    packsData.forEach(pack => {
-        pack.levels.forEach(levelName => {
-            const key = levelName.toLowerCase();
-            if (!levelToPacksMap.has(key)) levelToPacksMap.set(key, []);
-            levelToPacksMap.get(key).push(pack.name);
-        });
-    });
-
     levelsData.sort((a,b) => a.place - b.place);
     levelsData.forEach(l => {
-        globalLevelsMap.set(l.name.toLowerCase(), l); 
         const card = createLevelCardElement(l);
         levelsContainer.appendChild(card);
         levelCardsElements.push(card); 
     });
-
-    function initPlayer(name) {
-        if (!globalLeaderboardData[name]) globalLeaderboardData[name] = { points: 0, beaten: [], verified: [] };
-    }
-
-    levelsData.forEach(l => {
-        const exactPoints = l.points !== undefined ? Number(l.points) : 0;
-        
-        if (l.verifier) {
-            initPlayer(l.verifier);
-            globalLeaderboardData[l.verifier].points += exactPoints;
-            if (!globalLeaderboardData[l.verifier].verified.includes(l.name)) {
-                globalLeaderboardData[l.verifier].verified.push(l.name);
-             }
-        }
-
-        if (l.victors && Array.isArray(l.victors)) {
-            l.victors.forEach(playerEntry => {
-                const trimmedPlayer = playerEntry.split('=')[0].trim();
-                initPlayer(trimmedPlayer);
-                globalLeaderboardData[trimmedPlayer].points += exactPoints;
-                 if (!globalLeaderboardData[trimmedPlayer].beaten.includes(l.name)) {
-                    globalLeaderboardData[trimmedPlayer].beaten.push(l.name);
-                }
-            });
-        }
-    });
-
-    const sortedPlayers = Object.keys(globalLeaderboardData)
-        .map(name => ({ name, ...globalLeaderboardData[name] }))
-        .sort((a, b) => b.points - a.points);
-
-    sortedPlayers.forEach((p, index) => {
-        const lCard = document.createElement("div");
-        lCard.className = "list-card interactive-card";
-        lCard.dataset.player = p.name.toLowerCase(); 
-        
-        lCard.innerHTML = `
-            <div class="list-header">
-                <div class="list-title">#${index + 1} ${p.name}</div>
-                <div class="list-highlight">${p.points} PTS</div>
-            </div>
-            <div class="list-subtitle">
-                ${p.verified.length} Verified • ${p.beaten.length} Completed
-            </div>
-        `;
-        
-        lCard.addEventListener("click", () => openPlayerModal(p.name));
-        leaderboardContainer.appendChild(lCard);
-        leaderboardCardsElements.push(lCard);
-    });
-
-    if (appConfig.enablePacks) {
-        const packsListContainer = document.getElementById("packs-list-container");
-        packsData.forEach((pack) => {
-            const validLevels = pack.levels.filter(lvl => globalLevelsMap.has(lvl.toLowerCase()));
-            if (validLevels.length === 0) return;
-
-            const pCard = document.createElement("div");
-            pCard.className = "list-card interactive-card";
-            pCard.dataset.pack = pack.name.toLowerCase(); 
-            pCard.innerHTML = `
-                <div class="list-header">
-                    <div class="list-title">${pack.name}</div>
-                    <div class="list-highlight" style="font-size: 16px;">${validLevels.length} Levels</div>
-                </div>
-                <div class="list-items">${validLevels.join(", ")}</div>
-            `;
-
-            pCard.addEventListener("click", () => {
-                packsListContainer.classList.add("hidden-section");
-                document.getElementById("pack-view-container").classList.remove("hidden-section");
-                document.getElementById("pack-view-title").innerText = pack.name;
-                
-                const packLevelsWrapper = document.getElementById("pack-levels-wrapper");
-                packLevelsWrapper.innerHTML = "";
-                currentPackLevelElements = [];
-
-                validLevels.forEach(levelName => {
-                    const cardElement = createLevelCardElement(globalLevelsMap.get(levelName.toLowerCase()));
-                    packLevelsWrapper.appendChild(cardElement);
-                    currentPackLevelElements.push(cardElement);
-                });
-                searchInput.placeholder = `Search in ${pack.name}...`;
-                searchInput.value = "";
-            });
-
-            packsListContainer.appendChild(pCard);
-            packCardsElements.push(pCard);
-        });
-    }
 
     const rulesContent = document.getElementById("rules-content");
     if (rulesData && rulesData.length > 0) {
@@ -783,34 +512,19 @@ Promise.all([
 document.getElementById("btn-random").addEventListener("click", () => {
     if (!fullLevelsData || fullLevelsData.length === 0) return;
     const randomLvl = fullLevelsData[Math.floor(Math.random() * fullLevelsData.length)];
-    openLevelModal(randomLvl, levelToPacksMap.get(randomLvl.name.toLowerCase()) || []);
-});
-
-document.getElementById("back-to-packs-btn").addEventListener("click", () => {
-    document.getElementById("pack-view-container").classList.add("hidden-section");
-    document.getElementById("packs-list-container").classList.remove("hidden-section");
-    searchInput.placeholder = "Search pack by name...";
-    searchInput.value = ""; searchInput.dispatchEvent(new Event('input')); 
+    openLevelModal(randomLvl);
 });
 
 searchInput.addEventListener("input", (e) => {
     const query = e.target.value.toLowerCase();
     if (btnLevels.classList.contains("active")) {
         levelCardsElements.forEach(card => card.style.display = card.dataset.name.includes(query) ? "flex" : "none");
-    } else if (btnLeaderboard.classList.contains("active")) {
-        leaderboardCardsElements.forEach(card => card.style.display = card.dataset.player.includes(query) ? "flex" : "none");
-    } else if (btnPacks.classList.contains("active") && appConfig.enablePacks) {
-        if (!document.getElementById("packs-list-container").classList.contains("hidden-section")) {
-            packCardsElements.forEach(card => card.style.display = card.dataset.pack.includes(query) ? "flex" : "none");
-         } else {
-            currentPackLevelElements.forEach(card => card.style.display = card.dataset.name.includes(query) ? "flex" : "none");
-         }
     }
 });
 
 function switchTab(activeBtn, activeContainer, placeholder) {
-    [btnLevels, btnLeaderboard, btnPacks, btnRules, btnCredits].forEach(btn => btn?.classList.remove("active"));
-    [levelsContainer, leaderboardContainer, packsContainer, rulesContainer, creditsContainer].forEach(c => c?.classList.add("hidden-section"));
+    [btnLevels, btnRules, btnCredits].forEach(btn => btn?.classList.remove("active"));
+    [levelsContainer, rulesContainer, creditsContainer].forEach(c => c?.classList.add("hidden-section"));
     
     activeBtn.classList.add("active");
     activeContainer.classList.remove("hidden-section");
@@ -823,16 +537,9 @@ function switchTab(activeBtn, activeContainer, placeholder) {
     } else {
         document.getElementById("nav-search").style.display = "none";
     }
-
-    if (activeBtn === btnPacks && appConfig.enablePacks) {
-        document.getElementById("pack-view-container").classList.add("hidden-section");
-        document.getElementById("packs-list-container").classList.remove("hidden-section");
-    }
 }
 
 btnLevels.addEventListener("click", () => switchTab(btnLevels, levelsContainer, "Search level by name..."));
-btnLeaderboard.addEventListener("click", () => switchTab(btnLeaderboard, leaderboardContainer, "Search player by name..."));
-if (btnPacks) btnPacks.addEventListener("click", () => switchTab(btnPacks, packsContainer, "Search pack by name..."));
 btnRules.addEventListener("click", () => switchTab(btnRules, rulesContainer, null));
 btnCredits.addEventListener("click", () => switchTab(btnCredits, creditsContainer, null));
 
