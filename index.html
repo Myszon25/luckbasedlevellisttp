@@ -116,7 +116,6 @@ body {
 .theme-btn { font-size: 18px; width: 40px; }
 .nav-credits-btn { padding: 0 16px; font-family: 'Rubik', sans-serif; font-weight: 700; font-size: 14px; text-transform: uppercase; text-decoration: none; }
 .theme-btn:hover, .nav-credits-btn:hover { border-color: var(--border-hover); transform: translateY(-2px); box-shadow: 0 5px 15px var(--shadow-color); }
-.nav-credits-btn.active { background: var(--tab-active-bg); color: var(--tab-active-text); border-color: var(--tab-active-bg); box-shadow: 0 0 15px var(--shadow-color); }
 
 .discord-btn {
     display: flex; align-items: center; gap: 8px; background: #5865F2; color: white;
@@ -353,7 +352,6 @@ body {
         <button class="theme-btn" id="btn-random" title="Random Level">🎲</button>
         <button class="theme-btn" id="theme-toggle" title="Toggle Theme">☀️</button>
         <button class="nav-credits-btn" id="btn-credits">Credits</button>
-        <a href="https://docs.google.com/forms/" target="_blank" class="nav-credits-btn" id="submit-btn" style="text-decoration: none;">Submit Record</a>
         <a href="https://discord.gg/Z5PSQ7VNkF" target="_blank" class="discord-btn" id="discord-btn">
             <svg viewBox="0 0 127.14 96.36"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1,105.25,105.25,0,0,0,32.19-16.14c0,0,.04-.06.05-.09h0c2.69-27.42-2.73-51.49-18.95-72.06ZM42.63,65.22C38,65.22,34.15,61,34.15,55.9S37.9,46.58,42.63,46.58c4.76,0,8.56,4.31,8.48,9.32C51.11,61,47.41,65.22,42.63,65.22Zm41.88,0c-4.73,0-8.52-4.22-8.52-9.32s3.73-9.32,8.52-9.32c4.76,0,8.56,4.31,8.48,9.32C93,61,89.28,65.22,84.51,65.22Z"/></svg>
             Join Discord
@@ -440,14 +438,14 @@ const modalBody = document.getElementById("modal-body");
 const categoryButtonsContainer = document.getElementById("category-buttons");
 const categoriesBar = document.getElementById("categories-bar");
 
-let levelCardsElements = []; 
-let fullLevelsData = []; 
-let currentCategory = "all";
+let currentLevelCards = []; 
+let categoriesList = [];
+let levelsByCategory = {};
+let currentCategory = "";
 
 let appConfig = {
     listName: "USKC spam list",
-    discordLink: "https://discord.gg/Z5PSQ7VNkF",
-    submitLink: "https://docs.google.com/forms/"
+    discordLink: "https://discord.gg/Z5PSQ7VNkF"
 };
 
 function parseYoutube(youtubeInput) {
@@ -475,7 +473,7 @@ function parseYoutube(youtubeInput) {
     return { id: videoId, start: startSeconds };
 }
 
-function openLevelModal(l) {
+function openLevelModal(l, catName) {
     const yt = parseYoutube(l.youtube);
     
     modalBody.innerHTML = `
@@ -486,7 +484,7 @@ function openLevelModal(l) {
                 <span class="copy-id" onclick="navigator.clipboard.writeText('${l.id}'); const orig=this.innerHTML; this.innerHTML='Copied! ✓'; setTimeout(()=>this.innerHTML=orig, 1500);">ID: ${l.id} 📋</span>
             </div>
             <div style="display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap;">
-                <div class="modal-tag category">${l.category || 'Unknown'}</div>
+                <div class="modal-tag category">${catName}</div>
                 <div class="modal-tag duration">⏱️ ${l.duration || '0:00'}</div>
             </div>
         </div>
@@ -501,13 +499,12 @@ function openLevelModal(l) {
 document.getElementById("modal-close-btn").addEventListener("click", () => levelModal.classList.remove("active"));
 levelModal.addEventListener("click", (e) => { if (e.target === levelModal) levelModal.classList.remove("active"); });
 
-function createLevelCardElement(l) {
+function createLevelCardElement(l, catName) {
     const yt = parseYoutube(l.youtube);
     
     const card = document.createElement("div");
     card.className = "card";
     card.dataset.name = l.name.toLowerCase();
-    card.dataset.category = l.category ? l.category.toLowerCase() : "uncategorized";
     
     const left = document.createElement("div");
     left.className = "left";
@@ -517,9 +514,9 @@ function createLevelCardElement(l) {
             <div class="sub" style="font-size: 13px; margin-bottom: 4px; font-weight: 600;">by ${l.author}</div>
             <div class="sub" style="font-size: 11px; color: var(--text-dim);">ID: ${l.id}</div>
         </div>
-        <div class="category-badge">${l.category || 'Unknown'}</div>
+        <div class="category-badge">${catName}</div>
     `;
-    left.addEventListener("click", () => openLevelModal(l));
+    left.addEventListener("click", () => openLevelModal(l, catName));
 
     const right = document.createElement("div");
     right.className = "right";
@@ -538,38 +535,41 @@ function createLevelCardElement(l) {
     return card;
 }
 
-function renderCategories(levelsData) {
-    const uniqueCategories = ["All", ...new Set(levelsData.map(l => l.category).filter(Boolean))];
-    categoryButtonsContainer.innerHTML = "";
+function renderCategoryLevels() {
+    levelsContainer.innerHTML = "";
+    currentLevelCards = [];
     
-    uniqueCategories.forEach(cat => {
-        const btn = document.createElement("button");
-        btn.className = "category-btn" + (cat.toLowerCase() === currentCategory ? " active" : "");
-        btn.innerText = cat;
-        btn.addEventListener("click", () => {
-            currentCategory = cat.toLowerCase();
-            document.querySelectorAll(".category-btn").forEach(b => b.classList.remove("active"));
-            btn.classList.add("active");
-            filterLevels();
-        });
-        categoryButtonsContainer.appendChild(btn);
+    const levels = levelsByCategory[currentCategory] || [];
+    levels.sort((a,b) => a.place - b.place);
+    
+    levels.forEach(l => {
+        const card = createLevelCardElement(l, currentCategory);
+        levelsContainer.appendChild(card);
+        currentLevelCards.push(card); 
     });
+}
+
+function switchCategory(cat) {
+    currentCategory = cat;
+    document.querySelectorAll(".category-btn").forEach(b => {
+        b.classList.toggle("active", b.innerText === cat);
+    });
+    renderCategoryLevels();
 }
 
 function filterLevels() {
     const query = searchInput.value.toLowerCase();
-    levelCardsElements.forEach(card => {
-        const matchesCategory = currentCategory === "all" || card.dataset.category === currentCategory;
+    currentLevelCards.forEach(card => {
         const matchesSearch = card.dataset.name.includes(query);
-        card.style.display = (matchesCategory && matchesSearch) ? "flex" : "none";
+        card.style.display = matchesSearch ? "flex" : "none";
     });
 }
 
 Promise.all([
-    fetch("levels.json").then(r => r.json()),
+    fetch("categories.json").then(r => r.json()).catch(() => []),
     fetch("rules.json").then(r => r.json()).catch(() => []),
     fetch("change.json").then(r => r.json()).catch(() => ({})) 
-]).then(([levelsData, rulesData, changeData]) => {
+]).then(([catsData, rulesData, changeData]) => {
 
     if (changeData) {
         if (changeData.listName) {
@@ -583,22 +583,7 @@ Promise.all([
             const discordAnchor = document.getElementById("discord-btn");
             if (discordAnchor) discordAnchor.href = changeData.discordLink;
         }
-        if (changeData.submitLink) {
-            appConfig.submitLink = changeData.submitLink;
-            const submitAnchor = document.getElementById("submit-btn");
-            if (submitAnchor) submitAnchor.href = changeData.submitLink;
-        }
     }
-
-    fullLevelsData = levelsData; 
-    renderCategories(levelsData);
-
-    levelsData.sort((a,b) => a.place - b.place);
-    levelsData.forEach(l => {
-        const card = createLevelCardElement(l);
-        levelsContainer.appendChild(card);
-        levelCardsElements.push(card); 
-    });
 
     const rulesContent = document.getElementById("rules-content");
     if (rulesData && rulesData.length > 0) {
@@ -611,12 +596,37 @@ Promise.all([
     } else {
         rulesContent.innerHTML = '<h2 class="list-title">List Rules</h2><p class="list-items">No rules added yet.</p>';
     }
+
+    categoriesList = catsData;
+    categoriesList.forEach((cat, index) => {
+        const btn = document.createElement("button");
+        btn.className = "category-btn" + (index === 0 ? " active" : "");
+        btn.innerText = cat;
+        btn.addEventListener("click", () => switchCategory(cat));
+        categoryButtonsContainer.appendChild(btn);
+    });
+    
+    if (categoriesList.length > 0) {
+        currentCategory = categoriesList[0];
+        
+        const fetches = categoriesList.map(cat => 
+            fetch(`${cat.toLowerCase()}.json`)
+                .then(r => r.json())
+                .then(data => { levelsByCategory[cat] = data; })
+                .catch(() => { levelsByCategory[cat] = []; })
+        );
+        
+        Promise.all(fetches).then(() => {
+            renderCategoryLevels();
+        });
+    }
 });
 
 document.getElementById("btn-random").addEventListener("click", () => {
-    if (!fullLevelsData || fullLevelsData.length === 0) return;
-    const randomLvl = fullLevelsData[Math.floor(Math.random() * fullLevelsData.length)];
-    openLevelModal(randomLvl);
+    const currentLevels = levelsByCategory[currentCategory] || [];
+    if (!currentLevels || currentLevels.length === 0) return;
+    const randomLvl = currentLevels[Math.floor(Math.random() * currentLevels.length)];
+    openLevelModal(randomLvl, currentCategory);
 });
 
 searchInput.addEventListener("input", (e) => {
