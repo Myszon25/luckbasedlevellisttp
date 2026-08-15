@@ -1,45 +1,29 @@
 [
   {
     "place": 1,
-    "name": "level name1",
-    "author": "no",
-    "verifier": "me",
-    "id": "12345678",
-    "youtube": "65RJQig1tZc",
-    "points": 1,
-    "victors": [
-      "myszon=https://www.youtube.com/watch?v=MHcoMqO1du0",
-      "myszd=https://www.youtube.com/watch?v=MHcoMqO1du0"
-    ]
+    "name": "Sakupen Circles",
+    "author": "Riot",
+    "id": "371027",
+    "youtube": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "duration": "1:35",
+    "points": 1000
   },
   {
     "place": 2,
-    "name": "level name2",
-    "author": "no",
-    "verifier": "me",
-    "id": "12345678",
-    "youtube": "65RJQig1tZc",
-    "points": 1,
-    "victors": []
+    "name": "Sonic Wave",
+    "author": "Cyclic",
+    "id": "26890242",
+    "youtube": "https://www.youtube.com/watch?v=abcdefg",
+    "duration": "1:20",
+    "points": 950
   },
   {
     "place": 3,
-    "name": "level name3",
-    "author": "no",
-    "verifier": "me",
-    "id": "12345678",
-    "youtube": "65RJQig1tZc",
-    "points": 1,
-    "victors": []
-  },
-  {
-    "place": 4,
-    "name": "level name4",
-    "author": "no",
-    "verifier": "me",
-    "id": "12345678",
-    "youtube": "65RJQig1tZc",
-    "points": 1,
-    "victors": []
+    "name": "Tartarus",
+    "author": "Dolphy",
+    "id": "3677634",
+    "youtube": "https://www.youtube.com/watch?v=xyz1234",
+    "duration": "1:55",
+    "points": 900
   }
 ]
